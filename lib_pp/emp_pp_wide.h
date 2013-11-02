@@ -1,34 +1,26 @@
 //-----------------------------------------------------------------------------
 //
-// File Name : emp_pp_if_else.h
+// File Name : emp_pp_wide.h
 //
-// Creation Date : Mon 11 Oct 2010 10:55:51 PM CEST
+// Creation Date : Thu 16 Dec 2010 02:29:37 PM CET
 //
-// Modification Date : sam. 02 nov. 2013 19:35:56 CET
+// Modification Date : sam. 02 nov. 2013 19:53:14 CET
 //
 // Created By : rgba8 (ksej) - www.empathy.fr
 //
 // Description :
 //
 //-----------------------------------------------------------------------------
-#ifndef EMP_PP_IF_ELSE_H
-#define EMP_PP_IF_ELSE_H
+#ifndef EMP_PP_WIDE_H
+#define EMP_PP_WIDE_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_pp_bool.h"
 #include "emp_pp_token.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_IF_ELSE(x_Condition, x_Then, x_Else)\
-    EMP_PP_IF_ELSE_IMP(x_Condition, x_Then, x_Else)
-#define EMP_PP_IF_ELSE_IMP(x_Condition, x_Then, x_Else)\
-    EMP_PP_TOKEN(EMP_PP_IF_ELSE_IMP_,\
-        EMP_PP_BOOL(x_Condition))(x_Then, x_Else)
-
-#define EMP_PP_IF_ELSE_IMP_0(x_Then, x_Else) x_Else
-#define EMP_PP_IF_ELSE_IMP_1(x_Then, x_Else) x_Then
+#define EMP_PP_WIDE(x_Value) EMP_PP_TOKEN(L, x_Value)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

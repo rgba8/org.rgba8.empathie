@@ -1,34 +1,29 @@
 //-----------------------------------------------------------------------------
 //
-// File Name : emp_pp_if_else.h
+// File Name : emp_pp_comma_if.h
 //
-// Creation Date : Mon 11 Oct 2010 10:55:51 PM CEST
+// Creation Date : Mon 11 Oct 2010 10:57:01 PM CEST
 //
-// Modification Date : sam. 02 nov. 2013 19:35:56 CET
+// Modification Date : Sat 04 Jun 2011 07:05:22 PM CEST
 //
-// Created By : rgba8 (ksej) - www.empathy.fr
+// Created By :
 //
 // Description :
 //
 //-----------------------------------------------------------------------------
-#ifndef EMP_PP_IF_ELSE_H
-#define EMP_PP_IF_ELSE_H
+#ifndef EMP_PP_COMMA_IF_H
+#define EMP_PP_COMMA_IF_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_pp_bool.h"
-#include "emp_pp_token.h"
+#include "emp_pp_comma.h"
+#include "emp_pp_empty.h"
+#include "emp_pp_if_else.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_IF_ELSE(x_Condition, x_Then, x_Else)\
-    EMP_PP_IF_ELSE_IMP(x_Condition, x_Then, x_Else)
-#define EMP_PP_IF_ELSE_IMP(x_Condition, x_Then, x_Else)\
-    EMP_PP_TOKEN(EMP_PP_IF_ELSE_IMP_,\
-        EMP_PP_BOOL(x_Condition))(x_Then, x_Else)
-
-#define EMP_PP_IF_ELSE_IMP_0(x_Then, x_Else) x_Else
-#define EMP_PP_IF_ELSE_IMP_1(x_Then, x_Else) x_Then
+#define EMP_PP_COMMA_IF(x_Condition)\
+    EMP_PP_IF_ELSE(x_Condition, EMP_PP_COMMA, EMP_PP_EMPTY)()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
