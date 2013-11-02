@@ -1,29 +1,22 @@
 //-----------------------------------------------------------------------------
 //
-// File Name : emp_pp_comma_if.h
+// File Name : emp_hh_stdint.h
 //
-// Creation Date : Mon 11 Oct 2010 10:57:01 PM CEST
+// Creation Date : Mon 10 Jan 2011 12:38:28 PM CET
 //
-// Modification Date : sam. 02 nov. 2013 20:16:26 CET
+// Modification Date : sam. 02 nov. 2013 22:35:46 CET
 //
 // Created By : rgba8 (ksej) - www.empathy.fr
 //
 // Description :
 //
 //-----------------------------------------------------------------------------
-#ifndef EMP_PP_COMMA_IF_H
-#define EMP_PP_COMMA_IF_H
+#ifndef EMP_HH_STDINT_H
+#define EMP_HH_STDINT_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_pp_comma.h"
-#include "emp_pp_empty.h"
-#include "emp_pp_if_else.h"
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#define EMP_PP_COMMA_IF(x_Condition)\
-    EMP_PP_IF_ELSE(x_Condition, EMP_PP_COMMA, EMP_PP_EMPTY)()
+#include <stdint.h>
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
