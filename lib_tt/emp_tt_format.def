@@ -1,0 +1,87 @@
+//-----------------------------------------------------------------------------
+//
+// File Name : emp_tt_format.def
+//
+// Creation Date : Thu 06 Jan 2011 05:56:01 PM CET
+//
+// Modification Date : mar. 05 nov. 2013 20:07:24 CET
+//
+// Created By : rgba8 (ksej) - www.empathy.fr
+//
+// Description :
+//
+//-----------------------------------------------------------------------------
+#ifndef EMP_TT_FORMAT_DEF
+#define EMP_TT_FORMAT_DEF
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#ifndef EMP_TT_FORMAT_PP_H_DEF
+#define EMP_TT_FORMAT_PP_H_DEF
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//TODO:inside emp_tt_def.h
+//TODO:portable
+#define EMP_TT_FORMAT_BOOL nullptr
+
+#define EMP_TT_FORMAT_CHAR "%c"
+#define EMP_TT_FORMAT_SCHAR nullptr
+#define EMP_TT_FORMAT_UCHAR nullptr
+
+#define EMP_TT_FORMAT_WCHAR nullptr
+#define EMP_TT_FORMAT_SWCHAR nullptr
+#define EMP_TT_FORMAT_UWCHAR nullptr
+
+#define EMP_TT_FORMAT_SHORT nullptr
+#define EMP_TT_FORMAT_USHORT nullptr
+#define EMP_TT_FORMAT_INT "%d"
+#define EMP_TT_FORMAT_UINT "%u"
+#define EMP_TT_FORMAT_LINT "%ld"
+#define EMP_TT_FORMAT_ULINT "%lu"
+
+#define EMP_TT_FORMAT_FLOAT "%f"
+#define EMP_TT_FORMAT_DOUBLE "%f"
+#define EMP_TT_FORMAT_LDOUBLE "%Lf"
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//TODO:long long version
+//TODO:wchar version
+#define EMP_TT_FORMATS()\
+    XARG_TT_FORMAT(char, EMP_TT_FORMAT_CHAR)\
+    XARG_TT_FORMAT(unsigned char, EMP_TT_FORMAT_UINT)\
+    XARG_TT_FORMAT(unsigned short, EMP_TT_FORMAT_UINT)\
+    XARG_TT_FORMAT(int, EMP_TT_FORMAT_INT)\
+    XARG_TT_FORMAT(unsigned int, EMP_TT_FORMAT_UINT)\
+    XARG_TT_FORMAT(long int, EMP_TT_FORMAT_LINT)\
+    XARG_TT_FORMAT(unsigned long int, EMP_TT_FORMAT_ULINT)\
+    XARG_TT_FORMAT(float, EMP_TT_FORMAT_FLOAT)\
+    XARG_TT_FORMAT(double, EMP_TT_FORMAT_DOUBLE)\
+    XARG_TT_FORMAT(long double, EMP_TT_FORMAT_LDOUBLE)
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//TODO:error
+#ifndef XARG_TT_FORMAT
+#error XARG_TT_FORMAT
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+EMP_TT_FORMATS()
+
+#undef XARG_TT_FORMAT
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#undef EMP_TT_FORMAT_DEF
+
