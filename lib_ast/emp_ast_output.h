@@ -1,74 +1,61 @@
 //-----------------------------------------------------------------------------
 //
-// File Name : emp_tt_extract.h
+// File Name : emp_ast_output.h
 //
-// Creation Date : Tue 18 Jan 2011 02:13:18 PM CET
+// Creation Date : Mon 4 Jan 2009 10:41:27 PM CEST
 //
-// Modification Date : ven. 08 nov. 2013 23:58:45 CET
+// Modification Date : sam. 09 nov. 2013 00:05:30 CET
 //
 // Created By : rgba8 (ksej) - www.empathy.fr
 //
 // Description :
 //
 //-----------------------------------------------------------------------------
-#ifndef EMP_TT_EXTRACT_H
-#define EMP_TT_EXTRACT_H
+#ifndef EMP_AST_OUTPUT_H
+#define EMP_AST_OUTPUT_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_tt_false.h"
-#include "emp_tt_null.h"
-#include "emp_tt_true.h"
+#include "emp_hh_stdint.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-namespace emp { namespace tt {
+#if defined(EMP_XX_OUTPUT_ENABLE)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T, bool t_bExtract>
-class extract_impl
-{
-public:
-    typedef typename T::type type;
-private:
-    EMP_XX_NOINSTANCE(extract_impl);
-};
+namespace emp { namespace ast {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T>
-class extract_impl<T, false>
-{
-public:
-    typedef emp::tt::null type;
-private:
-    EMP_XX_NOINSTANCE(extract_impl);
-};
+class assert_t;
+class statement_t;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T>
-class extract
-{
-private:
-    template <typename t_Extract>
-    static true_type apply(typename t_Extract::type*);
+void output_char(char const a_cValue);
+void output_pchar(char const* const a_pValue);
+//void output_pwchar(wchar_t const* const a_pValue);
+//void output_puint32(uint32_t const* const a_pValue);
+void output_line(
+    char const* const a_szName, char const* const a_szValue,
+    bool const a_bVerbose);
 
-    template <typename t_Extract>
-    static false_type apply(...);
+void output_header(
+    char const* const a_szName, char const a_cAlias,
+    bool const a_bVerbose);
 
-public:
-    typedef typename extract_impl<T,
-        sizeof(apply<T>(0)) == sizeof(true_type)>::type type;
+void output_statement(statement_t const& a_rStatement, bool const a_bVerbose);
 
-private:
-    EMP_XX_NOINSTANCE(extract);
-};
+void output_assert(assert_t const& a_rAssert, bool const a_bVerbose);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 } }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

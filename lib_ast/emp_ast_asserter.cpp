@@ -1,70 +1,47 @@
 //-----------------------------------------------------------------------------
 //
-// File Name : emp_tt_extract.h
+// File Name : emp_ast_asserter.cpp
 //
-// Creation Date : Tue 18 Jan 2011 02:13:18 PM CET
+// Creation Date : Fri 15 Oct 2010 03:07:37 PM CEST
 //
-// Modification Date : ven. 08 nov. 2013 23:58:45 CET
+// Modification Date : sam. 09 nov. 2013 00:05:39 CET
 //
 // Created By : rgba8 (ksej) - www.empathy.fr
 //
 // Description :
 //
 //-----------------------------------------------------------------------------
-#ifndef EMP_TT_EXTRACT_H
-#define EMP_TT_EXTRACT_H
+#include "emp_ast_asserter.h"
+
+#include "emp_ast_assert.h"
+#include "emp_ast_output.h"
+#include "emp_ast_statement.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_tt_false.h"
-#include "emp_tt_null.h"
-#include "emp_tt_true.h"
+#include "emp_hh_stdlib.h"
+
+#include "emp_xx_string.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-namespace emp { namespace tt {
+#if defined(EMP_XX_ASSERT_ENABLE)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T, bool t_bExtract>
-class extract_impl
+namespace emp { namespace ast {
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void asserter::condition(emp::ast::assert_t const& a_rAssert)
 {
-public:
-    typedef typename T::type type;
-private:
-    EMP_XX_NOINSTANCE(extract_impl);
-};
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-template <typename T>
-class extract_impl<T, false>
-{
-public:
-    typedef emp::tt::null type;
-private:
-    EMP_XX_NOINSTANCE(extract_impl);
-};
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-template <typename T>
-class extract
-{
-private:
-    template <typename t_Extract>
-    static true_type apply(typename t_Extract::type*);
-
-    template <typename t_Extract>
-    static false_type apply(...);
-
-public:
-    typedef typename extract_impl<T,
-        sizeof(apply<T>(0)) == sizeof(true_type)>::type type;
-
-private:
-    EMP_XX_NOINSTANCE(extract);
-};
+    if (a_rAssert.b_condition() == false)
+    {
+        output_header(EMP_XSZ_ASSERT, EMP_XC_UPPER_A, true);
+        output_assert(a_rAssert, true);
+        abort();
+    }
+}
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -73,4 +50,7 @@ private:
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 

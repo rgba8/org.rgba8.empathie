@@ -1,70 +1,32 @@
 //-----------------------------------------------------------------------------
 //
-// File Name : emp_tt_extract.h
+// File Name : emp_gbl_global.cpp
 //
-// Creation Date : Tue 18 Jan 2011 02:13:18 PM CET
+// Creation Date : Wed 03 Nov 2010 01:57:22 PM CET
 //
-// Modification Date : ven. 08 nov. 2013 23:58:45 CET
+// Modification Date : sam. 09 nov. 2013 00:04:35 CET
 //
 // Created By : rgba8 (ksej) - www.empathy.fr
 //
 // Description :
 //
 //-----------------------------------------------------------------------------
-#ifndef EMP_TT_EXTRACT_H
-#define EMP_TT_EXTRACT_H
+#include "emp_gbl_global.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_tt_false.h"
-#include "emp_tt_null.h"
-#include "emp_tt_true.h"
+#include "emp_xx_nullptr.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-namespace emp { namespace tt {
+namespace emp { namespace gbl {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T, bool t_bExtract>
-class extract_impl
-{
-public:
-    typedef typename T::type type;
-private:
-    EMP_XX_NOINSTANCE(extract_impl);
-};
+globals_t* globals_t::m_pInstance = nullptr;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T>
-class extract_impl<T, false>
-{
-public:
-    typedef emp::tt::null type;
-private:
-    EMP_XX_NOINSTANCE(extract_impl);
-};
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-template <typename T>
-class extract
-{
-private:
-    template <typename t_Extract>
-    static true_type apply(typename t_Extract::type*);
-
-    template <typename t_Extract>
-    static false_type apply(...);
-
-public:
-    typedef typename extract_impl<T,
-        sizeof(apply<T>(0)) == sizeof(true_type)>::type type;
-
-private:
-    EMP_XX_NOINSTANCE(extract);
-};
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -72,5 +34,4 @@ private:
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#endif
 
