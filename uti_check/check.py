@@ -5,7 +5,7 @@
 ##
 ## Creation Date : Thu 14 Oct 2010 07:23:55 PM CEST
 ##
-## Modification Date : mar. 08 oct. 2013 21:57:40 CEST
+## Modification Date : ven. 08 nov. 2013 20:57:15 CET
 ##
 ## Created By : rgba8 (ksej) - www.empathy.fr
 ##
@@ -161,6 +161,17 @@ def CheckLineEnding(a_aLines):
         if len(szLine) > len(szLine.rstrip()):
             aLineEnding.append((index, "++ " + szLine + "$"))
     return aLineEnding, len(aLineEnding)
+
+##-----------------------------------------------------------------------------
+##
+##-----------------------------------------------------------------------------
+def CheckLineToken(a_aLines, a_sToken):
+    aTokenFound = []
+    for index, szLine in enumerate(a_aLines):
+        szLine = szLine.rstrip('\n')
+        if szLine.lower().find(a_sToken) >= 0:
+            aTokenFound.append((index, ("++ " + szLine)))
+    return aTokenFound, len(aTokenFound)
 
 ##-----------------------------------------------------------------------------
 ##
@@ -351,6 +362,8 @@ def CheckHeader(szFile):
     aLineEnding, uiErrorLineEnding  = CheckLineEnding(aLines)
     uiError += uiErrorLineEnding
 
+    aLineTodo, uiErrorLineTodo = CheckLineToken(aLines, "todo")
+    uiError += uiErrorLineTodo
     ##aExternalGuard, uiErrorExternalGuard = CheckExternalGuard(aLines)
     ##uiError += uiErrorExternalGuard
 
@@ -383,6 +396,9 @@ def CheckHeader(szFile):
         if uiErrorLineEnding:
             print "## Invalid line ending"
             PrintList(aLineEnding)
+        if uiErrorLineTodo:
+            print "## Todo found"
+            PrintList(aLineTodo)
         ##if uiErrorExternalGuard:
           ##  print "## Invalid external guard"
             ##PrintList(aExternalGuard)
@@ -439,6 +455,9 @@ def CheckSource(szFile):
     aLineEnding, uiErrorLineEnding = CheckLineEnding(aLines)
     uiError += uiErrorLineEnding
 
+    aLineTodo, uiErrorLineTodo = CheckLineToken(aLines, "todo")
+    uiError += uiErrorLineTodo
+
     if  uiError:
         print gLine_SPY
         print "## File : %s" % (szFile)
@@ -457,6 +476,10 @@ def CheckSource(szFile):
         if uiErrorLineEnding:
             print "## Invalid line ending"
             PrintList(aLineEnding)
+        if uiErrorLineTodo:
+            print "## Todo found"
+            PrintList(aLineTodo)
+
     return uiError
 
 ##-----------------------------------------------------------------------------
@@ -540,7 +563,6 @@ def Main():
         print "## Errors : %d" % (uiError)
     if uiDuplicate > 0:
         print "## Duplicates : %d" % (uiDuplicate)
-
     print gLine_SPY
 
 ##-----------------------------------------------------------------------------

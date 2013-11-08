@@ -1,0 +1,163 @@
+//-----------------------------------------------------------------------------
+//
+// File Name : emp_enu_enumdec.def
+//
+// Creation Date : Mon 01 Nov 2010 01:41:05 PM CET
+//
+// Modification Date : ven. 08 nov. 2013 20:01:06 CET
+//
+// Created By : rgba8 (ksej) - www.empathy.fr
+//
+// Description :
+//
+//-----------------------------------------------------------------------------
+#ifndef EMP_ENU_ENUMDEC_DEF
+#define EMP_ENU_ENUMDEC_DEF
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "emp_xx_class.h"
+#include "emp_xx_return.h"
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#ifndef EMP_ENUM_VALUES
+//TODO:use error
+#error EMP_ENUM_VALUES not defined
+//TODO:use the right error code
+#define EMP_ENUM_VALUES EMP_PP_UNDEFINED
+#endif
+
+#ifndef EMP_ENUM_NAME
+//TODO:error
+#error EMP_ENUM_NAME not defined
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#ifdef EMP_ENUM_FIRST_LABEL
+//TODO:error
+#error EMP_ENUM_FIRST_LABEL is defined
+#endif
+
+#ifdef EMP_ENUM_FIRST_VALUE
+//TODO:error
+#error EMP_ENUM_FIRST_VALUE is defined
+#endif
+
+#ifdef EMP_ENUM_FIRST_LABEL_EX
+//TODO:error
+#error EMP_ENUM_FIRST_LABEL_EX is defined
+#endif
+
+#ifdef EMP_ENUM_FIRST_VALUE_EX
+//TODO:error
+#error EMP_ENUM_FIRST_VALUE_EX is defined
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#ifdef EMP_ENUM_LAST_LABEL
+//TODO:error
+#error EMP_ENUM_LAST_LABEL is defined
+#endif
+
+#ifdef EMP_ENUM_LAST_VALUE
+//TODO:error
+#error EMP_ENUM_LAST_VALUE is defined
+#endif
+
+#ifdef EMP_ENUM_LAST_LABEL_EX
+//TODO:error
+#error EMP_ENUM_LAST_LABEL_EX is defined
+#endif
+
+#ifdef EMP_ENUM_LAST_VALUE_EX
+//TODO:error
+#error EMP_ENUM_LAST_VALUE_EX is defined
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+EMP_CLASS(EMP_ENUM_NAME())
+public:
+    enum Value
+    {
+#define EMP_ENUM_FIRST_LABEL(x_Name) x_Name
+#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value) x_Name = x_Value
+#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User) x_Name
+#define EMP_ENUM_FIRST_VALUE_EX(x_Name, x_Value, x_User) x_Name = x_Value
+
+#define EMP_ENUM_LAST_LABEL(x_Name) ,x_Name
+#define EMP_ENUM_LAST_VALUE(x_Name, x_Value) ,x_Name = x_Value
+#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User) ,x_Name
+#define EMP_ENUM_LAST_VALUE_EX(x_Name, x_Value, x_User) ,x_Name = x_Value
+
+        EMP_ENUM_VALUES()
+
+#undef EMP_ENUM_FIRST_LABEL
+#undef EMP_ENUM_FIRST_VALUE
+#undef EMP_ENUM_FIRST_LABEL_EX
+#undef EMP_ENUM_FIRST_VALUE_EX
+
+#undef EMP_ENUM_LAST_LABEL
+#undef EMP_ENUM_LAST_VALUE
+#undef EMP_ENUM_LAST_LABEL_EX
+#undef EMP_ENUM_LAST_VALUE_EX
+    };
+
+    static const unsigned int count =
+#define EMP_ENUM_FIRST_LABEL(x_Name) 1
+#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value) 1
+#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User) 1
+#define EMP_ENUM_FIRST_VALUE_EX(x_Name, x_Value, x_User) 1
+
+#define EMP_ENUM_LAST_LABEL(x_Name) +1
+#define EMP_ENUM_LAST_VALUE(x_Name, x_Value) +1
+#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User) +1
+#define EMP_ENUM_LAST_VALUE_EX(x_Name, x_Value, x_User) +1
+
+        EMP_ENUM_VALUES()
+
+#undef EMP_ENUM_FIRST_LABEL
+#undef EMP_ENUM_FIRST_VALUE
+#undef EMP_ENUM_FIRST_LABEL_EX
+#undef EMP_ENUM_FIRST_VALUE_EX
+
+#undef EMP_ENUM_LAST_LABEL
+#undef EMP_ENUM_LAST_VALUE
+#undef EMP_ENUM_LAST_LABEL_EX
+#undef EMP_ENUM_LAST_VALUE_EX
+        ;
+
+private:
+    Value m_eValue;
+
+public:
+    EMP_ENUM_NAME()(Value const a_eValue):
+    m_eValue(a_eValue)
+    {}
+
+    EMP_RETURN Value value(void) const
+    { return m_eValue; }
+
+    static EMP_RETURN EMP_ENUM_NAME()::Value from(unsigned int const a_uiFrom);
+
+    static EMP_RETURN bool is_valid(EMP_ENUM_NAME()::Value const a_eValue);
+
+
+};
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#undef EMP_ENUM_NAME
+#undef EMP_ENUM_VALUES
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#undef EMP_ENU_ENUMDEC_DEF
+

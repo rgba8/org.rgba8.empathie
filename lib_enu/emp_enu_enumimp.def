@@ -1,0 +1,132 @@
+//-----------------------------------------------------------------------------
+//
+// File Name : emp_enu_enumimp.def
+//
+// Creation Date : Mon 01 Nov 2010 01:41:05 PM CET
+//
+// Modification Date : ven. 08 nov. 2013 20:03:26 CET
+//
+// Created By : rgba8 (ksej) - www.empathy.fr
+//
+// Description :
+//
+//-----------------------------------------------------------------------------
+#ifndef EMP_ENU_ENUMIMP_DEF
+#define EMP_ENU_ENUMIMP_DEF
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#ifndef EMP_ENUM_VALUES
+//TODO:use error
+#error EMP_ENUM_VALUES not defined
+//TODO:use the right error code
+#define EMP_ENUM_VALUES EMP_PP_UNDEFINED
+#endif
+
+#ifndef EMP_ENUM_NAME
+//TODO:error
+#error EMP_ENUM_NAME not defined
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#ifdef EMP_ENUM_FIRST_LABEL
+//TODO:error
+#error EMP_ENUM_FIRST_LABEL is defined
+#endif
+
+#ifdef EMP_ENUM_FIRST_VALUE
+//TODO:error
+#error EMP_ENUM_FIRST_VALUE is defined
+#endif
+
+#ifdef EMP_ENUM_FIRST_LABEL_EX
+//TODO:error
+#error EMP_ENUM_FIRST_LABEL_EX is defined
+#endif
+
+#ifdef EMP_ENUM_FIRST_VALUE_EX
+//TODO:error
+#error EMP_ENUM_FIRST_VALUE_EX is defined
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#ifdef EMP_ENUM_LAST_LABEL
+//TODO:error
+#error EMP_ENUM_LAST_LABEL is defined
+#endif
+
+#ifdef EMP_ENUM_LAST_VALUE
+//TODO:error
+#error EMP_ENUM_LAST_VALUE is defined
+#endif
+
+#ifdef EMP_ENUM_LAST_LABEL_EX
+//TODO:error
+#error EMP_ENUM_LAST_LABEL_EX is defined
+#endif
+
+#ifdef EMP_ENUM_LAST_VALUE_EX
+//TODO:error
+#error EMP_ENUM_LAST_VALUE_EX is defined
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+EMP_RETURN EMP_ENUM_NAME()::Value EMP_ENUM_NAME()::from(
+    unsigned int const a_uiFrom)
+{
+    //TODO:runtime_cast
+    EMP_ENUM_NAME()::Value const eValue =
+        static_cast<EMP_ENUM_NAME()::Value>(a_uiFrom);
+    EMP_ASSERT(is_valid(eValue));
+    return eValue;
+}
+
+EMP_RETURN bool EMP_ENUM_NAME()::is_valid(
+    EMP_ENUM_NAME()::Value const a_eValue)
+{
+    switch (a_eValue)
+    {
+#define XTMP_ENU_CASE(x_Name) case EMP_ENUM_NAME()::x_Name: { return true; }
+#define EMP_ENUM_FIRST_LABEL(x_Name) XTMP_ENU_CASE(x_Name)
+#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value) XTMP_ENU_CASE(x_Name)
+#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User) XTMP_ENU_CASE(x_Name)
+#define EMP_ENUM_FIRST_VALUE_EX(x_Name, x_Value, x_User) XTMP_ENU_CASE(x_Name)
+
+#define EMP_ENUM_LAST_LABEL(x_Name) XTMP_ENU_CASE(x_Name)
+#define EMP_ENUM_LAST_VALUE(x_Name, x_Value) XTMP_ENU_CASE(x_Name)
+#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User) XTMP_ENU_CASE(x_Name)
+#define EMP_ENUM_LAST_VALUE_EX(x_Name, x_Value, x_User) XTMP_ENU_CASE(x_Name)
+
+    EMP_ENUM_VALUES()
+
+#undef EMP_ENUM_FIRST_LABEL
+#undef EMP_ENUM_FIRST_VALUE
+#undef EMP_ENUM_FIRST_LABEL_EX
+#undef EMP_ENUM_FIRST_VALUE_EX
+
+#undef EMP_ENUM_LAST_LABEL
+#undef EMP_ENUM_LAST_VALUE
+#undef EMP_ENUM_LAST_LABEL_EX
+#undef EMP_ENUM_LAST_VALUE_EX
+#undef XTMP_ENU_CASE
+        default: { break; }
+    };
+    return false;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#undef EMP_ENUM_NAME
+#undef EMP_ENUM_VALUES
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#undef EMP_ENU_ENUMIMP_DEF
+
