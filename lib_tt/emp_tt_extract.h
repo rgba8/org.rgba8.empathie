@@ -4,7 +4,7 @@
 //
 // Creation Date : Tue 18 Jan 2011 02:13:18 PM CET
 //
-// Modification Date : mar. 05 nov. 2013 20:07:22 CET
+// Modification Date : ven. 08 nov. 2013 23:19:22 CET
 //
 // Created By : rgba8 (ksej) - www.empathy.fr
 //
@@ -16,9 +16,7 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#ifndef EMP_TT_NULL_H
 #include "emp_tt_null.h"
-#endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -52,20 +50,15 @@ template <typename T>
 class extract
 {
 private:
-    //TODO:true_type;
-    typedef char true_type;
-    //TODO:false_type;
-    typedef int false_type;
+    template <typename t_Extract>
+    static true_ apply(typename t_Extract::type*);
 
     template <typename t_Extract>
-    static true_type apply(typename t_Extract::type*);
-
-    template <typename t_Extract>
-    static false_type apply(...);
+    static false_ apply(...);
 
 public:
     typedef typename extract_impl<T,
-        sizeof(apply<T>(0)) == sizeof(true_type)>::type type;
+        sizeof(apply<T>(0)) == sizeof(true_)>::type type;
 
 private:
     EMP_XX_NOINSTANCE(extract);
@@ -73,7 +66,7 @@ private:
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-} } // tt // emp
+} }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 08 Nov 2010 03:42:22 PM CET
 //
-// Modification Date : mar. 05 nov. 2013 20:08:41 CET
+// Modification Date : ven. 08 nov. 2013 22:48:53 CET
 //
 // Created By : rgba8 (ksej) - www.empathy.fr
 //
@@ -32,52 +32,6 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#ifdef min
-//TODO:use pp error
-#error min is defined
-#endif
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#ifdef max
-//TODO:use pp error
-#error max is defined
-#endif
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//TODO:error code
-#ifdef _MIN
-#error _MIN is already defined
-#endif
-
-//TODO:error code
-#ifdef _MAX
-#error _MAX is already defined
-#endif
-
-//TODO:error code
-#ifdef _S_MIN
-#error _S_MIN is already defined
-#endif
-
-//TODO:error code
-#ifdef _S_MAX
-#error _S_MAX is already defined
-#endif
-
-//TODO:error code
-#ifdef _U_MIN
-#error _U_MIN is already defined
-#endif
-
-//TODO:error code
-#ifdef _U_MAX
-#error _U_MAX is already defined
-#endif
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 namespace emp { namespace tt {
 
 template <typename T> class max;
@@ -85,14 +39,14 @@ template <typename T> class min;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define XTMP_TT_MIN(x_Name) EMP_PP_TOKEN(x_Name, _MIN)
-#define XTMP_TT_MAX(x_Name) EMP_PP_TOKEN(x_Name, _MAX)
+#define XTMP_TT_MIN(x_Name) EMP_PP_TOKEN(x_Name, _EMP_TT_MIN)
+#define XTMP_TT_MAX(x_Name) EMP_PP_TOKEN(x_Name, _EMP_TT_MAX)
 
-#define XTMP_TT_SMIN(x_Name) EMP_PP_TOKEN(x_Name, _S_MIN)
-#define XTMP_TT_SMAX(x_Name) EMP_PP_TOKEN(x_Name, _S_MAX)
+#define XTMP_TT_SMIN(x_Name) EMP_PP_TOKEN(x_Name, _EMP_TT_S_MIN)
+#define XTMP_TT_SMAX(x_Name) EMP_PP_TOKEN(x_Name, _EMP_TT_S_MAX)
 
-#define XTMP_TT_UMIN(x_Name) EMP_PP_TOKEN(x_Name, _U_MIN)
-#define XTMP_TT_UMAX(x_Name) EMP_PP_TOKEN(x_Name, _U_MAX)
+#define XTMP_TT_UMIN(x_Name) EMP_PP_TOKEN(x_Name, _EMP_TT_U_MIN)
+#define XTMP_TT_UMAX(x_Name) EMP_PP_TOKEN(x_Name, _EMP_TT_U_MAX)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -109,8 +63,8 @@ private:\
 
 #define XTMP_TT_TYPE(x_Type, x_Name, x_Integral, x_Signedness, x_Distinct,\
                     x_Signed)\
-XTMP_TT_LIM(min, x_Type, x_Name, x_Integral, EMP_PP_TOKEN(x_Name, _MIN))\
-XTMP_TT_LIM(max, x_Type, x_Name, x_Integral, EMP_PP_TOKEN(x_Name, _MAX))\
+XTMP_TT_LIM(min, x_Type, x_Name, x_Integral, XTMP_TT_MIN(x_Name))\
+XTMP_TT_LIM(max, x_Type, x_Name, x_Integral, XTMP_TT_MAX(x_Name))\
 EMP_PP_IF(x_Signedness,\
 XTMP_TT_LIM(min, unsigned x_Type, x_Name, x_Integral, XTMP_TT_UMIN(x_Name))\
 XTMP_TT_LIM(max, unsigned x_Type, x_Name, x_Integral, XTMP_TT_UMAX(x_Name))\

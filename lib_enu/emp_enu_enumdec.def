@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 01 Nov 2010 01:41:05 PM CET
 //
-// Modification Date : ven. 08 nov. 2013 20:01:06 CET
+// Modification Date : ven. 08 nov. 2013 23:06:01 CET
 //
 // Created By : rgba8 (ksej) - www.empathy.fr
 //
@@ -22,58 +22,46 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #ifndef EMP_ENUM_VALUES
-//TODO:use error
 #error EMP_ENUM_VALUES not defined
-//TODO:use the right error code
-#define EMP_ENUM_VALUES EMP_PP_UNDEFINED
 #endif
 
 #ifndef EMP_ENUM_NAME
-//TODO:error
 #error EMP_ENUM_NAME not defined
 #endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #ifdef EMP_ENUM_FIRST_LABEL
-//TODO:error
 #error EMP_ENUM_FIRST_LABEL is defined
 #endif
 
 #ifdef EMP_ENUM_FIRST_VALUE
-//TODO:error
 #error EMP_ENUM_FIRST_VALUE is defined
 #endif
 
 #ifdef EMP_ENUM_FIRST_LABEL_EX
-//TODO:error
 #error EMP_ENUM_FIRST_LABEL_EX is defined
 #endif
 
 #ifdef EMP_ENUM_FIRST_VALUE_EX
-//TODO:error
 #error EMP_ENUM_FIRST_VALUE_EX is defined
 #endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #ifdef EMP_ENUM_LAST_LABEL
-//TODO:error
 #error EMP_ENUM_LAST_LABEL is defined
 #endif
 
 #ifdef EMP_ENUM_LAST_VALUE
-//TODO:error
 #error EMP_ENUM_LAST_VALUE is defined
 #endif
 
 #ifdef EMP_ENUM_LAST_LABEL_EX
-//TODO:error
 #error EMP_ENUM_LAST_LABEL_EX is defined
 #endif
 
 #ifdef EMP_ENUM_LAST_VALUE_EX
-//TODO:error
 #error EMP_ENUM_LAST_VALUE_EX is defined
 #endif
 

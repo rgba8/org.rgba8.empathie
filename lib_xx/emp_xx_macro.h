@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 11 Oct 2010 10:27:15 PM CEST
 //
-// Modification Date : jeu. 03 oct. 2013 22:48:18 CEST
+// Modification Date : ven. 08 nov. 2013 22:12:52 CET
 //
 // Created By : rgba8 (ksej) - www.empathy.fr
 //
@@ -33,27 +33,22 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_TT_ARRAY_COUNT
-//TODO:error
 #error EMP_XX_TT_ARRAY_COUNT not defined
 #endif
 
 #ifndef EMP_XX_CNT_TUPLE_COUNT
-//TODO:error
 #error EMP_XX_CNT_TUPLE_COUNT not defined
 #endif
 
 #ifndef EMP_XX_MEM_ALLOCATE_COUNT
-//TODO:error
 #error EMP_XX_MEM_ALLOCATE_COUNT not defined
 #endif
 
 #ifndef EMP_XX_STR_FORMAT_COUNT
-//TODO:error
 #error EMP_XX_STR_FORMAT_COUNT not defined
 #endif
 
 #ifndef EMP_XX_FCT_FUNCTION_COUNT
-//TODO:error
 #error EMP_XX_FCT_FUNCTION_COUNT not defined
 #endif
 
