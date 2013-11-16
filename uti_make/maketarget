@@ -103,7 +103,7 @@ UTI_GPP         ?=  ccache g++ -pipe
 #UTI_GPP         ?=  ccache x86_64-pc-linux-gnu-g++
 UTI_GPP_X86_32  ?= ccache g++ -pipe
 #UTI_GPP_X86_32  ?=  ccache x86_64-pc-linux-gnu-g++
-UTI_GPP_X86_64  ?=  ccache x86_64-pc-linux-gnu-g++ -pipe
+UTI_GPP_X86_64  ?=  ccache g++ -pipe
 
 ##-----------------------------------------------------------------------------
 ##
@@ -275,8 +275,15 @@ CXXFLAGS_X86_32     +=  -msse3
 ##-----------------------------------------------------------------------------
 ##
 ##-----------------------------------------------------------------------------
-CXXFLAGS_X86_64	?=	-march=core2\
-					-m64
+CXXFLAGS_X86_64     ?=  -m64
+CXXFLAGS_X86_64     +=  -march=core2
+CXXFLAGS_X86_64     +=  -mtune=core2
+CXXFLAGS_X86_64     +=  -mfpmath=sse
+CXXFLAGS_X86_64     +=  -msse
+CXXFLAGS_X86_64     +=  -msse2
+CXXFLAGS_X86_64     +=  -msse3
+#CXXFLAGS_X86_64     +=  -mssse3
+#CXXFLAGS_X86_64     +=  -msse4.1
 
 ##-----------------------------------------------------------------------------
 ##
