@@ -94,12 +94,9 @@ MAKECHECK	?= $(ROOT)uti_check/check.py
 ##-----------------------------------------------------------------------------
 ##
 ##-----------------------------------------------------------------------------
-CCACHE		?= 
-UTI_GPP         ?=  $(CCACHE) g++ -pipe -x c++
-#UTI_GPP         ?=  $(CCACHE) x86_64-pc-linux-gnu-g++
-UTI_GPP_X86_32  ?= $(CCACHE) g++ -pipe -x c++
-#UTI_GPP_X86_32  ?=  $(CCACHE) x86_64-pc-linux-gnu-g++
-UTI_GPP_X86_64  ?=  $(CCACHE) x86_64-pc-linux-gnu-g++ -pipe
+UTI_GPP         ?=  $(CCACHE) g++ -pipe
+UTI_GPP_X86_32  ?=  $(CCACHE) g++ -pipe
+UTI_GPP_X86_64  ?=  $(CCACHE) g++ -pipe
 
 ##-----------------------------------------------------------------------------
 ##
@@ -207,7 +204,7 @@ endif
 CXXFLAGS_DEBUG  ?=  -O0
 CXXFLAGS_DEBUG  +=  -g3
 CXXFLAGS_DEBUG  +=  -ggdb3
-## clang CXXFLAGS_DEBUG  +=  -fno-merge-debug-strings
+## llvm CXXFLAGS_DEBUG  +=  -fno-merge-debug-strings
 CXXFLAGS_DEBUG  +=  -fstack-protector
 CXXFLAGS_DEBUG  +=  -fstack-protector-all
 CXXFLAGS_DEBUG  +=  -fverbose-asm
@@ -217,38 +214,38 @@ CXXFLAGS_DEBUG  +=  -ftrapv
 ##
 ##-----------------------------------------------------------------------------
 CXXFLAGS_RELEASE    ?=  -O3
-## clang CXXFLAGS_RELEASE    +=  -fforward-propagate
+## llvm CXXFLAGS_RELEASE    +=  -fforward-propagate
 CXXFLAGS_RELEASE    +=  -fomit-frame-pointer
 CXXFLAGS_RELEASE    +=  -foptimize-sibling-calls
-## clang CXXFLAGS_RELEASE    +=  -finline-small-functions
-## clang CXXFLAGS_RELEASE    +=  -findirect-inlining
+## llvm CXXFLAGS_RELEASE    +=  -finline-small-functions
+## llvm CXXFLAGS_RELEASE    +=  -findirect-inlining
 CXXFLAGS_RELEASE    +=  -finline-functions
-## clang CXXFLAGS_RELEASE    +=  -finline-functions-called-once
-## clang CXXFLAGS_RELEASE    +=  -fearly-inlining
-## clang CXXFLAGS_RELEASE    +=  -fmerge-constants
-## clang CXXFLAGS_RELEASE    +=  -fmodulo-sched
-## clang CXXFLAGS_RELEASE    +=  -fmodulo-sched-allow-regmoves
-## clang CXXFLAGS_RELEASE    +=  -fthread-jumps
-## clang CXXFLAGS_RELEASE    +=  -fsplit-wide-types
-## clang CXXFLAGS_RELEASE    +=  -fcse-follow-jumps
-## clang CXXFLAGS_RELEASE    +=  -fcse-skip-blocks
-## clang CXXFLAGS_RELEASE    +=  -frerun-cse-after-loop
-## clang CXXFLAGS_RELEASE    +=  -fgcse
-## clang CXXFLAGS_RELEASE    +=  -fgcse-lm
-## clang CXXFLAGS_RELEASE    +=  -fgcse-sm
-## clang CXXFLAGS_RELEASE    +=  -fgcse-las
-## clang CXXFLAGS_RELEASE    +=  -fgcse-after-reload
+## llvm CXXFLAGS_RELEASE    +=  -finline-functions-called-once
+## llvm CXXFLAGS_RELEASE    +=  -fearly-inlining
+## llvm CXXFLAGS_RELEASE    +=  -fmerge-constants
+## llvm CXXFLAGS_RELEASE    +=  -fmodulo-sched
+## llvm CXXFLAGS_RELEASE    +=  -fmodulo-sched-allow-regmoves
+## llvm CXXFLAGS_RELEASE    +=  -fthread-jumps
+## llvm CXXFLAGS_RELEASE    +=  -fsplit-wide-types
+## llvm CXXFLAGS_RELEASE    +=  -fcse-follow-jumps
+## llvm CXXFLAGS_RELEASE    +=  -fcse-skip-blocks
+## llvm CXXFLAGS_RELEASE    +=  -frerun-cse-after-loop
+## llvm CXXFLAGS_RELEASE    +=  -fgcse
+## llvm CXXFLAGS_RELEASE    +=  -fgcse-lm
+## llvm CXXFLAGS_RELEASE    +=  -fgcse-sm
+## llvm CXXFLAGS_RELEASE    +=  -fgcse-las
+## llvm CXXFLAGS_RELEASE    +=  -fgcse-after-reload
 CXXFLAGS_RELEASE    +=  -funroll-loops
-## clang CXXFLAGS_RELEASE    +=  -funsafe-loop-optimizations
-## clang CXXFLAGS_RELEASE    +=  -fcrossjumping
-## clang CXXFLAGS_RELEASE    +=  -fauto-inc-dec
-## clang CXXFLAGS_RELEASE    +=  -fdce
-## clang CXXFLAGS_RELEASE    +=  -fdse
-## clang CXXFLAGS_RELEASE    +=  -fif-conversion
-## clang CXXFLAGS_RELEASE    +=  -fif-conversion2
-## clang CXXFLAGS_RELEASE    +=  -fdelete-null-pointer-checks
-## clang CXXFLAGS_RELEASE    +=  -fexpensive-optimizations
-## clang CXXFLAGS_RELEASE    +=  -foptimize-register-move
+## llvm CXXFLAGS_RELEASE    +=  -funsafe-loop-optimizations
+## llvm CXXFLAGS_RELEASE    +=  -fcrossjumping
+## llvm CXXFLAGS_RELEASE    +=  -fauto-inc-dec
+## llvm CXXFLAGS_RELEASE    +=  -fdce
+## llvm CXXFLAGS_RELEASE    +=  -fdse
+## llvm CXXFLAGS_RELEASE    +=  -fif-conversion
+## llvm CXXFLAGS_RELEASE    +=  -fif-conversion2
+## llvm CXXFLAGS_RELEASE    +=  -fdelete-null-pointer-checks
+## llvm CXXFLAGS_RELEASE    +=  -fexpensive-optimizations
+## llvm CXXFLAGS_RELEASE    +=  -foptimize-register-move
 CXXFLAGS_RELEASE    +=  -pipe
 #CXXFLAGS_RELEASE    +=  --param inline-unit-growth=200
 #CXXFLAGS_RELEASE    +=  --param large-function-growth=400
@@ -264,7 +261,7 @@ CXXFLAGS_RELEASE    +=  -pipe
 CXXFLAGS_X86_32     ?=  -m32
 CXXFLAGS_X86_32     +=  -march=core2
 CXXFLAGS_X86_32     +=  -mtune=core2
-## clang CXXFLAGS_X86_32     +=  -mfpmath=sse
+## llvm CXXFLAGS_X86_32     +=  -mfpmath=sse
 CXXFLAGS_X86_32     +=  -msse
 CXXFLAGS_X86_32     +=  -msse2
 CXXFLAGS_X86_32     +=  -msse3
@@ -274,8 +271,15 @@ CXXFLAGS_X86_32     +=  -msse3
 ##-----------------------------------------------------------------------------
 ##
 ##-----------------------------------------------------------------------------
-CXXFLAGS_X86_64	?=	-march=core2\
-					-m64
+CXXFLAGS_X86_64     ?=  -m64
+CXXFLAGS_X86_64     +=  -march=core2
+CXXFLAGS_X86_64     +=  -mtune=core2
+CXXFLAGS_X86_64     +=  -mfpmath=sse
+CXXFLAGS_X86_64     +=  -msse
+CXXFLAGS_X86_64     +=  -msse2
+CXXFLAGS_X86_64     +=  -msse3
+#CXXFLAGS_X86_64     +=  -mssse3
+#CXXFLAGS_X86_64     +=  -msse4.1
 
 ##-----------------------------------------------------------------------------
 ##
