@@ -24,6 +24,7 @@
 #define EMP_AA_W_FLOAT_EQUAL "-Wfloat-equal"
 #define EMP_AA_W_FORMAT_NONLITERAL "-Wformat-nonliteral"
 #define EMP_AA_W_FORMAT_SECURITY "-Wformat-security"
+#define EMP_AA_W_UNUSED_PRIVATE_FIELD "-Wunused-private-field"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

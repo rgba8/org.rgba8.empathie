@@ -89,21 +89,17 @@ MUD_FLAG	?=	-fmudflapth
 ##-----------------------------------------------------------------------------
 ##
 ##-----------------------------------------------------------------------------
-RM			?=	rm -rf
-
-##-----------------------------------------------------------------------------
-##
-##-----------------------------------------------------------------------------
 MAKECHECK	?= $(ROOT)uti_check/check.py
 
 ##-----------------------------------------------------------------------------
 ##
 ##-----------------------------------------------------------------------------
-UTI_GPP         ?=  ccache g++ -pipe
-#UTI_GPP         ?=  ccache x86_64-pc-linux-gnu-g++
-UTI_GPP_X86_32  ?= ccache g++ -pipe
-#UTI_GPP_X86_32  ?=  ccache x86_64-pc-linux-gnu-g++
-UTI_GPP_X86_64  ?=  ccache x86_64-pc-linux-gnu-g++ -pipe
+CCACHE		?= 
+UTI_GPP         ?=  $(CCACHE) g++ -pipe -x c++
+#UTI_GPP         ?=  $(CCACHE) x86_64-pc-linux-gnu-g++
+UTI_GPP_X86_32  ?= $(CCACHE) g++ -pipe -x c++
+#UTI_GPP_X86_32  ?=  $(CCACHE) x86_64-pc-linux-gnu-g++
+UTI_GPP_X86_64  ?=  $(CCACHE) x86_64-pc-linux-gnu-g++ -pipe
 
 ##-----------------------------------------------------------------------------
 ##
@@ -114,11 +110,9 @@ CXXFLAGS    +=  -Werror
 CXXFLAGS    +=  -Wabi
 CXXFLAGS    +=  -Wextra
 CXXFLAGS    +=  -Weffc++
-CXXFLAGS    +=  -fabi-version=0
 CXXFLAGS    +=  -pedantic-errors
 CXXFLAGS    +=  -Wno-variadic-macros
 CXXFLAGS    +=  -Wno-long-long
-CXXFLAGS    +=  -Wno-mudflap
 CXXFLAGS    +=  -Wctor-dtor-privacy
 CXXFLAGS    +=  -Wnon-virtual-dtor
 CXXFLAGS    +=  -Wreorder
@@ -143,7 +137,6 @@ CXXFLAGS    +=  -Wreturn-type
 CXXFLAGS    +=  -Wswitch
 CXXFLAGS    +=  -Wswitch-default
 CXXFLAGS    +=  -Wswitch-enum
-CXXFLAGS    +=  -Wsync-nand
 CXXFLAGS    +=  -Wtrigraphs
 CXXFLAGS    +=  -Wuninitialized
 CXXFLAGS    +=  -Wunknown-pragmas
@@ -157,19 +150,16 @@ CXXFLAGS    +=  -Wtype-limits
 CXXFLAGS    +=  -Wcast-qual
 CXXFLAGS    +=  -Wcast-align
 CXXFLAGS    +=  -Wwrite-strings
-CXXFLAGS    +=  -Wclobbered
 CXXFLAGS    +=  -Wconversion
 CXXFLAGS    +=  -Wempty-body
 CXXFLAGS    +=  -Wenum-compare
 CXXFLAGS    +=  -Wsign-compare
 CXXFLAGS    +=  -Wsign-conversion
 CXXFLAGS    +=  -Waddress
-CXXFLAGS    +=  -Wlogical-op
 CXXFLAGS    +=  -Wmissing-declarations
 CXXFLAGS    +=  -Wmissing-field-initializers
 CXXFLAGS    +=  -Wmissing-noreturn
 CXXFLAGS    +=  -Wmissing-format-attribute
-CXXFLAGS    +=  -Wnormalized=nfkc
 CXXFLAGS    +=  -Wpacked
 CXXFLAGS    +=  -Wredundant-decls
 CXXFLAGS    +=  -Winvalid-pch
@@ -185,7 +175,6 @@ CXXFLAGS    +=  -Wunused-variable
 CXXFLAGS    +=  -Wunused-value
 CXXFLAGS    +=  -Wunused
 CXXFLAGS    +=  -Winline
-CXXFLAGS    +=  -fno-nonansi-builtins
 CXXFLAGS    +=  -fno-rtti
 CXXFLAGS    +=  -fno-exceptions
 CXXFLAGS    +=  -fno-threadsafe-statics
@@ -196,11 +185,21 @@ CXXFLAGS    +=  -ffor-scope
 CXXFLAGS    +=  -fvisibility-inlines-hidden
 CXXFLAGS    +=  -fstrict-aliasing
 CXXFLAGS    +=  -fstrict-overflow
+CXXFLAGS    +=  -mstackrealign
+#FUCKING BAD movaps :) #CXXFLAGS    +=  -ffloat-store
+
+ifeq ($(COMPILER), gcc)
+CXXFLAGS    +=  -fabi-version=0
+CXXFLAGS    +=  -Wno-mudflap
+CXXFLAGS    +=  -Wsync-nand
+CXXFLAGS    +=  -Wclobbered
+CXXFLAGS    +=  -Wlogical-op
+CXXFLAGS    +=  -Wnormalized=nfkc
+CXXFLAGS    +=  -fno-nonansi-builtins
 CXXFLAGS    +=  -ftree-vrp
 CXXFLAGS    +=  -finput-charset=UTF-8
 CXXFLAGS    +=  -fexec-charset=UTF-8
-CXXFLAGS    +=  -mstackrealign
-#FUCKING BAD movaps :) #CXXFLAGS    +=  -ffloat-store
+endif
 
 ##-----------------------------------------------------------------------------
 ##
@@ -208,7 +207,7 @@ CXXFLAGS    +=  -mstackrealign
 CXXFLAGS_DEBUG  ?=  -O0
 CXXFLAGS_DEBUG  +=  -g3
 CXXFLAGS_DEBUG  +=  -ggdb3
-CXXFLAGS_DEBUG  +=  -fno-merge-debug-strings
+## clang CXXFLAGS_DEBUG  +=  -fno-merge-debug-strings
 CXXFLAGS_DEBUG  +=  -fstack-protector
 CXXFLAGS_DEBUG  +=  -fstack-protector-all
 CXXFLAGS_DEBUG  +=  -fverbose-asm
@@ -218,38 +217,38 @@ CXXFLAGS_DEBUG  +=  -ftrapv
 ##
 ##-----------------------------------------------------------------------------
 CXXFLAGS_RELEASE    ?=  -O3
-CXXFLAGS_RELEASE    +=  -fforward-propagate
+## clang CXXFLAGS_RELEASE    +=  -fforward-propagate
 CXXFLAGS_RELEASE    +=  -fomit-frame-pointer
 CXXFLAGS_RELEASE    +=  -foptimize-sibling-calls
-CXXFLAGS_RELEASE    +=  -finline-small-functions
-CXXFLAGS_RELEASE    +=  -findirect-inlining
+## clang CXXFLAGS_RELEASE    +=  -finline-small-functions
+## clang CXXFLAGS_RELEASE    +=  -findirect-inlining
 CXXFLAGS_RELEASE    +=  -finline-functions
-CXXFLAGS_RELEASE    +=  -finline-functions-called-once
-CXXFLAGS_RELEASE    +=  -fearly-inlining
-CXXFLAGS_RELEASE    +=  -fmerge-constants
-CXXFLAGS_RELEASE    +=  -fmodulo-sched
-CXXFLAGS_RELEASE    +=  -fmodulo-sched-allow-regmoves
-CXXFLAGS_RELEASE    +=  -fthread-jumps
-CXXFLAGS_RELEASE    +=  -fsplit-wide-types
-CXXFLAGS_RELEASE    +=  -fcse-follow-jumps
-CXXFLAGS_RELEASE    +=  -fcse-skip-blocks
-CXXFLAGS_RELEASE    +=  -frerun-cse-after-loop
-CXXFLAGS_RELEASE    +=  -fgcse
-CXXFLAGS_RELEASE    +=  -fgcse-lm
-CXXFLAGS_RELEASE    +=  -fgcse-sm
-CXXFLAGS_RELEASE    +=  -fgcse-las
-CXXFLAGS_RELEASE    +=  -fgcse-after-reload
+## clang CXXFLAGS_RELEASE    +=  -finline-functions-called-once
+## clang CXXFLAGS_RELEASE    +=  -fearly-inlining
+## clang CXXFLAGS_RELEASE    +=  -fmerge-constants
+## clang CXXFLAGS_RELEASE    +=  -fmodulo-sched
+## clang CXXFLAGS_RELEASE    +=  -fmodulo-sched-allow-regmoves
+## clang CXXFLAGS_RELEASE    +=  -fthread-jumps
+## clang CXXFLAGS_RELEASE    +=  -fsplit-wide-types
+## clang CXXFLAGS_RELEASE    +=  -fcse-follow-jumps
+## clang CXXFLAGS_RELEASE    +=  -fcse-skip-blocks
+## clang CXXFLAGS_RELEASE    +=  -frerun-cse-after-loop
+## clang CXXFLAGS_RELEASE    +=  -fgcse
+## clang CXXFLAGS_RELEASE    +=  -fgcse-lm
+## clang CXXFLAGS_RELEASE    +=  -fgcse-sm
+## clang CXXFLAGS_RELEASE    +=  -fgcse-las
+## clang CXXFLAGS_RELEASE    +=  -fgcse-after-reload
 CXXFLAGS_RELEASE    +=  -funroll-loops
-CXXFLAGS_RELEASE    +=  -funsafe-loop-optimizations
-CXXFLAGS_RELEASE    +=  -fcrossjumping
-CXXFLAGS_RELEASE    +=  -fauto-inc-dec
-CXXFLAGS_RELEASE    +=  -fdce
-CXXFLAGS_RELEASE    +=  -fdse
-CXXFLAGS_RELEASE    +=  -fif-conversion
-CXXFLAGS_RELEASE    +=  -fif-conversion2
-CXXFLAGS_RELEASE    +=  -fdelete-null-pointer-checks
-CXXFLAGS_RELEASE    +=  -fexpensive-optimizations
-CXXFLAGS_RELEASE    +=  -foptimize-register-move
+## clang CXXFLAGS_RELEASE    +=  -funsafe-loop-optimizations
+## clang CXXFLAGS_RELEASE    +=  -fcrossjumping
+## clang CXXFLAGS_RELEASE    +=  -fauto-inc-dec
+## clang CXXFLAGS_RELEASE    +=  -fdce
+## clang CXXFLAGS_RELEASE    +=  -fdse
+## clang CXXFLAGS_RELEASE    +=  -fif-conversion
+## clang CXXFLAGS_RELEASE    +=  -fif-conversion2
+## clang CXXFLAGS_RELEASE    +=  -fdelete-null-pointer-checks
+## clang CXXFLAGS_RELEASE    +=  -fexpensive-optimizations
+## clang CXXFLAGS_RELEASE    +=  -foptimize-register-move
 CXXFLAGS_RELEASE    +=  -pipe
 #CXXFLAGS_RELEASE    +=  --param inline-unit-growth=200
 #CXXFLAGS_RELEASE    +=  --param large-function-growth=400
@@ -265,7 +264,7 @@ CXXFLAGS_RELEASE    +=  -pipe
 CXXFLAGS_X86_32     ?=  -m32
 CXXFLAGS_X86_32     +=  -march=core2
 CXXFLAGS_X86_32     +=  -mtune=core2
-CXXFLAGS_X86_32     +=  -mfpmath=sse
+## clang CXXFLAGS_X86_32     +=  -mfpmath=sse
 CXXFLAGS_X86_32     +=  -msse
 CXXFLAGS_X86_32     +=  -msse2
 CXXFLAGS_X86_32     +=  -msse3
