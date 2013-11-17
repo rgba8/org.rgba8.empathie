@@ -14,36 +14,42 @@
 ROOT        	?= ../
 BIN         	?= test
 DIR		?= pro_$(BIN)
-COMPILER 	?= llvm 
+#COMPILER 	?= llvm 
+COMPILER 	?= gcc
 BUILD		?= debug
 ARCH		?= x86_32
 FATAL		?= FALSE
 MUD		?= false
-TARGET_OS	?= osx
+#TARGET_OS	?= osx
+TARGET_OS	?= lin
+
+ifeq ($(TARGET_OS), osx)
 SDK_ROOT	?= /Applications/XCode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/
-
-ifeq ($(TARGET_OS), osx)
-LIBXML2_ROOT	?= $(SDK_ROOT)usr/include/libxml2
 else
-LIBXML2_ROOT	?= $(SDK_ROOT)usr/include/
+SDK_ROOT	?= /usr/include/
 endif
 
 ifeq ($(TARGET_OS), osx)
-OPENGL_ROOT	?= $(SDK_ROOT)/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/
+LIBXML2_ROOT	?= $(SDK_ROOT)libxml2
 else
-OPENGL_ROOT	?= $(SDK_ROOT)/usr/include/GL/
+LIBXML2_ROOT	?= $(SDK_ROOT)libxml2
 endif
 
 ifeq ($(TARGET_OS), osx)
-X11_ROOT	?= $(SDK_ROOT)/System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/
+OPENGL_ROOT	?= $(SDK_ROOT)System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/
 else
-X11_ROOT	?= $(SDK_ROOT)/user/include/X11/
+OPENGL_ROOT	?= $(SDK_ROOT)GL/
+endif
+
+ifeq ($(TARGET_OS), osx)
+X11_ROOT	?= $(SDK_ROOT)System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/
+else
+X11_ROOT	?= $(SDK_ROOT)X11/
 endif
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
-ARGS		?= 	ARCH="$(ARCH)" BUILD="$(BUILD)" FATAL="$(FATAL)"\
-			 MUD="$(MUD)" ROOT="$(ROOT)" COMPILER="$(COMPILER)"
+ARGS		?= 	ARCH="$(ARCH)" BUILD="$(BUILD)" FATAL="$(FATAL)" MUD="$(MUD)" ROOT="$(ROOT)" COMPILER="$(COMPILER)"
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
