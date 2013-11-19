@@ -11,18 +11,32 @@
 ## Description :
 ##
 ##-----------------------------------------------------------------------------
-ROOT        	?= ../
+ifeq (, $(wildcard $(ROOT)makeuser))
+$(error no $(ROOT)makeuser found)
+else
+include $(ROOT)makeuser
+endif
+
 BIN         	?= test
-DIR		?= pro_$(BIN)
 #COMPILER 	?= llvm 
 COMPILER 	?= gcc
-BUILD		?= debug
-ARCH		?= x86_32
-FATAL		?= FALSE
-MUD		?= false
+#ARCH		?= x86_32
+ARCH		?= x86_64
 #TARGET_OS	?= osx
 TARGET_OS	?= lin
 
+##-----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
+ROOT        	?= ../
+
+##-----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
+DIR		?= pro_$(BIN)
+BUILD		?= debug
+FATAL		?= FALSE
+MUD		?= false
+
+$(info FUUUUUCK $(TARGET_OS))
 ifeq ($(TARGET_OS), osx)
 SDK_ROOT	?= /Applications/XCode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/
 else
@@ -30,10 +44,12 @@ SDK_ROOT	?= /usr/include/
 endif
 
 ifeq ($(TARGET_OS), osx)
-LIBXML2_ROOT	?= $(SDK_ROOT)libxml2
+LIBXML2_ROOT	?= $(SDK_ROOT)usr/include/libxml2/
 else
-LIBXML2_ROOT	?= $(SDK_ROOT)libxml2
+LIBXML2_ROOT	?= $(SDK_ROOT)libxml2/
 endif
+
+$(info TEST $(LIBXML2_ROOT))
 
 ifeq ($(TARGET_OS), osx)
 OPENGL_ROOT	?= $(SDK_ROOT)System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/
@@ -42,7 +58,7 @@ OPENGL_ROOT	?= $(SDK_ROOT)GL/
 endif
 
 ifeq ($(TARGET_OS), osx)
-X11_ROOT	?= $(SDK_ROOT)System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/
+X11_ROOT	?= $(SDK_ROOT)System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/X11/
 else
 X11_ROOT	?= $(SDK_ROOT)X11/
 endif
@@ -74,7 +90,7 @@ all:
 		BINARY="$(BIN)"\
 		IMACROS="$(IMACROS)"\
 		INCLUDES="$(INCLUDES)"\
-        LIBRARIES="$(LIBRARIES)"\
+        	LIBRARIES="$(LIBRARIES)"\
 		SOURCES="$(SOURCES)"\
 		$(ARGS)
 
@@ -89,7 +105,7 @@ check:
 compile:
 	cd $(DIR); time make -j2 -f $(MAKETARGET) compile TARGET="compile"\
 		IMACROS="$(IMACROS)"\
-        INCLUDES="$(INCLUDES)"\
+        	INCLUDES="$(INCLUDES)"\
 		$(ARGS)
 
 ##-----------------------------------------------------------------------------

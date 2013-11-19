@@ -23,7 +23,7 @@ OUTPUT		        ?=	$(join $(BINARY_DIRECTORY), $(BINARY))
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 LOCATIONS	        ?=	$(sort $(sort $(dir $(wildcard ../*/)))\
-                        $(sort $(dir $(wildcard $(ROOT)*/))))
+                        	$(sort $(dir $(wildcard $(ROOT)*/))))
 
 INCLUDE_LOCATIONS   ?=  $(INCLUDES) $(addprefix -I, $(LOCATIONS))
 
@@ -337,16 +337,28 @@ all: initialize $(OBJ_CPP)
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 initialize:
-ifneq (, $(filter $(BUILD), lousy debug release retail final))
-	$(info $(BUILD) build...)
+ifneq (, $(filter "$(BUILD)", "lousy" "debug" "release" "retail" "final"))
+	$(info "$(BUILD)" build...)
 else
-	$(error unknown build : $(BUILD))
+	$(error unknown build : "$(BUILD)")
 endif
 
-ifneq (, $(filter $(ARCH), x86_32 x86_64))
-	$(info $(ARCH) architecture...)
+ifneq (, $(filter "$(ARCH)", "x86_32" "x86_64"))
+	$(info "$(ARCH)" architecture...)
 else
-	$(error unknown architecture : $(ARCH))
+	$(error unknown architecture : "$(ARCH)")
+endif
+
+ifneq (, $(filter "$(COMPILER)", "llvm" "gcc"))
+	$(info "$(COMPILER)" compiler...)
+else
+	$(error unknown compiler : "$(COMPILER)")
+endif
+
+ifneq (, $(filter "$(TARGET_OS)", "osx" "lin"))
+	$(info "$(TARGET_OS)" os...)
+else
+	$(error unknown os : "$(TARGET_OS)")
 endif
 
 ifeq ($(MUD), true)

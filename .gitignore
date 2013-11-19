@@ -1,6 +1,7 @@
 x86_32
 x86_64
 geshi
+makeuser
 *~
 *.swp
 *.lock*.odt#
