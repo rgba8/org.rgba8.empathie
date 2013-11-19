@@ -4,7 +4,7 @@
 //
 // Creation Date : Sat 13 Nov 2010 11:13:11 AM CET
 //
-// Modification Date : mar. 05 nov. 2013 20:08:52 CET
+// Modification Date : mar. 19 nov. 2013 19:37:56 CET
 //
 // Created By : rgba8 (ksej) - www.empathy.fr
 //
@@ -29,9 +29,13 @@ class not_empty_base
 public:
     not_empty_base(void) : m_siPadding(0) {}
 private:
+#ifdef EMP_XX_COMPILER_LLVM
 EMP_AA_PRAGMA_PUSH_IGNORE(EMP_AA_W_UNUSED_PRIVATE_FIELD)
+#endif
     int m_siPadding;
+#ifdef EMP_XX_COMPILER_LLVM
 EMP_AA_PRAGMA_POP_IGNORE(EMP_AA_W_UNUSED_PRIVATE_FIELD)
+#endif
 };
 
 //-----------------------------------------------------------------------------

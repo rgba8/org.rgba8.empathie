@@ -4,7 +4,7 @@
 //
 // Creation Date : Tue 12 Oct 2010 03:26:28 PM CEST
 //
-// Modification Date : mar. 05 nov. 2013 20:07:05 CET
+// Modification Date : lun. 18 nov. 2013 22:24:57 CET
 //
 // Created By : rgba8 (ksej) - www.empathy.fr
 //
@@ -58,11 +58,6 @@ typedef EMP_AA_UNUSED emp::tt::assert_tester\
 
 #define EMP_STATIC_ASSERT(x_Condition)\
     EMP_STATIC_ASSERT_IMP(EMP_XX_COUNTER, x_Condition)
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-EMP_STATIC_ASSERT(sizeof(bool) == 1);
-//EMP_STATIC_ASSERT(sizeof(bool) == 2);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
