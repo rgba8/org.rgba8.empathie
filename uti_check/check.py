@@ -5,9 +5,9 @@
 ##
 ## Creation Date : Thu 14 Oct 2010 07:23:55 PM CEST
 ##
-## Modification Date : ven. 08 nov. 2013 20:57:15 CET
+## Modification Date : mar. 26 nov. 2013 18:12:38 CET
 ##
-## Created By : rgba8 (ksej) - www.empathy.fr
+## Created By : luh - www.rgba8.org
 ##
 ## Description :
 ##
