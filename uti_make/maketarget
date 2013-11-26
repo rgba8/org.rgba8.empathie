@@ -179,7 +179,7 @@ endif
 #CXXFLAGS    +=  -Wstrict-overflow=5
 #CXXFLAGS    +=  -fno-implement-inlines
 #CXXFLAGS    +=  -fdefault-inline
-#FUCKING BAD movaps :) #CXXFLAGS    +=  -ffloat-store
+#BAD movaps :) #CXXFLAGS    +=  -ffloat-store
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------

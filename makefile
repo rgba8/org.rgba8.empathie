@@ -36,7 +36,6 @@ BUILD		?= debug
 FATAL		?= FALSE
 MUD		?= false
 
-$(info FUUUUUCK $(TARGET_OS))
 ifeq ($(TARGET_OS), osx)
 SDK_ROOT	?= /Applications/XCode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/
 else
