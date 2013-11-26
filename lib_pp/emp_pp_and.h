@@ -4,9 +4,9 @@
 //
 // Creation Date : Mon 11 Oct 2010 10:56:04 PM CEST
 //
-// Modification Date : dim. 20 oct. 2013 18:02:16 CEST
+// Modification Date : mar. 26 nov. 2013 18:04:07 CET
 //
-// Created By : rgba8 (ksej) - www.empathy.fr
+// Created By : luh - www.rgba8.org
 //
 // Description :
 //
