@@ -4,7 +4,7 @@
 ##
 ## Creation Date : Mon 31 Jan 2011 08:01:47 PM CET
 ##
-## Modification Date : mar. 26 nov. 2013 18:13:00 CET
+## Modification Date : Thu Nov 28 21:03:09 2013
 ##
 ## Created By : luh - www.rgba8.org
 ##
@@ -27,14 +27,15 @@ TARGET_OS	?= lin
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
-ROOT        	?= ../
+ROOT        ?= ../
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
-DIR		?= pro_$(BIN)
-BUILD		?= debug
-FATAL		?= FALSE
-MUD		?= false
+DIR		    ?= pro_$(BIN)
+BUILD	    ?= debug
+FATAL	    ?= FALSE
+MUD		    ?= false
+VALGRIND    ?= false
 
 ifeq ($(TARGET_OS), osx)
 SDK_ROOT	?= /Applications/XCode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/
@@ -64,7 +65,9 @@ endif
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
-ARGS		?= 	ARCH="$(ARCH)" BUILD="$(BUILD)" FATAL="$(FATAL)" MUD="$(MUD)" ROOT="$(ROOT)" COMPILER="$(COMPILER)" TARGET_OS="$(TARGET_OS)"
+ARGS		?= 	ARCH="$(ARCH)" BUILD="$(BUILD)" FATAL="$(FATAL)" MUD="$(MUD)"\
+                ROOT="$(ROOT)" COMPILER="$(COMPILER)" TARGET_OS="$(TARGET_OS)"\
+                VALGRIND="$(VALGRIND)"
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
