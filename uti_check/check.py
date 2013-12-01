@@ -5,7 +5,7 @@
 ##
 ## Creation Date : Thu 14 Oct 2010 07:23:55 PM CEST
 ##
-## Modification Date : mar. 26 nov. 2013 18:12:38 CET
+## Modification Date : ven. 29 nov. 2013 18:12:42 CET
 ##
 ## Created By : luh - www.rgba8.org
 ##
@@ -262,7 +262,7 @@ def PrintList(a_List):
 ##-----------------------------------------------------------------------------
 ##
 ##-----------------------------------------------------------------------------
-def CheckHeader(szFile):
+def CheckHeader(szFile, a_bCheckTodo):
     pFile = open(szFile, "r")
     aLines = pFile.readlines()
 
@@ -362,8 +362,11 @@ def CheckHeader(szFile):
     aLineEnding, uiErrorLineEnding  = CheckLineEnding(aLines)
     uiError += uiErrorLineEnding
 
-    aLineTodo, uiErrorLineTodo = CheckLineToken(aLines, "todo")
+    uiErrorLineTodo = 0
+    if a_bCheckTodo == 1:
+        aLineTodo, uiErrorLineTodo = CheckLineToken(aLines, "todo")
     uiError += uiErrorLineTodo
+    
     ##aExternalGuard, uiErrorExternalGuard = CheckExternalGuard(aLines)
     ##uiError += uiErrorExternalGuard
 
@@ -407,7 +410,7 @@ def CheckHeader(szFile):
 ##-----------------------------------------------------------------------------
 ##
 ##-----------------------------------------------------------------------------
-def CheckSource(szFile):
+def CheckSource(szFile, a_bCheckTodo):
     pFile = open(szFile, "r")
     aLines = pFile.readlines()
 
@@ -455,7 +458,9 @@ def CheckSource(szFile):
     aLineEnding, uiErrorLineEnding = CheckLineEnding(aLines)
     uiError += uiErrorLineEnding
 
-    aLineTodo, uiErrorLineTodo = CheckLineToken(aLines, "todo")
+    uiErrorLineTodo = 0
+    if  a_bCheckTodo == 1:
+        aLineTodo, uiErrorLineTodo = CheckLineToken(aLines, "todo")
     uiError += uiErrorLineTodo
 
     if  uiError:
@@ -485,7 +490,7 @@ def CheckSource(szFile):
 ##-----------------------------------------------------------------------------
 ##
 ##-----------------------------------------------------------------------------
-def StcHeaders(a_aFiles):
+def StcHeaders(a_aFiles, a_bCheckTodo):
     uiStcCount = 0
     uiStcFile = 0
     uiDuplicate = 0
@@ -496,7 +501,7 @@ def StcHeaders(a_aFiles):
     for szFile in a_aFiles:
         if IsHeaderFile(szFile):
             uiCount += 1
-            uiErrorCount, szGuard = CheckHeader(szFile)
+            uiErrorCount, szGuard = CheckHeader(szFile, a_bCheckTodo)
             if szGuard in mGuardMap:
                 print "Duplicate guard %s, %s, (%s)" % (
                     szGuard, szFile, mGuardFile[szGuard])
@@ -513,7 +518,7 @@ def StcHeaders(a_aFiles):
 ##-----------------------------------------------------------------------------
 ##
 ##-----------------------------------------------------------------------------
-def StcSources(a_aFiles):
+def StcSources(a_aFiles, a_bCheckTodo):
     uiStcCount = 0
     uiStcFile = 0
     uiCount = 0
@@ -521,7 +526,7 @@ def StcSources(a_aFiles):
     for szFile in a_aFiles:
         if IsSourceFile(szFile):
             uiCount += 1
-            uiErrorCount = CheckSource(szFile)
+            uiErrorCount = CheckSource(szFile, a_bCheckTodo)
             if uiErrorCount:
                 uiStcCount += uiErrorCount
                 uiStcFile += 1
@@ -533,20 +538,29 @@ def StcSources(a_aFiles):
 ##-----------------------------------------------------------------------------
 def Main():
     aFiles = []
+    bCheckTodo = 0
     if len(sys.argv) > 1:
         for szDir in sys.argv:
-            if os.path.isdir(szDir):
-                for szFile in os.listdir(szDir):
-                    aFiles.append(szDir + szFile)
-            elif os.path.isfile(szDir):
-                aFiles.append(szDir)
+            if szDir[0] == '-':
+                if len(szDir) > 1:
+                    if szDir[1] == 't':
+                        bCheckTodo = 1
             else:
-                print "Invalid File : %s" % (szDir)
+                if os.path.isdir(szDir):
+                    for szFile in os.listdir(szDir):
+                        aFiles.append(szDir + szFile)
+                elif os.path.isfile(szDir):
+                    aFiles.append(szDir)
+                else:
+                    print "Invalid File : %s" % (szDir)
     else:
          aFiles = os.listdir(".")
 
-    uiFile_H, uiCount_H, uiError_H, uiDuplicate_H = StcHeaders(aFiles)
-    uiFile_CPP, uiCount_CPP, uiError_CPP, uiDuplicate_CPP = StcSources(aFiles)
+    uiFile_H, uiCount_H, uiError_H, uiDuplicate_H = StcHeaders(
+        aFiles, bCheckTodo)
+
+    uiFile_CPP, uiCount_CPP, uiError_CPP, uiDuplicate_CPP = StcSources(
+        aFiles, bCheckTodo)
 
     uiFile = uiFile_H + uiFile_CPP
     uiCount = uiCount_H + uiCount_CPP

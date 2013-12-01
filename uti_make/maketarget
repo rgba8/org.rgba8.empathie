@@ -4,7 +4,7 @@
 ##
 ## Creation Date : Tue Jun 22 23:12:04 2010
 ##
-## Modification Date : Thu Nov 28 21:04:30 2013
+## Modification Date : ven. 29 nov. 2013 20:21:55 CET
 ##
 ## Created By : luh - www.rgba8.org
 ##
@@ -24,6 +24,9 @@ OUTPUT		        ?=	$(join $(BINARY_DIRECTORY), $(BINARY))
 ##-----------------------------------------------------------------------------
 LOCATIONS	        ?=	$(sort $(sort $(dir $(wildcard ../*/)))\
                         	$(sort $(dir $(wildcard $(ROOT)*/))))
+
+CHECK_LOCATIONS     ?= ./ $(sort $(sort $(dir $(wildcard ../lib_*/)))\
+                            $(sort $(dir $(wildcard $(ROOT)lib_*/))))
 
 INCLUDE_LOCATIONS   ?=  $(INCLUDES) $(addprefix -I, $(LOCATIONS))
 
@@ -397,7 +400,7 @@ endif
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 check:
-	$(MAKECHECK) $(LOCATIONS)
+	$(MAKECHECK) $(CHECK_LOCATIONS) $(CHECK)
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------

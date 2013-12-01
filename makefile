@@ -4,7 +4,7 @@
 ##
 ## Creation Date : Mon 31 Jan 2011 08:01:47 PM CET
 ##
-## Modification Date : Thu Nov 28 21:03:09 2013
+## Modification Date : dim. 01 déc. 2013 16:06:15 CET
 ##
 ## Created By : luh - www.rgba8.org
 ##
@@ -36,6 +36,7 @@ BUILD	    ?= debug
 FATAL	    ?= FALSE
 MUD		    ?= false
 VALGRIND    ?= false
+CHECK       ?=
 
 ifeq ($(TARGET_OS), osx)
 SDK_ROOT	?= /Applications/XCode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/
@@ -49,8 +50,6 @@ else
 LIBXML2_ROOT	?= $(SDK_ROOT)libxml2/
 endif
 
-$(info TEST $(LIBXML2_ROOT))
-
 ifeq ($(TARGET_OS), osx)
 OPENGL_ROOT	?= $(SDK_ROOT)System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/
 else
@@ -63,6 +62,14 @@ else
 X11_ROOT	?= $(SDK_ROOT)X11/
 endif
 
+ifeq ($(TARGET_OS), osx)
+FREETYPE2_ROOT  ?= $(SDK_ROOT)usr/include/freetype2/
+else
+FREETYPE2_ROOT  ?= $(SDK_ROOT)freetype2/
+endif
+
+#ifeq ($(TARGET_OS), osx)
+#PCI_ROOT        ?= $(SDK_ROOT)usr/include/pci
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 ARGS		?= 	ARCH="$(ARCH)" BUILD="$(BUILD)" FATAL="$(FATAL)" MUD="$(MUD)"\
@@ -100,7 +107,7 @@ all:
 ##-----------------------------------------------------------------------------
 check:
 	cd $(DIR); time make -j2 -f $(MAKETARGET) check TARGET="check"\
-		$(ARGS)
+		$(ARGS) CHECK="$(CHECK)"
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
