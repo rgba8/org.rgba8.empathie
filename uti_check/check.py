@@ -5,7 +5,7 @@
 ##
 ## Creation Date : Thu 14 Oct 2010 07:23:55 PM CEST
 ##
-## Modification Date : ven. 29 nov. 2013 18:12:42 CET
+## Modification Date : Fri Dec 20 12:21:04 2013
 ##
 ## Created By : luh - www.rgba8.org
 ##
@@ -76,7 +76,8 @@ def IsHeaderFile(szFile):
 ##
 ##-----------------------------------------------------------------------------
 def IsSourceFile(szFile):
-    return  IsExtension(szFile, ".cpp") or IsExtension(szFile, ".cxx")
+    return  IsExtension(szFile, ".cpp") or IsExtension(szFile, ".cxx") or \
+        IsExtension(szFile, ".mm")
 
 ##-----------------------------------------------------------------------------
 ##

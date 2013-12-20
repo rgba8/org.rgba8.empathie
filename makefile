@@ -4,7 +4,7 @@
 ##
 ## Creation Date : Mon 31 Jan 2011 08:01:47 PM CET
 ##
-## Modification Date : Mon Dec  2 18:45:14 2013
+## Modification Date : Sun Dec 15 21:51:06 2013
 ##
 ## Created By : luh - www.rgba8.org
 ##
@@ -82,6 +82,10 @@ ifeq ($(TARGET_OS), lin)
 OPENAL_H        ?= $(SDK_ROOT)AL/
 OPENAL_LIB      ?= -lopenal
 endif
+endif
+
+ifeq ($(TARGET_OS), osx)
+COCOA_LIB       ?= -framework cocoa -framework QuartzCore
 endif
 
 #ifeq ($(TARGET_OS), osx)

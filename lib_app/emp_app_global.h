@@ -1,18 +1,18 @@
 //-----------------------------------------------------------------------------
 //
-// File Name : emp_gbl_global.h
+// File Name : emp_app_global.h
 //
 // Creation Date : Sat 16 Oct 2010 03:40:36 PM CEST
 //
-// Modification Date : mar. 26 nov. 2013 18:14:48 CET
+// Modification Date : Wed Dec 11 22:02:50 2013
 //
 // Created By : luh - www.rgba8.org
 //
 // Description :
 //
 //-----------------------------------------------------------------------------
-#ifndef EMP_GBL_GLOBAL_H
-#define EMP_GBL_GLOBAL_H
+#ifndef EMP_APP_GLOBAL_H
+#define EMP_APP_GLOBAL_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -23,38 +23,38 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_GLOBALS() emp::gbl::globals_t::instance()
+#define EMP_GLOBAL() emp::app::global_c::instance()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #ifdef EMP_XX_LOG_ENABLE
-#define EMP_LOGGER() EMP_GLOBALS().logger()
+#define EMP_LOGGER() EMP_GLOBAL().logger()
 #endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #if defined(EMP_XX_ASSERT_ENABLE)
-#define EMP_ASSERTER() EMP_GLOBALS().asserter()
+#define EMP_ASSERTER() EMP_GLOBAL().asserter()
 #endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #if defined(EMP_XX_LOCALIZE_ENABLE)
-#define EMP_LOCALIZER() EMP_GLOBALS().localizer()
+#define EMP_LOCALIZER() EMP_GLOBAL().localizer()
 #endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_ALLOCATOR() EMP_GLOBALS().allocator()
-#define EMP_ALIGNATOR() EMP_GLOBALS().alignator()
+#define EMP_ALLOCATOR() EMP_GLOBAL().allocator()
+#define EMP_ALIGNATOR() EMP_GLOBAL().alignator()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_STRING() EMP_GLOBALS().string()
+#define EMP_STRING() EMP_GLOBAL().string()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_ENGINE() EMP_GLOBALS().engine()
+#define EMP_GAME() EMP_GLOBAL().game()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -65,18 +65,18 @@ namespace emp
     namespace loc { class localizer_c; }
     namespace log { class logger_t; }
     namespace rfx { class factory_c; }
-    namespace eng { class engine_c; }
+    namespace app { class game_c; }
 }
 
 EMP_XX_FORWARD_MEM_ALLOCATOR()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-namespace emp { namespace gbl {
+namespace emp { namespace app {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_NOCOPY_CLASS(globals_t)
+EMP_NOCOPY_CLASS(global_c)
 
 #ifdef EMP_XX_ASSERT_ENABLE
 private:
@@ -141,15 +141,15 @@ public:
 #endif
 
 private:
-    emp::eng::engine_c* m_pEngine;
+    emp::app::game_c* m_pGame;
 public:
-    EMP_RETURN emp::eng::engine_c& engine(void)
-    { return *m_pEngine; }
-    void set_engine(emp::eng::engine_c* const a_pValue)
-    { m_pEngine = a_pValue; }
+    EMP_RETURN emp::app::game_c& game(void)
+    { return *m_pGame; }
+    void set_game(emp::app::game_c* const a_pValue)
+    { m_pGame = a_pValue; }
 
 public:
-    globals_t(void):
+    global_c(void):
     EMP_XX_IF_ASSERT(   m_pAsserter()   EMP_PP_COMMA())
                         m_pAllocator()  ,
                         m_pAlignator()  ,
@@ -157,15 +157,15 @@ public:
                         m_pFactory()    ,
     EMP_XX_IF_LOCALIZE( m_pLocalizer()  EMP_PP_COMMA())
     EMP_XX_IF_LOG(      m_pLogger())    ,
-                        m_pEngine()
+                        m_pGame()
     { }
 
 private:
-    static globals_t* m_pInstance;
+    static global_c* m_pInstance;
 public:
-    static EMP_RETURN globals_t& instance(void)
+    static EMP_RETURN global_c& instance(void)
     { return *m_pInstance; }
-    static void set_instance(globals_t* a_pValue)
+    static void set_instance(global_c* a_pValue)
     { m_pInstance = a_pValue; }
 };
 

@@ -4,7 +4,7 @@
 //
 // Creation Date : Tue 12 Oct 2010 03:39:14 PM CEST
 //
-// Modification Date : mar. 26 nov. 2013 18:08:35 CET
+// Modification Date : Wed Dec 11 21:32:36 2013
 //
 // Created By : luh - www.rgba8.org
 //
@@ -22,6 +22,7 @@
 #include "emp_xx_line.h"
 #include "emp_xx_signature.h"
 
+#include "emp_pp_comma.h"
 #include "emp_pp_string.h"
 
 //-----------------------------------------------------------------------------
@@ -67,6 +68,24 @@ private:
         EMP_XX_FUNCTION,\
         EMP_XX_SIGNATURE\
     )
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#ifdef EMP_XX_TRACK_LEAKS_ENABLE
+#define EMP_XX_DBG_STATEMENT_COMMA EMP_PP_COMMA()
+#define EMP_XX_DBG_STATEMENT_ARGUMENT a_rStatement
+#define EMP_XX_DBG_STATEMENT_PARAMETER\
+    emp::ast::statement_t const& a_rStatement
+#define EMP_XX_DBG_STATEMENT_UNUSED EMP_AA_UNUSED
+#define EMP_XX_DBG_STATEMENT_INFO EMP_STATEMENT_INFO()
+namespace emp { namespace ast { class statement_t; } }
+#else
+#define EMP_XX_DBG_STATEMENT_COMMA
+#define EMP_XX_DBG_STATEMENT_ARGUMENT
+#define EMP_XX_DBG_STATEMENT_PARAMETER
+#define EMP_XX_DBG_STATEMENT_UNUSED
+#define EMP_XX_DBG_STATEMENT_INFO
+#endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
