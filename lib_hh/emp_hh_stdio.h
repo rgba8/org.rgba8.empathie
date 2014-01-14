@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 10 Jan 2011 12:24:32 PM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:13:30 CET
+// Modification Date : Tue Jan 14 19:24:44 2014
 //
 // Created By : luh - www.rgba8.org
 //
@@ -16,7 +16,18 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+#ifdef __STRICT_ANSI__
+// TODO : ugly
+#undef __STRICT_ANSI__
 #include <stdio.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#define __STRICT_ANSI__
+#else
+#include <stdio.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

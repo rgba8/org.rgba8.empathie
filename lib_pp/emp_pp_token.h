@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 11 Oct 2010 10:47:27 PM CEST
 //
-// Modification Date : mar. 26 nov. 2013 18:05:16 CET
+// Modification Date : Tue Jan 14 19:27:07 2014
 //
 // Created By : luh - www.rgba8.org
 //
@@ -16,8 +16,8 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_TOKEN(x_Left, x_Right) EMP_PP_TOKEN_IMP(x_Left, x_Right)
-#define EMP_PP_TOKEN_IMP(x_Left, x_Right) x_Left ## x_Right
+#define EMP_PP_TOKEN(x_Left, ...) EMP_PP_TOKEN_IMP(x_Left, __VA_ARGS__)
+#define EMP_PP_TOKEN_IMP(x_Left, ...) x_Left ## __VA_ARGS__
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
