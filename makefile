@@ -4,7 +4,7 @@
 ##
 ## Creation Date : Mon 31 Jan 2011 08:01:47 PM CET
 ##
-## Modification Date : Sun Jan 12 16:48:30 2014
+## Modification Date : mar. 14 janv. 2014 23:40:29 CET
 ##
 ## Created By : luh - www.rgba8.org
 ##
@@ -146,16 +146,18 @@ endif
 ##-----------------------------------------------------------------------------
 include $(DIR)/makefile
 
+TARGET_JOB ?= 
+
 ifeq ($(TARGET_OS), win)
-JOB ?=
+TARGET_JOB ?= 
 else
-JOB ?= -j4
+TARGET_JOB ?= -j4
 endif
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 all:
-	cd $(DIR); time make $(JOB) -f $(MAKETARGET) all TARGET="all"\
+	cd $(DIR); time make $(TARGET_JOB) -f $(MAKETARGET) all TARGET="all"\
 		BINARY="$(BIN)"\
 		IMACROS="$(IMACROS)"\
 		INCLUDES="$(INCLUDES)"\
@@ -166,13 +168,13 @@ all:
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 check:
-	cd $(DIR); time make $(JOB) -f $(MAKETARGET) check TARGET="check"\
+	cd $(DIR); time make $(TARGET_JOB) -f $(MAKETARGET) check TARGET="check"\
 		$(ARGS) CHECK="$(CHECK)"
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 compile:
-	cd $(DIR); time make $(JOB) -f $(MAKETARGET) compile TARGET="compile"\
+	cd $(DIR); time make $(TARGET_JOB) -f $(MAKETARGET) compile TARGET="compile"\
 		IMACROS="$(IMACROS)"\
         	INCLUDES="$(INCLUDES)"\
 		$(ARGS)
@@ -180,7 +182,7 @@ compile:
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 clean:
-	cd $(DIR); time make $(JOB) -f $(MAKETARGET) clean TARGET="clean"\
+	cd $(DIR); time make $(TARGET_JOB) -f $(MAKETARGET) clean TARGET="clean"\
 		BINARY="$(BIN)"\
 		$(ARGS)
 
