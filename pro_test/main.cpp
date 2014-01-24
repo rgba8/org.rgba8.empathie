@@ -6,7 +6,7 @@
 //
 // Modification Date : Mon Dec  2 19:50:23 2013
 //
-// Created By : luh - www.rgba8.org
+// Created By : ksej - www.rgba8.org
 //
 // Description :
 //

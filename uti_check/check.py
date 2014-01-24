@@ -7,7 +7,7 @@
 ##
 ## Modification Date : Fri Dec 20 12:21:04 2013
 ##
-## Created By : luh - www.rgba8.org
+## Created By : ksej - www.rgba8.org
 ##
 ## Description :
 ##
