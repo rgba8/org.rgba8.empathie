@@ -4,7 +4,7 @@
 //
 // Creation Date : Tue 20 Sep 2011 05:17:53 PM CEST
 //
-// Modification Date : mar. 26 nov. 2013 18:14:09 CET
+// Modification Date : lun. 27 janv. 2014 20:27:08 CET
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -20,6 +20,7 @@
 
 #define EMP_XX_TRACK_LEAKS_ENABLE
 
+#define EMP_XX_LOG_ENABLE_WARNING
 #define EMP_XX_LOG_ENABLE_ERROR
 #define EMP_XX_LOG_ENABLE_OUTPUT
 
