@@ -4,7 +4,7 @@
 ##
 ## Creation Date : Mon 31 Jan 2011 08:01:47 PM CET
 ##
-## Modification Date : mar. 14 janv. 2014 23:40:29 CET
+## Modification Date : dim. 20 juil. 2014 20:46:51 CEST
 ##
 ## Created By : ksej - www.rgba8.org
 ##
@@ -146,12 +146,12 @@ endif
 ##-----------------------------------------------------------------------------
 include $(DIR)/makefile
 
-TARGET_JOB ?= 
+TARGET_JOB ?= -j 4
 
 ifeq ($(TARGET_OS), win)
 TARGET_JOB ?= 
 else
-TARGET_JOB ?= -j4
+TARGET_JOB ?= -j 4
 endif
 
 ##-----------------------------------------------------------------------------

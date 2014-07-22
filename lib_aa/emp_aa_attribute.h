@@ -4,7 +4,7 @@
 //
 // Creation Date : Fri 24 Sep 2010 01:00:23 PM CEST
 //
-// Modification Date : mar. 26 nov. 2013 18:12:53 CET
+// Modification Date : dim. 09 févr. 2014 20:51:41 CET
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -44,6 +44,14 @@
 #define EMP_AA_NOINLINE __attribute__ ((noinline))
 #else
 #define EMP_AA_NOINLINE
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#if defined(__GNUC__)
+#define EMP_AA_NORETURN __attribute__ ((noreturn))
+#else
+#define EMP_AA_NORETURN
 #endif
 
 //-----------------------------------------------------------------------------

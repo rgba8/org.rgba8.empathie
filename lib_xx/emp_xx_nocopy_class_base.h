@@ -4,7 +4,7 @@
 //
 // Creation Date : Thu 10 Mar 2011 02:57:48 PM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:14:15 CET
+// Modification Date : lun. 16 juin 2014 23:10:10 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -24,6 +24,7 @@
 class x_Name : x_Modifier x_Base\
 {\
     friend class emp::rfx::class_t<x_Name>;\
+    friend EMP_RETURN bool emp::rfx::reflect<x_Name>(reflection_c&);\
 public:\
     typedef x_Base tbase;\
 private:\
@@ -34,7 +35,7 @@ private:\
 #define EMP_NOCOPY_CLASS_BASE_2(x_Name, x_Modifier, x_Base, x_Mod2, x_Base2)\
 class x_Name : x_Modifier x_Base, x_Mod2 x_Base2\
 {\
-    friend class emp::rfx::class_t<x_Name>;\
+    EMP_RFX_FRIEND(x_Name)\
 public:\
     typedef x_Base tbase;\
     typedef x_Base2 tbase2;\

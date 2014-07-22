@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 11 Oct 2010 10:27:15 PM CEST
 //
-// Modification Date : mar. 26 nov. 2013 18:14:06 CET
+// Modification Date : lun. 16 juin 2014 23:03:35 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -13,6 +13,10 @@
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_MACRO_H
 #define EMP_XX_MACRO_H
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "emp_xx_return.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -202,8 +206,18 @@ namespace emp { namespace mem {\
     EMP_XX_TYPEDEF_MEM_ALIGNATOR();\
 } }
 
-namespace emp { namespace rfx { template <typename> class class_t; } }
+namespace emp { namespace rfx {
+    class reflection_c;
+    template <typename T>
+    EMP_RETURN bool reflect(reflection_c& a_rReflection);
+} }
 
+#define EMP_RFX_FRIEND(x_Name)\
+    friend class emp::rfx::class_t<x_Name>;\
+    friend EMP_RETURN bool emp::rfx::reflect<x_Name>(reflection_c&);
+ 
+namespace emp { namespace rfx { template <typename> class class_t; } }
+namespace emp { namespace rfx { template <typename> class member_t; } }
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #endif

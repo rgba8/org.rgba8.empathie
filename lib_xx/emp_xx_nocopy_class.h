@@ -4,7 +4,7 @@
 //
 // Creation Date : Thu 10 Mar 2011 02:56:57 PM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:14:16 CET
+// Modification Date : lun. 16 juin 2014 23:05:19 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -23,7 +23,7 @@
 #define EMP_NOCOPY_CLASS(x_Name)\
 class x_Name\
 {\
-    friend class emp::rfx::class_t<x_Name>;\
+    EMP_RFX_FRIEND(x_Name)\
     EMP_XX_NOCOPY(x_Name);
 
 //-----------------------------------------------------------------------------
