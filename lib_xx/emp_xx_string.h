@@ -4,7 +4,7 @@
 //
 // Creation Date : Thu 02 Dec 2010 04:11:39 PM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:14:34 CET
+// Modification Date : sam. 20 sept. 2014 09:48:28 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -54,10 +54,12 @@
 #define EMP_XC_TILDE               '~'
 
 #define EMP_XC_lower_a 'a'
+#define EMP_XC_lower_f 'f'
 #define EMP_XC_lower_z 'z'
 #define EMP_XC_UPPER_A 'A'
 #define EMP_XC_UPPER_D 'D'
 #define EMP_XC_UPPER_E 'E'
+#define EMP_XC_UPPER_F 'F'
 #define EMP_XC_UPPER_I 'I'
 #define EMP_XC_UPPER_O 'O'
 #define EMP_XC_UPPER_W 'W'
