@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 01 Nov 2010 01:41:05 PM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:15:12 CET
+// Modification Date : jeu. 28 mai 2015 22:58:21 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -94,6 +94,8 @@ public:
 #undef EMP_ENUM_LAST_VALUE_EX
     };
 
+    typedef Value const CValue;
+
     static const unsigned int count =
 #define EMP_ENUM_FIRST_LABEL(x_Name) 1
 #define EMP_ENUM_FIRST_VALUE(x_Name, x_Value) 1
@@ -133,6 +135,39 @@ public:
 
     static EMP_RETURN bool is_valid(EMP_ENUM_NAME()::Value const a_eValue);
 
+#ifdef EMP_ENUM_TO_CSTR
+    static EMP_RETURN char const* to_cstr(EMP_ENUM_NAME()::Value const a_eValue)
+    {
+        switch (a_eValue)
+        {
+#define EMP_ENUM_FIRST_LABEL(x_Name) case EMP_ENUM_NAME()::x_Name: { return EMP_PP_STRING(x_Name); }
+#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value) EMP_ENUM_FIRST_LABEL(x_Name)
+#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User) EMP_ENUM_FIRST_LABEL(x_Name)
+#define EMP_ENUM_FIRST_VALUE_EX(x_Name, x_Value, x_User) EMP_ENUM_FIRST_LABEL(x_Name)
+
+#define EMP_ENUM_LAST_LABEL(x_Name) EMP_ENUM_FIRST_LABEL(x_Name)
+#define EMP_ENUM_LAST_VALUE(x_Name, x_Value) EMP_ENUM_FIRST_LABEL(x_Name)
+#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User) EMP_ENUM_FIRST_LABEL(x_Name)
+#define EMP_ENUM_LAST_VALUE_EX(x_Name, x_Value, x_User) EMP_ENUM_FIRST_LABEL(x_Name)
+
+        EMP_ENUM_VALUES()
+             
+#undef EMP_ENUM_FIRST_LABEL
+#undef EMP_ENUM_FIRST_VALUE
+#undef EMP_ENUM_FIRST_LABEL_EX
+#undef EMP_ENUM_FIRST_VALUE_EX
+
+#undef EMP_ENUM_LAST_LABEL
+#undef EMP_ENUM_LAST_VALUE
+#undef EMP_ENUM_LAST_LABEL_EX
+#undef EMP_ENUM_LAST_VALUE_EX
+            default:
+            { break; }
+        };
+        return "__invalid_enum_value__";
+    }
+#endif
+
 
 };
 
@@ -140,6 +175,7 @@ public:
 //-----------------------------------------------------------------------------
 #undef EMP_ENUM_NAME
 #undef EMP_ENUM_VALUES
+#undef EMP_ENUM_TO_CSTR
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

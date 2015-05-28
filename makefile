@@ -4,7 +4,7 @@
 ##
 ## Creation Date : Mon 31 Jan 2011 08:01:47 PM CET
 ##
-## Modification Date : dim. 20 juil. 2014 20:46:51 CEST
+## Modification Date : jeu. 28 mai 2015 22:58:37 CEST
 ##
 ## Created By : ksej - www.rgba8.org
 ##
@@ -35,6 +35,7 @@ DIR		    ?= pro_$(BIN)
 BUILD	    ?= debug
 FATAL	    ?= FALSE
 MUD		    ?= false
+ASAN        ?= false
 VALGRIND    ?= false
 CHECK       ?=
 
@@ -128,7 +129,7 @@ endif
 ##-----------------------------------------------------------------------------
 ARGS		?= 	ARCH="$(ARCH)" BUILD="$(BUILD)" FATAL="$(FATAL)" MUD="$(MUD)"\
                 ROOT="$(ROOT)" COMPILER="$(COMPILER)" TARGET_OS="$(TARGET_OS)"\
-                VALGRIND="$(VALGRIND)"
+                VALGRIND="$(VALGRIND)" ASAN="$(ASAN)"
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
@@ -146,7 +147,7 @@ endif
 ##-----------------------------------------------------------------------------
 include $(DIR)/makefile
 
-TARGET_JOB ?= -j 4
+TARGET_JOB ?= 
 
 ifeq ($(TARGET_OS), win)
 TARGET_JOB ?= 
