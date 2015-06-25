@@ -4,7 +4,7 @@
 //
 // Creation Date : Tue 30 Nov 2010 11:58:53 AM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:13:46 CET
+// Modification Date : Thu Jun 25 23:42:01 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -18,6 +18,15 @@
 //-----------------------------------------------------------------------------
 #define EMP_CALL_OR_DIE(x_Call)\
 if ((x_Call) == false)\
+{\
+    EMP_LOG_ERROR(EMP_PP_STRING(x_Call));\
+    return false;\
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#define EMP_DIE_FALSE(x_Call)\
+if (x_Call)\
 {\
     EMP_LOG_ERROR(EMP_PP_STRING(x_Call));\
     return false;\

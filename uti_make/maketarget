@@ -4,7 +4,7 @@
 ##
 ## Creation Date : Tue Jun 22 23:12:04 2010
 ##
-## Modification Date : jeu. 28 mai 2015 22:59:19 CEST
+## Modification Date : Thu Jun 25 20:38:05 2015
 ##
 ## Created By : ksej - www.rgba8.org
 ##
@@ -232,7 +232,6 @@ endif
 CXXFLAGS_RELEASE    ?=  -O3
 CXXFLAGS_RELEASE    +=  -fomit-frame-pointer
 CXXFLAGS_RELEASE    +=  -foptimize-sibling-calls
-CXXFLAGS_RELEASE    +=  -finline-functions
 CXXFLAGS_RELEASE    +=  -funroll-loops
 CXXFLAGS_RELEASE    +=  -pipe
 
@@ -241,9 +240,10 @@ CXXFLAGS_RELEASE    +=  -mtune=core2
 
 ifeq ($(COMPILER), gcc)
 CXXFLAGS_RELEASE    +=  -fforward-propagate
+CXXFLAGS_RELEASE    +=  -finline-functions
 CXXFLAGS_RELEASE    +=  -finline-small-functions
-CXXFLAGS_RELEASE    +=  -findirect-inlining
 CXXFLAGS_RELEASE    +=  -finline-functions-called-once
+CXXFLAGS_RELEASE    +=  -findirect-inlining
 CXXFLAGS_RELEASE    +=  -fearly-inlining
 CXXFLAGS_RELEASE    +=  -fmerge-constants
 CXXFLAGS_RELEASE    +=  -fmodulo-sched

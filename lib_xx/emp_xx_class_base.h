@@ -4,7 +4,7 @@
 //
 // Creation Date : Thu 10 Mar 2011 02:58:47 PM CET
 //
-// Modification Date : lun. 16 juin 2014 23:09:06 CEST
+// Modification Date : Thu Jun 25 22:41:30 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -20,7 +20,7 @@
 class x_Name : x_Modifier x_Base\
 {\
     friend class emp::rfx::class_t<x_Name>;\
-    friend EMP_RETURN bool emp::rfx::reflect<x_Name>(reflection_c&);\
+    friend EMP_RETURN bool emp::rfx::reflect<x_Name>(emp::rfx::reflection_c&);\
 public:\
     typedef x_Base tbase;\
 private:

@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 11 Oct 2010 10:27:15 PM CEST
 //
-// Modification Date : lun. 16 juin 2014 23:03:35 CEST
+// Modification Date : Thu Jun 25 22:40:46 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -214,7 +214,7 @@ namespace emp { namespace rfx {
 
 #define EMP_RFX_FRIEND(x_Name)\
     friend class emp::rfx::class_t<x_Name>;\
-    friend EMP_RETURN bool emp::rfx::reflect<x_Name>(reflection_c&);
+    friend EMP_RETURN bool emp::rfx::reflect<x_Name>(emp::rfx::reflection_c&);
  
 namespace emp { namespace rfx { template <typename> class class_t; } }
 namespace emp { namespace rfx { template <typename> class member_t; } }
