@@ -46,7 +46,7 @@ EMP_NOINSTANCE_CLASS(assert_tester)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_STATIC_ASSERT_IMP(x_Count, x_bCondition)\
-typedef EMP_AA_UNUSED emp::tt::assert_tester\
+typedef EMP_UNUSED emp::tt::assert_tester\
     <x_Count, sizeof(emp::tt::assert<x_bCondition>)>\
         EMP_PP_TOKEN(assert_, x_Count)
 

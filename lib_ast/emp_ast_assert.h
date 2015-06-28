@@ -35,7 +35,7 @@
 #define EMP_XX_DBG_STATEMENT_ARGUMENT a_rStatement
 #define EMP_XX_DBG_STATEMENT_PARAMETER\
     emp::ast::statement_c const& a_rStatement
-#define EMP_XX_DBG_STATEMENT_UNUSED EMP_AA_UNUSED
+#define EMP_XX_DBG_STATEMENT_UNUSED EMP_UNUSED
 #define EMP_XX_DBG_STATEMENT_INFO EMP_STATEMENT_INFO()
 namespace emp { namespace ast { class statement_c; } }
 #else
