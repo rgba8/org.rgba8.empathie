@@ -1,22 +1,23 @@
 //-----------------------------------------------------------------------------
 //
-// File Name : emp_xx_file.h
+// File Name : emp_xx_array.h
 //
-// Creation Date : Mon 11 Oct 2010 10:41:27 PM CEST
+// Creation Date : Fri Jun 26 18:42:43 2015
 //
-// Modification Date : mar. 26 nov. 2013 18:13:55 CET
+// Modification Date : Fri Jun 26 18:43:21 2015
 //
 // Created By : ksej - www.rgba8.org
 //
 // Description :
 //
 //-----------------------------------------------------------------------------
-#ifndef EMP_XX_FILE_H
-#define EMP_XX_FILE_H
+#ifndef EMP_XX_ARRAY_H
+#define EMP_XX_ARRAY_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_XX_FILE __FILE__
+#define EMP_XX_ARRAY_SIZE(x_Array) (sizeof(x_Array) / sizeof(x_Array[0]))
+#define EMP_XX_ARRAY_LEN(x_Array) (EMP_XX_ARRAY_SIZE(x_Array) - 1)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

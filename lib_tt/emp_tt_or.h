@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 08 Nov 2010 11:46:00 AM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:11:27 CET
+// Modification Date : Fri Jun 26 20:12:41 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -18,8 +18,6 @@
 //-----------------------------------------------------------------------------
 #include "emp_tt_bool.h"
 
-#include "emp_xx_noinstance_class_base.h"
-
 #include "emp_pp_forward.h"
 
 //-----------------------------------------------------------------------------
@@ -29,7 +27,7 @@ namespace emp { namespace tt {
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <bool b0, bool b1, bool b2 = false, bool b3 = false, bool b4 = false>
-EMP_NOINSTANCE_CLASS_BASE(or, public, true_)
+EMP_NOINSTANCE_CLASS_BASE(or_, public, true_)
 public:
     using true_::value;
 };
@@ -38,7 +36,7 @@ public:
 //-----------------------------------------------------------------------------
 template <>
 EMP_NOINSTANCE_CLASS_BASE(
-EMP_PP_FORWARD_5(or<false, false, false, false, false>), public, false_)
+EMP_PP_FORWARD_5(or_<false, false, false, false, false>), public, false_)
 public:
     using false_::value;
 };

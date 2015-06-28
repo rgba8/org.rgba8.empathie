@@ -1,22 +1,26 @@
 //-----------------------------------------------------------------------------
 //
-// File Name : emp_xx_signature.h
+// File Name : emp_xx_info.h
 //
-// Creation Date : Thu 14 Oct 2010 03:49:57 PM CEST
+// Creation Date : Fri Jun 26 18:46:20 2015
 //
-// Modification Date : mar. 26 nov. 2013 18:14:32 CET
+// Modification Date : Fri Jun 26 18:50:02 2015
 //
 // Created By : ksej - www.rgba8.org
 //
 // Description :
 //
 //-----------------------------------------------------------------------------
-#ifndef EMP_XX_SIGNATURE_H
-#define EMP_XX_SIGNATURE_H
+#ifndef EMP_XX_INFO_H
+#define EMP_XX_INFO_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+#define EMP_XX_COUNTER __COUNTER__
+#define EMP_XX_LINE __LINE__
+#define EMP_XX_FUNCTION __FUNCTION__
 #define EMP_XX_SIGNATURE __PRETTY_FUNCTION__
+#define EMP_XX_FILE __FILE__
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

@@ -29,9 +29,8 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_TT_DECLARE_VALUE(is_param, EMP_PP_FORWARD(emp::tt::or<
-                                            emp::tt::is_fundamental<T>::value,
-                                            emp::tt::is_pointer<T>::value>));
+EMP_TT_DECLARE_VALUE(is_param, EMP_PP_FORWARD(emp::tt::or_<
+    emp::tt::is_fundamental<T>::value, emp::tt::is_pointer<T>::value>));
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

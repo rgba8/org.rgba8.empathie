@@ -4,7 +4,7 @@
 //
 // Creation Date : Tue 11 Jan 2011 04:07:21 PM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:09:54 CET
+// Modification Date : Fri Jun 26 20:08:46 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -19,11 +19,6 @@
 #include "emp_tt_assert.h"
 #include "emp_tt_constant.h"
 #include "emp_tt_limit.h"
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#include "emp_xx_call.h"
-#include "emp_xx_noinstance_class.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

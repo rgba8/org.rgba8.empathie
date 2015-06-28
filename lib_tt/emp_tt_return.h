@@ -35,7 +35,7 @@ EMP_NOINSTANCE_CLASS(return_)
 public:
     typedef typename emp::tt::if_else
     <
-        emp::tt::or
+        emp::tt::or_
         <
             emp::tt::is_fundamental<T>::value,
             emp::tt::is_pointer<T>::value

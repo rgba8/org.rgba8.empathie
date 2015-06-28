@@ -4,7 +4,7 @@
 //
 // Creation Date : Thu 04 Nov 2010 03:37:46 PM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:09:49 CET
+// Modification Date : Fri Jun 26 20:16:22 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -21,8 +21,6 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_xx_noinstance_class.h"
-
 #include "emp_pp_argument.h"
 #include "emp_pp_for.h"
 #include "emp_pp_iterate.h"

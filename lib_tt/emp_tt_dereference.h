@@ -4,7 +4,7 @@
 //
 // Creation Date : Tue 23 Nov 2010 11:42:25 AM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:10:03 CET
+// Modification Date : Fri Jun 26 20:09:48 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -25,11 +25,6 @@
 #include "emp_tt_try_remove_pointer.h"
 #include "emp_tt_try_remove_reference.h"
 #include "emp_tt_try_remove_volatile.h"
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#include "emp_xx_noinstance_class.h"
-#include "emp_xx_return.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 //
 // Creation Date : Thu 03 Mar 2011 02:42:11 PM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:11:19 CET
+// Modification Date : Fri Jun 26 20:13:04 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -16,13 +16,7 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#ifndef EMP_TT_CONSTANT_H
 #include "emp_tt_constant.h"
-#endif
-
-#ifndef EMP_XX_NOINSTANCE_CLASS_H
-#include "emp_xx_noinstance_class.h"
-#endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

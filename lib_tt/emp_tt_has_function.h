@@ -4,7 +4,7 @@
 //
 // Creation Date : mer. 12 sept. 2012 12:03:15 CEST
 //
-// Modification Date : mar. 26 nov. 2013 18:10:13 CET
+// Modification Date : Fri Jun 26 20:15:02 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -23,10 +23,6 @@
 
 #include "emp_tt_constant.h"
 #include "emp_tt_has_base.h"
-
-#include "emp_xx_nocopy_class.h"
-#include "emp_xx_noinstance_class.h"
-#include "emp_xx_nullptr.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

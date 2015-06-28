@@ -4,7 +4,7 @@
 //
 // Creation Date : Sat 16 Oct 2010 03:40:36 PM CEST
 //
-// Modification Date : Wed Dec 11 22:02:50 2013
+// Modification Date : Fri Jun 26 20:09:11 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -16,9 +16,6 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_xx_nocopy_class.h"
-#include "emp_xx_return.h"
-
 #include "emp_pp_comma.h"
 
 //-----------------------------------------------------------------------------

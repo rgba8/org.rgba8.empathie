@@ -4,7 +4,7 @@
 //
 // Creation Date : mer. 12 sept. 2012 12:01:56 CEST
 //
-// Modification Date : mar. 26 nov. 2013 18:10:10 CET
+// Modification Date : Fri Jun 26 20:15:23 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -21,9 +21,6 @@
 #include "emp_pp_forward.h"
 
 #include "emp_tt_constant.h"
-
-#include "emp_xx_noinstance_class.h"
-#include "emp_xx_nullptr.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

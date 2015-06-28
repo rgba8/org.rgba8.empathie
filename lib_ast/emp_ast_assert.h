@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 4 Jan 2009 10:41:27 PM CEST
 //
-// Modification Date : mar. 26 nov. 2013 18:09:04 CET
+// Modification Date : Sat Jun 27 09:19:01 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -16,58 +16,34 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#if defined(EMP_XX_ASSERT_ENABLE) || defined(EMP_XX_ASSERT_OUTPUT_ENABLE)
+#include "emp_xx_noop.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_ast_statement.h"
+#define EMP_STATEMENT_INFO()\
+    emp::ast::statement_c(\
+        EMP_XX_FILE,\
+        EMP_XX_LINE,\
+        EMP_PP_STRING(EMP_XX_LINE),\
+        EMP_XX_FUNCTION,\
+        EMP_XX_SIGNATURE)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_xx_return.h"
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-namespace emp { namespace ast {
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-EMP_CLASS(assert_t)
-private:
-    bool m_bCondition;
-    char const* m_szCondition;
-    statement_t  m_Statement;
-
-public:
-    assert_t(   bool const a_bCondition,
-                char const* const a_szCondition,
-                statement_t const& a_rStatement):
-                m_bCondition(a_bCondition),
-                m_szCondition(a_szCondition),
-                m_Statement(a_rStatement)
-    { }
-
-public:
-    EMP_RETURN bool b_condition(void) const
-    { return m_bCondition; }
-
-    EMP_RETURN char const* sz_condition(void) const
-    { return m_szCondition; }
-
-    EMP_RETURN statement_t const& statement(void) const
-    { return m_Statement; }
-};
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-void condition(assert_t const& a_rAssert);
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-} }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
+#ifdef EMP_XX_TRACK_LEAKS_ENABLE
+#define EMP_XX_DBG_STATEMENT_COMMA EMP_PP_COMMA()
+#define EMP_XX_DBG_STATEMENT_ARGUMENT a_rStatement
+#define EMP_XX_DBG_STATEMENT_PARAMETER\
+    emp::ast::statement_c const& a_rStatement
+#define EMP_XX_DBG_STATEMENT_UNUSED EMP_AA_UNUSED
+#define EMP_XX_DBG_STATEMENT_INFO EMP_STATEMENT_INFO()
+namespace emp { namespace ast { class statement_c; } }
+#else
+#define EMP_XX_DBG_STATEMENT_COMMA
+#define EMP_XX_DBG_STATEMENT_ARGUMENT
+#define EMP_XX_DBG_STATEMENT_PARAMETER
+#define EMP_XX_DBG_STATEMENT_UNUSED
+#define EMP_XX_DBG_STATEMENT_INFO
 #endif
 
 //-----------------------------------------------------------------------------
@@ -77,8 +53,7 @@ void condition(assert_t const& a_rAssert);
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_ASSERT_INFO(x_Condition)\
-    emp::ast::assert_t(  x_Condition, EMP_PP_STRING(x_Condition),\
-                        EMP_STATEMENT_INFO())
+    emp::ast::assert_c(x_Condition, EMP_PP_STRING(x_Condition), EMP_STATEMENT_INFO())
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -87,18 +62,9 @@ do { emp::ast::condition(EMP_ASSERT_INFO(x_Condition)); } while(0)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_ASSERT_UNREACHABLE()\
-    EMP_ASSERT(false);
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#define EMP_ASSERT_NOT_IMPLEMENTED()\
-    EMP_ASSERT(false);
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#define EMP_ASSERT_BOOL_CALL(x_Call)\
-    EMP_ASSERT(x_Call)
+#define EMP_ASSERT_UNREACHABLE() EMP_ASSERT(false);
+#define EMP_ASSERT_NOT_IMPLEMENTED() EMP_ASSERT(false);
+#define EMP_ASSERT_BOOL_CALL(x_Call) EMP_ASSERT(x_Call)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -106,27 +72,120 @@ do { emp::ast::condition(EMP_ASSERT_INFO(x_Condition)); } while(0)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_tt_assert.h"
-#include "emp_tt_ignore_return.h"
-
-#include "emp_xx_noop.h"
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 #define EMP_ASSERT(x_Condition) EMP_XX_NOOP()
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 #define EMP_ASSERT_UNREACHABLE() EMP_XX_NOOP()
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 #define EMP_ASSERT_NOT_IMPLEMENTED() EMP_STATIC_ASSERT(false)
+#define EMP_ASSERT_BOOL_CALL(x_Call) emp::tt::ignore_return(x_Call)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_ASSERT_BOOL_CALL(x_Call)\
-    emp::tt::ignore_return(x_Call)
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#if defined(EMP_XX_ASSERT_ENABLE) || defined(EMP_XX_ASSERT_OUTPUT_ENABLE)
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+namespace emp { namespace ast {
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+EMP_CLASS(statement_c)
+private:
+    char const* m_szFile;
+    unsigned int m_uiLine;
+    char const* m_szLine;
+    char const* m_szFunction;
+    char const* m_szSignature;
+
+public:
+    statement_c(
+        char const* const a_szFile,
+        unsigned int const a_uiLine,
+        char const* const a_szLine,
+        char const* const a_szFunction,
+        char const* const a_szSignature):
+        m_szFile(a_szFile),
+        m_uiLine(a_uiLine),
+        m_szLine(a_szLine),
+        m_szFunction(a_szFunction),
+        m_szSignature(a_szSignature)
+    {}
+
+public:
+    EMP_RETURN char const* file(void) const
+    { return m_szFile; }
+
+    EMP_RETURN unsigned int ui_line(void) const
+    { return m_uiLine; }
+
+    EMP_RETURN char const* sz_line(void) const
+    { return m_szLine; }
+
+    EMP_RETURN char const* function(void) const
+    { return m_szFunction; }
+
+    EMP_RETURN char const* signature(void) const
+    { return m_szSignature; }
+};
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+EMP_CLASS(assert_c)
+private:
+    bool m_bCondition;
+    char const* m_szCondition;
+    statement_c  m_Statement;
+
+public:
+    assert_c(
+        bool const a_bCondition,
+        char const* const a_szCondition,
+        statement_c const& a_rStatement):
+        m_bCondition(a_bCondition),
+        m_szCondition(a_szCondition),
+        m_Statement(a_rStatement)
+    { }
+
+public:
+    EMP_RETURN bool b_condition(void) const
+    { return m_bCondition; }
+
+    EMP_RETURN char const* sz_condition(void) const
+    { return m_szCondition; }
+
+    EMP_RETURN statement_c const& statement(void) const
+    { return m_Statement; }
+};
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+EMP_NOCOPY_CLASS(asserter_c)
+public:
+    asserter_c(void)
+    {}
+
+    void condition(assert_c const& a_rAssert);
+};
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void condition(assert_c const& a_rAssert);
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void output_char(char const a_cValue);
+void output_pchar(char const* const a_pValue);
+void output_line(char const* const a_szName, char const* const a_szValue, bool const a_bVerbose);
+void output_header(char const* const a_szName, char const a_cAlias, bool const a_bVerbose);
+void output_statement(statement_c const& a_rStatement, bool const a_bVerbose);
+void output_assert(assert_c const& a_rAssert, bool const a_bVerbose);
+
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+} }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
