@@ -4,7 +4,7 @@
 //
 // Creation Date : Thu 27 Jan 2011 08:42:33 PM CET
 //
-// Modification Date : Fri Jun 26 19:53:02 2015
+// Modification Date : Sun Jun 28 19:38:14 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -13,6 +13,26 @@
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_CLASS_H
 #define EMP_XX_CLASS_H
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "emp_pp_forward.h"
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+namespace emp { namespace rfx  {
+
+    template <typename> class class_t;
+    template <typename> class member_t;
+    class reflection_c;
+    template <typename T>
+    EMP_RETURN bool reflect(reflection_c& a_rReflection);
+
+} }
+ 
+#define EMP_RFX_FRIEND(...)\
+    friend class emp::rfx::class_t<__VA_ARGS__>;\
+    friend EMP_RETURN bool emp::rfx::reflect<__VA_ARGS__>(emp::rfx::reflection_c&);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

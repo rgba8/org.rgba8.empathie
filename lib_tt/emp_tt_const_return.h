@@ -4,7 +4,7 @@
 //
 // Creation Date : Fri 28 Jan 2011 02:13:05 PM CET
 //
-// Modification Date : mar. 26 nov. 2013 18:09:59 CET
+// Modification Date : Sun Jun 28 19:06:45 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -37,7 +37,7 @@ EMP_NOINSTANCE_CLASS(const_return)
 public:
     typedef typename emp::tt::if_else
     <
-        emp::tt::or
+        emp::tt::or_
         <
             emp::tt::is_fundamental<T>::value,
             emp::tt::is_pointer<T>::value

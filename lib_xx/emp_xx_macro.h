@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 11 Oct 2010 10:27:15 PM CEST
 //
-// Modification Date : Fri Jun 26 20:08:13 2015
+// Modification Date : Sun Jun 28 19:00:43 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -13,12 +13,6 @@
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_MACRO_H
 #define EMP_XX_MACRO_H
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#include "emp_xx_attribute.h"
-#include "emp_xx_call.h"
-#include "emp_xx_class.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -208,18 +202,21 @@ namespace emp { namespace mem {\
     EMP_XX_TYPEDEF_MEM_ALIGNATOR();\
 } }
 
-namespace emp { namespace rfx {
-    class reflection_c;
-    template <typename T>
-    EMP_RETURN bool reflect(reflection_c& a_rReflection);
-} }
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "emp_ast_assert.h"
 
-#define EMP_RFX_FRIEND(x_Name)\
-    friend class emp::rfx::class_t<x_Name>;\
-    friend EMP_RETURN bool emp::rfx::reflect<x_Name>(emp::rfx::reflection_c&);
- 
-namespace emp { namespace rfx { template <typename> class class_t; } }
-namespace emp { namespace rfx { template <typename> class member_t; } }
+//#include "emp_log_logger.h"
+
+#include "emp_hh_stddef.h"
+#include "emp_hh_stdint.h"
+
+#include "emp_xx_attribute.h"
+#include "emp_xx_build.h"
+#include "emp_xx_call.h"
+#include "emp_xx_class.h"
+#include "emp_xx_pragma.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #endif
