@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 11 Oct 2010 10:27:15 PM CEST
 //
-// Modification Date : Sun Jun 28 19:00:43 2015
+// Modification Date : lun. 29 juin 2015 23:14:47 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -204,18 +204,19 @@ namespace emp { namespace mem {\
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_ast_assert.h"
-
-//#include "emp_log_logger.h"
-
-#include "emp_hh_stddef.h"
-#include "emp_hh_stdint.h"
-
 #include "emp_xx_attribute.h"
 #include "emp_xx_build.h"
 #include "emp_xx_call.h"
 #include "emp_xx_class.h"
 #include "emp_xx_pragma.h"
+#include "emp_xx_noop.h"
+
+#include "emp_hh_stddef.h"
+#include "emp_hh_stdint.h"
+
+#include "emp_ast_assert.h"
+
+//#include "emp_log_logger.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

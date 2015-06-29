@@ -4,7 +4,7 @@
 //
 // Creation Date : mer. 12 sept. 2012 12:01:56 CEST
 //
-// Modification Date : Fri Jun 26 20:14:13 2015
+// Modification Date : lun. 29 juin 2015 20:00:59 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -16,11 +16,7 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_hh_stddef.h"
-
 #include "emp_pp_forward.h"
-
-#include "emp_tt_constant.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -43,8 +39,7 @@ private:
     static D* get_derived(void);
 
 public:
-    EMP_TT_CONSTANT(
-        size_t, value, sizeof(test<B>(get_derived())) == sizeof(yes_type_c));
+    static const size_t value = sizeof(test<B>(get_derived())) == sizeof(yes_type_c);
 };
 
 //-----------------------------------------------------------------------------

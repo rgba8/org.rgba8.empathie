@@ -4,7 +4,7 @@
 //
 // Creation Date : mer. 12 sept. 2012 12:03:15 CEST
 //
-// Modification Date : Fri Jun 26 20:15:02 2015
+// Modification Date : lun. 29 juin 2015 20:05:28 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -19,9 +19,6 @@
 #include "emp_pp_forward.h"
 #include "emp_pp_token.h"
 
-#include "emp_hh_stddef.h"
-
-#include "emp_tt_constant.h"
 #include "emp_tt_has_base.h"
 
 //-----------------------------------------------------------------------------
@@ -40,17 +37,16 @@ private:\
     template <typename V>\
     static no_type_c test_t(...);\
 public:\
-    EMP_TT_CONSTANT(\
-        size_t, value, sizeof(test_t<T>(nullptr)) == sizeof(yes_type_c) ||\
-        EMP_PP_TOKEN(has_, x_Function)<\
+    static const size_t value = sizeof(test_t<T>(nullptr)) == sizeof(yes_type_c) ||\
+        EMP_PP_TOKEN(has_, x_Function) <\
         EMP_PP_FORWARD_3(\
             typename emp::tt::get_base_t\
-                <T, void, emp::tt::has_base_t<T>::value>::type)>::value);\
+                <T, void, emp::tt::has_base_t<T>::value>::type)>::value;\
 };\
 template <>\
 EMP_NOINSTANCE_CLASS(EMP_PP_TOKEN(has_, x_Function<void>))\
 public:\
-    EMP_TT_CONSTANT(size_t, value, false);\
+    static const bool value = false;\
 };\
 
 //-----------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 08 Nov 2010 11:36:29 AM CET
 //
-// Modification Date : Fri Jun 26 20:14:29 2015
+// Modification Date : lun. 29 juin 2015 19:58:36 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -16,10 +16,6 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_tt_constant.h"
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
@@ -27,7 +23,7 @@ namespace emp { namespace tt {
 template <typename T, T t_tValue>
 EMP_NOINSTANCE_CLASS(integral)
 public:
-    EMP_TT_CONSTANT(T, value, t_tValue);
+    static const T value = t_tValue;
 };
 
 //-----------------------------------------------------------------------------

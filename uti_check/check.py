@@ -5,7 +5,7 @@
 ##
 ## Creation Date : Thu 14 Oct 2010 07:23:55 PM CEST
 ##
-## Modification Date : Fri Dec 20 12:21:04 2013
+## Modification Date : lun. 29 juin 2015 22:57:54 CEST
 ##
 ## Created By : ksej - www.rgba8.org
 ##
@@ -146,7 +146,7 @@ def CheckLineLength(a_aLines):
     aLineLength = []
     for index, szLine in enumerate(a_aLines):
         szLine = szLine.rstrip('\n')
-        if len(szLine) > 79:
+        if len(szLine) > 127:
             aLineLength.append((index, "++ " + szLine))
     return aLineLength, len(aLineLength)
 

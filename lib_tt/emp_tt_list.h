@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 07 Feb 2011 05:11:54 PM CET
 //
-// Modification Date : Fri Jun 26 20:13:10 2015
+// Modification Date : lun. 29 juin 2015 19:46:57 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -17,14 +17,9 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #include "emp_tt_are_equal.h"
-#include "emp_tt_constant.h"
 #include "emp_tt_if_else.h"
 #include "emp_tt_integral.h"
 #include "emp_tt_null.h"
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#include "emp_hh_stddef.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -44,14 +39,13 @@ public:
 template <typename t_List>
 EMP_NOINSTANCE_CLASS(list_count)
 public:
-    EMP_TT_CONSTANT(size_t, value,
-                    list_count<typename t_List::tail>::value + 1);
+    static size_t value = list_count<typename t_List::tail>::value + 1;
 };
 
 template <>
 EMP_NOINSTANCE_CLASS(list_count<emp::tt::null>)
 public:
-    EMP_TT_CONSTANT(size_t, value, 0);
+    static size_t value = 0;
 };
 
 //-----------------------------------------------------------------------------
@@ -98,7 +92,7 @@ template <typename t_List, typename T>
 EMP_NOINSTANCE_CLASS(list_index)
 public:
     typedef typename list_index_impl<t_List, T, 0>::type type;
-    EMP_TT_CONSTANT(size_t, value, type::value);
+    static size_t value = type::value;
 };
 
 //-----------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 08 Nov 2010 03:42:22 PM CET
 //
-// Modification Date : Fri Jun 26 20:13:50 2015
+// Modification Date : lun. 29 juin 2015 19:59:08 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -17,7 +17,6 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #include "emp_tt_assert.h"
-#include "emp_tt_constant.h"
 #include "emp_tt_def.h"
 
 //-----------------------------------------------------------------------------
@@ -25,8 +24,6 @@
 #include "emp_pp_if.h"
 #include "emp_pp_if_else.h"
 #include "emp_pp_not.h"
-
-#include "emp_hh_stdint.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -52,9 +49,8 @@ template <typename T> class min;
 template <> class x_Trait<x_Type>\
 {\
 public:\
-    EMP_PP_IF(x_Integral,\
-        EMP_TT_CONSTANT(x_Type, value, x_Value);)\
-        static inline x_Type get_value(void);\
+    EMP_PP_IF(x_Integral, static const x_Type value = x_Value;)\
+    static inline x_Type get_value(void);\
 private:\
     EMP_XX_NOINSTANCE(x_Trait);\
 };
@@ -100,14 +96,14 @@ template <typename T>
 EMP_NOINSTANCE_CLASS(min<T*>)
 public:
     EMP_STATIC_ASSERT(sizeof(T*) == sizeof(uintptr_t));
-    EMP_TT_CONSTANT(uintptr_t, value, emp::tt::min<uintptr_t>::value);
+    static const uintptr_t value = emp::tt::min<uintptr_t>::value;
 };
 
 template <typename T>
 EMP_NOINSTANCE_CLASS(max<T*>)
 public:
     EMP_STATIC_ASSERT(sizeof(T*) == sizeof(uintptr_t));
-    EMP_TT_CONSTANT(uintptr_t, value, emp::tt::max<uintptr_t>::value);
+    static const uintptr_t value = emp::tt::max<uintptr_t>::value;
 };
 
 //-----------------------------------------------------------------------------

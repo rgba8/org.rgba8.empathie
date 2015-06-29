@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 08 Nov 2010 03:05:47 PM CET
 //
-// Modification Date : Fri Jun 26 20:14:18 2015
+// Modification Date : lun. 29 juin 2015 19:49:55 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -33,8 +33,7 @@ EMP_TT_DECLARE_VALUE(is_integral, emp::tt::false_);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define XTMP_TT_TYPE(x_Type, x_Name, x_Integral, x_Signedness, x_Distinct,\
-                    x_Signed)\
+#define XTMP_TT_TYPE(x_Type, x_Name, x_Integral, x_Signedness, x_Distinct, x_Signed)\
 EMP_PP_IF(x_Integral,\
     EMP_PP_IF_ELSE(x_Signedness,\
      EMP_PP_IF_ELSE(x_Distinct,\
@@ -43,8 +42,7 @@ EMP_TT_DECLARE_VALUE_SPECIAL_CV(is_integral, signed x_Type, emp::tt::true_);\
 EMP_TT_DECLARE_VALUE_SPECIAL_CV(is_integral, unsigned x_Type, emp::tt::true_);\
             ,\
 EMP_TT_DECLARE_VALUE_SPECIAL_CV(is_integral, x_Type, emp::tt::true_);\
-EMP_TT_DECLARE_VALUE_SPECIAL_CV(is_integral, unsigned x_Type,\
-                                emp::tt::true_);)\
+EMP_TT_DECLARE_VALUE_SPECIAL_CV(is_integral, unsigned x_Type, emp::tt::true_);)\
             ,\
     EMP_TT_DECLARE_VALUE_SPECIAL_CV(is_integral, x_Type, emp::tt::true_);))
 EMP_TT_TYPES()

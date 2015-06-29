@@ -4,7 +4,7 @@
 //
 // Creation Date : Tue 11 Jan 2011 04:07:21 PM CET
 //
-// Modification Date : Fri Jun 26 20:08:46 2015
+// Modification Date : lun. 29 juin 2015 19:59:26 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -17,7 +17,6 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #include "emp_tt_assert.h"
-#include "emp_tt_constant.h"
 #include "emp_tt_limit.h"
 
 //-----------------------------------------------------------------------------
@@ -29,13 +28,13 @@ namespace emp { namespace tt {
 template <typename t_From, t_From t_tFrom, typename t_To>
 EMP_NOINSTANCE_CLASS(cast)
 public:
-    EMP_TT_CONSTANT(bool, bmin, t_tFrom >= emp::tt::min<t_To>::value);
+    static const bool bmin = t_tFrom >= emp::tt::min<t_To>::value;
     EMP_STATIC_ASSERT(bmin);
 
-    EMP_TT_CONSTANT(bool, bmax, t_tFrom <= emp::tt::max<t_To>::value);
+    static const bool bmax = t_tFrom <= emp::tt::max<t_To>::value;
     EMP_STATIC_ASSERT(bmax);
 
-    EMP_TT_CONSTANT(t_To, value, static_cast<t_To>(t_tFrom));
+    static const t_To value = static_cast<t_To>(t_tFrom);
 };
 
 //-----------------------------------------------------------------------------

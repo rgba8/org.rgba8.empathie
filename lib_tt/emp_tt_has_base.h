@@ -4,7 +4,7 @@
 //
 // Creation Date : mer. 12 sept. 2012 12:01:56 CEST
 //
-// Modification Date : Fri Jun 26 20:15:23 2015
+// Modification Date : lun. 29 juin 2015 20:01:45 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -16,11 +16,7 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_hh_stddef.h"
-
 #include "emp_pp_forward.h"
-
-#include "emp_tt_constant.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -41,8 +37,7 @@ private:
     static no_type_c test_t(...);
 
 public:
-    EMP_TT_CONSTANT(
-        size_t, value, sizeof(test_t<T>(nullptr)) == sizeof(yes_type_c));
+    static const size_t value = sizeof(test_t<T>(nullptr)) == sizeof(yes_type_c);
 };
 
 template <typename T, typename V, bool a_bValue>

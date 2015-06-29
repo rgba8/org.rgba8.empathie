@@ -4,7 +4,7 @@
 //
 // Creation Date : lun. 18 nov. 2013 22:22:29 CET
 //
-// Modification Date : Mon Dec  2 19:50:23 2013
+// Modification Date : lun. 29 juin 2015 23:24:41 CEST
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -15,10 +15,6 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_ast_assert.h"
-
-#include "emp_hh_stdint.h"
-
 #include "emp_pp_forward.h"
 
 #include "emp_tt_is_arithmetic.h"
