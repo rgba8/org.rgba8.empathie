@@ -32,6 +32,16 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+#if defined EMP_XX_OS_IOS
+#define EMP_IF_IOS(x_Then) x_Then
+#define EMP_IF_NOT_IOS(x_Then)
+#else
+#define EMP_IF_IOS(x_Then)
+#define EMP_IF_NOT_IOS(x_Then) x_Then
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 #ifndef EMP_XX_TT_ARRAY_COUNT
 #error EMP_XX_TT_ARRAY_COUNT not defined
 #endif

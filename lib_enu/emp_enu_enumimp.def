@@ -62,18 +62,17 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_RETURN EMP_ENUM_NAME()::Value EMP_ENUM_NAME()::from(
-    unsigned int const a_uiFrom)
+EMP_RETURN EMP_ENUM_NAME()::Value EMP_ENUM_NAME()::from(unsigned int const a_uiFrom)
 {
 // TODO : runtime_cast
-    EMP_ENUM_NAME()::Value const eValue =
+    EMP_ENUM_NAME()::CValue eValue =
         static_cast<EMP_ENUM_NAME()::Value>(a_uiFrom);
     EMP_ASSERT(is_valid(eValue));
     return eValue;
 }
 
 EMP_RETURN bool EMP_ENUM_NAME()::is_valid(
-    EMP_ENUM_NAME()::Value const a_eValue)
+    EMP_ENUM_NAME()::CValue a_eValue)
 {
     switch (a_eValue)
     {

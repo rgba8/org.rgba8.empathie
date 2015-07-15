@@ -27,7 +27,7 @@ namespace emp { namespace tt {
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template<bool b0, bool b1, bool b2 = true, bool b3 = true, bool b4 = true>
-EMP_NOINSTANCE_CLASS_BASE(and, public, false_)
+EMP_NOINSTANCE_CLASS_BASE(and_, public, false_)
 public:
     using false_::value;
 };
@@ -36,7 +36,7 @@ public:
 //-----------------------------------------------------------------------------
 template <>
 EMP_NOINSTANCE_CLASS_BASE(
-EMP_PP_FORWARD_5(and<true, true, true, true, true>), public, true_)
+EMP_PP_FORWARD_5(and_<true, true, true, true, true>), public, true_)
 public:
     using true_::value;
 };

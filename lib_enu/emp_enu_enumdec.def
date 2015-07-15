@@ -4,7 +4,7 @@
 //
 // Creation Date : Mon 01 Nov 2010 01:41:05 PM CET
 //
-// Modification Date : Fri Jun 26 20:09:36 2015
+// Modification Date : Tue Jul 14 22:56:24 2015
 //
 // Created By : ksej - www.rgba8.org
 //
@@ -146,7 +146,7 @@ public:
 #define EMP_ENUM_LAST_VALUE_EX(x_Name, x_Value, x_User) EMP_ENUM_FIRST_LABEL(x_Name)
 
         EMP_ENUM_VALUES()
-             
+
 #undef EMP_ENUM_FIRST_LABEL
 #undef EMP_ENUM_FIRST_VALUE
 #undef EMP_ENUM_FIRST_LABEL_EX

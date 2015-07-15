@@ -34,20 +34,23 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #ifdef EMP_XX_TRACK_LEAKS_ENABLE
-#define EMP_XX_DBG_STATEMENT_COMMA EMP_PP_COMMA()
-#define EMP_XX_DBG_STATEMENT_ARGUMENT a_rStatement
-#define EMP_XX_DBG_STATEMENT_PARAMETER\
-    emp::ast::statement_c const& a_rStatement
-#define EMP_XX_DBG_STATEMENT_UNUSED EMP_UNUSED
-#define EMP_XX_DBG_STATEMENT_INFO EMP_STATEMENT_INFO()
+#define EMP_AST_COMMA EMP_PP_COMMA()
+#define EMP_AST_ARG a_rStatement
+#define EMP_AST_PARAM emp::ast::statement_c const& a_rStatement
+#define EMP_AST_UNUSED EMP_UNUSED
+#define EMP_AST_INFO EMP_STATEMENT_INFO()
 namespace emp { namespace ast { class statement_c; } }
 #else
-#define EMP_XX_DBG_STATEMENT_COMMA
-#define EMP_XX_DBG_STATEMENT_ARGUMENT
-#define EMP_XX_DBG_STATEMENT_PARAMETER
-#define EMP_XX_DBG_STATEMENT_UNUSED
-#define EMP_XX_DBG_STATEMENT_INFO
+#define EMP_AST_COMMA
+#define EMP_AST_ARG
+#define EMP_AST_PARAM
+#define EMP_AST_UNUSED
+#define EMP_AST_INFO
 #endif
+
+#define EMP_AST_ARG_COMMA EMP_AST_ARG EMP_AST_COMMA
+#define EMP_AST_PARAM_COMMA EMP_AST_PARAM EMP_AST_COMMA
+#define EMP_AST_INFO_COMMA EMP_AST_INFO EMP_AST_COMMA
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
