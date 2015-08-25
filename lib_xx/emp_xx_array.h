@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_xx_array.h
-//
-// Creation Date : Fri Jun 26 18:42:43 2015
-//
-// Modification Date : Fri Jun 26 18:43:21 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_ARRAY_H
 #define EMP_XX_ARRAY_H

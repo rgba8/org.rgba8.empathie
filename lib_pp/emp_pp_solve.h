@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_solve.h
-//
-// Creation Date : Sun 23 Jan 2011 12:52:11 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:04:12 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_SOLVE_H
 #define EMP_PP_SOLVE_H

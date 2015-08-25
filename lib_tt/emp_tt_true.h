@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_true.h
-//
-// Creation Date : ven. 08 nov. 2013 23:00:19 CET
-//
-// Modification Date : mar. 26 nov. 2013 18:11:44 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_TRUE_H
 #define EMP_TT_TRUE_H

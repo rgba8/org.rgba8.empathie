@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_eat.h
-//
-// Creation Date : Tue 12 Oct 2010 08:36:12 AM CEST
-//
-// Modification Date : mar. 26 nov. 2013 18:05:43 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_EAT_H
 #define EMP_PP_EAT_H

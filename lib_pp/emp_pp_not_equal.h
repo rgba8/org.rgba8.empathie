@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_not_equal.h
-//
-// Creation Date : Mon 11 Oct 2010 11:00:23 PM CEST
-//
-// Modification Date : mar. 26 nov. 2013 18:06:28 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_NOT_EQUAL_H
 #define EMP_PP_NOT_EQUAL_H

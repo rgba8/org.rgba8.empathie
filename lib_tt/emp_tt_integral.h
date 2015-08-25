@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_integral.h
-//
-// Creation Date : Mon 08 Nov 2010 11:36:29 AM CET
-//
-// Modification Date : lun. 29 juin 2015 19:58:36 CEST
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_INTEGRAL_H
 #define EMP_TT_INTEGRAL_H

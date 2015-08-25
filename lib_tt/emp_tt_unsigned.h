@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_unsigned.h
-//
-// Creation Date : Mon 10 Jan 2011 10:56:37 PM CET
-//
-// Modification Date : Fri Jun 26 20:11:19 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_UNSIGNED_H
 #define EMP_TT_UNSIGNED_H

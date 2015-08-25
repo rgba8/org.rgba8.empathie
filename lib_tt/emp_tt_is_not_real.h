@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_is_not_real.h
-//
-// Creation Date : Thu 25 Nov 2010 04:27:57 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:10:43 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_IS_NOT_REAL_H
 #define EMP_TT_IS_NOT_REAL_H

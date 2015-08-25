@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_dereference.h
-//
-// Creation Date : Tue 23 Nov 2010 11:42:25 AM CET
-//
-// Modification Date : Fri Jun 26 20:09:48 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_DEREFERENCE_H
 #define EMP_TT_DEREFERENCE_H
@@ -35,40 +25,19 @@ namespace emp { namespace tt {
 template <typename T>
 EMP_NOINSTANCE_CLASS(dereference)
 public:
-    typedef typename emp::tt::if_else
-    <
-        emp::tt::is_reference<T>::value,
-        typename emp::tt::if_else
-        <
-            emp::tt::is_pointer<
-                typename emp::tt::try_remove_reference<T>::type
-            >::value,
-            typename emp::tt::try_remove_const<
-                typename emp::tt::try_remove_volatile<
-                    typename emp::tt::try_remove_reference<T>::type
-                >::type
-            >::type,
+    typedef typename if_else<is_reference<T>::value,
+        typename if_else<is_pointer<typename try_remove_reference<T>::type>::value,
+            typename try_remove_const<typename try_remove_volatile<typename try_remove_reference<T>::type>::type>::type,
             T
         >::type,
-        typename emp::tt::if_else<
-            emp::tt::is_pointer<T>::value,
-            typename emp::tt::try_remove_const<
-                typename emp::tt::try_remove_volatile<T>::type
-            >::type,
+        typename if_else<is_pointer<T>::value,
+            typename try_remove_const<typename try_remove_volatile<T>::type>::type,
             typename emp::tt::add_reference<T>::type
         >::type
     >::type timpl;
 
-    typedef typename emp::tt::try_add_reference<
-        typename emp::tt::try_remove_pointer<timpl>::type
-    >::type treturn;
-
-    typedef typename emp::tt::if_else
-    <
-        emp::tt::is_reference<T>::value,
-        T,
-        typename emp::tt::add_reference<T>::type
-    >::type tparam;
+    typedef typename try_add_reference<typename try_remove_pointer<timpl>::type>::type treturn;
+    typedef typename if_else<is_reference<T>::value, T, typename add_reference<T>::type>::type tparam;
 
     static treturn apply(tparam a_rtValue);
 };
@@ -98,8 +67,7 @@ public:
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-EMP_RETURN typename dereference<T>::treturn dereference<T>::apply(
-                                    typename dereference<T>::tparam a_rtValue)
+EMP_RETURN typename dereference<T>::treturn dereference<T>::apply(typename dereference<T>::tparam a_rtValue)
 { return dereference_impl<timpl>::apply(a_rtValue); }
 
 //-----------------------------------------------------------------------------
@@ -108,24 +76,13 @@ EMP_RETURN typename dereference<T>::treturn dereference<T>::apply(
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-
-#ifndef EMP_TT_ASSERT_H
 #include "emp_tt_assert.h"
-#endif
 
 EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::dereference<char>::treturn, char&);
-EMP_STATIC_ASSERT_TYPE_EQUAL(   emp::tt::dereference<char const>::treturn,
-                                char const &);
-EMP_STATIC_ASSERT_TYPE_EQUAL(   emp::tt::dereference<char const&>::treturn,
-                                char const &);
-
-EMP_STATIC_ASSERT_TYPE_EQUAL(
-                            emp::tt::dereference<char const* const>::treturn,
-                            char const&);
-
-EMP_STATIC_ASSERT_TYPE_EQUAL(
-                            emp::tt::dereference<char const* const&>::treturn,
-                            char const&);
+EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::dereference<char const>::treturn, char const &);
+EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::dereference<char const&>::treturn, char const &);
+EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::dereference<char const* const>::treturn, char const&);
+EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::dereference<char const* const&>::treturn, char const&);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

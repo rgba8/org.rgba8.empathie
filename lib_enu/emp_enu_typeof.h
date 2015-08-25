@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_enu_typeof.h
-//
-// Creation Date : mar. 27 déc. 2011 17:45:03 CET
-//
-// Modification Date : Fri Jun 26 20:17:15 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_ENU_TYPEOF_H
 #define EMP_ENU_TYPEOF_H

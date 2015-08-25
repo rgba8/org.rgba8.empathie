@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_has_function.cpp
-//
-// Creation Date : mer. 12 sept. 2012 12:13:53 CEST
-//
-// Modification Date : Fri Jun 26 20:15:15 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #include "emp_tt_has_function.h"
 

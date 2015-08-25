@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_argument.h
-//
-// Creation Date : Tue 14 Sep 2010 05:32:26 PM CEST
-//
-// Modification Date : mar. 26 nov. 2013 18:04:20 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_ARGUMENT_H
 #define EMP_PP_ARGUMENT_H

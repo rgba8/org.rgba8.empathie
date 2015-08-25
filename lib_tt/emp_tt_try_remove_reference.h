@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_try_remove_reference.h
-//
-// Creation Date : Thu 25 Nov 2010 02:58:52 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:12:02 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_TRY_REMOVE_REFERENCE_H
 #define EMP_TT_TRY_REMOVE_REFERENCE_H
@@ -27,10 +17,7 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_TT_DECLARE_TYPE(try_remove_reference, typename EMP_PP_FORWARD_3(
-                                            emp::tt::try_<T,
-                                            emp::tt::is_reference,
-                                            emp::tt::remove_reference>::type));
+EMP_TT_DECLARE_TYPE(try_remove_reference, typename EMP_PP_FORWARD_3(try_<T, is_reference, remove_reference>::type));
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

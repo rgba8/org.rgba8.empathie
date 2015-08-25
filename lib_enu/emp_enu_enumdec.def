@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_enu_enumdec.def
-//
-// Creation Date : Mon 01 Nov 2010 01:41:05 PM CET
-//
-// Modification Date : Tue Jul 14 22:56:24 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_ENU_ENUMDEC_DEF
 #define EMP_ENU_ENUMDEC_DEF
@@ -66,14 +56,14 @@ EMP_CLASS(EMP_ENUM_NAME())
 public:
     enum Value
     {
-#define EMP_ENUM_FIRST_LABEL(x_Name) x_Name
-#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value) x_Name = x_Value
-#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User) x_Name
+#define EMP_ENUM_FIRST_LABEL(x_Name)                     x_Name
+#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value)            x_Name = x_Value
+#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User)          x_Name
 #define EMP_ENUM_FIRST_VALUE_EX(x_Name, x_Value, x_User) x_Name = x_Value
 
-#define EMP_ENUM_LAST_LABEL(x_Name) ,x_Name
-#define EMP_ENUM_LAST_VALUE(x_Name, x_Value) ,x_Name = x_Value
-#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User) ,x_Name
+#define EMP_ENUM_LAST_LABEL(x_Name)                     ,x_Name
+#define EMP_ENUM_LAST_VALUE(x_Name, x_Value)            ,x_Name = x_Value
+#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User)          ,x_Name
 #define EMP_ENUM_LAST_VALUE_EX(x_Name, x_Value, x_User) ,x_Name = x_Value
 
         EMP_ENUM_VALUES()
@@ -91,15 +81,15 @@ public:
 
     typedef Value const CValue;
 
-    static const unsigned int count =
-#define EMP_ENUM_FIRST_LABEL(x_Name) 1
-#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value) 1
-#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User) 1
+    static const uint count =
+#define EMP_ENUM_FIRST_LABEL(x_Name)                     1
+#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value)            1
+#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User)          1
 #define EMP_ENUM_FIRST_VALUE_EX(x_Name, x_Value, x_User) 1
 
-#define EMP_ENUM_LAST_LABEL(x_Name) +1
-#define EMP_ENUM_LAST_VALUE(x_Name, x_Value) +1
-#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User) +1
+#define EMP_ENUM_LAST_LABEL(x_Name)                     +1
+#define EMP_ENUM_LAST_VALUE(x_Name, x_Value)            +1
+#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User)          +1
 #define EMP_ENUM_LAST_VALUE_EX(x_Name, x_Value, x_User) +1
 
         EMP_ENUM_VALUES()
@@ -120,11 +110,10 @@ private:
 
 public:
     EMP_ENUM_NAME()(Value const a_eValue):
-    m_eValue(a_eValue)
+        m_eValue(a_eValue)
     {}
 
-    EMP_RETURN Value value(void) const
-    { return m_eValue; }
+    EMP_RETURN Value value(void) const { return m_eValue; }
 
     static EMP_RETURN EMP_ENUM_NAME()::Value from(unsigned int const a_uiFrom);
 
@@ -135,15 +124,15 @@ public:
     {
         switch (a_eValue)
         {
-#define EMP_ENUM_FIRST_LABEL(x_Name) case EMP_ENUM_NAME()::x_Name: { return EMP_PP_STRING(x_Name); }
-#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value) EMP_ENUM_FIRST_LABEL(x_Name)
-#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User) EMP_ENUM_FIRST_LABEL(x_Name)
+#define EMP_ENUM_FIRST_LABEL(x_Name)                     case EMP_ENUM_NAME()::x_Name: { return EMP_PP_STRING(x_Name); }
+#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value)            EMP_ENUM_FIRST_LABEL(x_Name)
+#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User)          EMP_ENUM_FIRST_LABEL(x_Name)
 #define EMP_ENUM_FIRST_VALUE_EX(x_Name, x_Value, x_User) EMP_ENUM_FIRST_LABEL(x_Name)
 
-#define EMP_ENUM_LAST_LABEL(x_Name) EMP_ENUM_FIRST_LABEL(x_Name)
-#define EMP_ENUM_LAST_VALUE(x_Name, x_Value) EMP_ENUM_FIRST_LABEL(x_Name)
-#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User) EMP_ENUM_FIRST_LABEL(x_Name)
-#define EMP_ENUM_LAST_VALUE_EX(x_Name, x_Value, x_User) EMP_ENUM_FIRST_LABEL(x_Name)
+#define EMP_ENUM_LAST_LABEL(x_Name)                      EMP_ENUM_FIRST_LABEL(x_Name)
+#define EMP_ENUM_LAST_VALUE(x_Name, x_Value)             EMP_ENUM_FIRST_LABEL(x_Name)
+#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User)           EMP_ENUM_FIRST_LABEL(x_Name)
+#define EMP_ENUM_LAST_VALUE_EX(x_Name, x_Value, x_User)  EMP_ENUM_FIRST_LABEL(x_Name)
 
         EMP_ENUM_VALUES()
 

@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_or.h
-//
-// Creation Date : Mon 08 Nov 2010 11:46:00 AM CET
-//
-// Modification Date : Fri Jun 26 20:12:41 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_OR_H
 #define EMP_TT_OR_H

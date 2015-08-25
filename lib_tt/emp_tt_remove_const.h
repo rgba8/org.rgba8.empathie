@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_remove_const.h
-//
-// Creation Date : Mon 08 Nov 2010 03:31:40 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:11:29 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_REMOVE_CONST_H
 #define EMP_TT_REMOVE_CONST_H

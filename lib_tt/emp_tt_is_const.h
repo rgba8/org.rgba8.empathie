@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_is_const.h
-//
-// Creation Date : Mon 08 Nov 2010 03:19:48 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:10:24 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_IS_CONST_H
 #define EMP_TT_IS_CONST_H

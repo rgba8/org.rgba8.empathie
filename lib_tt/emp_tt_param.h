@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_param.h
-//
-// Creation Date : Thu 11 Nov 2010 01:14:30 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:11:28 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_PARAM_H
 #define EMP_TT_PARAM_H
@@ -50,15 +40,8 @@ public:
 #include "emp_tt_are_equal.h"
 
 EMP_STATIC_ASSERT(emp::tt::is_param<int>::value);
-
-EMP_STATIC_ASSERT((emp::tt::are_equal<
-    emp::tt::try_add_const<int>::type,
-    int const>::value));
-
-
-EMP_STATIC_ASSERT((emp::tt::are_equal<
-    emp::tt::param<int>::type,
-    int const>::value));
+EMP_STATIC_ASSERT((emp::tt::are_equal<emp::tt::try_add_const<int>::type, int const>::value));
+EMP_STATIC_ASSERT((emp::tt::are_equal<emp::tt::param<int>::type, int const>::value));
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

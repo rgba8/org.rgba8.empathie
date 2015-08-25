@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_less_equal.h
-//
-// Creation Date : Tue 11 Jan 2011 01:45:50 PM CET
-//
-// Modification Date : lun. 29 juin 2015 19:59:52 CEST
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_LESS_EQUAL_H
 #define EMP_TT_LESS_EQUAL_H

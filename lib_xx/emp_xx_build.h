@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_xx_build.h
-//
-// Creation Date : Fri Jun 26 18:46:20 2015
-//
-// Modification Date : Tue Jul 14 22:53:55 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_BUILD_H
 #define EMP_XX_BUILD_H

@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_xx_pragma.h
-//
-// Creation Date : Thu 03 Feb 2011 10:33:42 AM CET
-//
-// Modification Date : Sun Jun 28 19:09:10 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_PRAGMA_H
 #define EMP_XX_PRAGMA_H

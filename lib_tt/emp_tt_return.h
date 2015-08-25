@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_return.h
-//
-// Creation Date : Wed 17 Nov 2010 12:36:25 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:11:40 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_RETURN_H
 #define EMP_TT_RETURN_H

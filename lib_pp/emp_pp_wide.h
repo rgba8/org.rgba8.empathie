@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_wide.h
-//
-// Creation Date : Thu 16 Dec 2010 02:29:37 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:06:13 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_WIDE_H
 #define EMP_PP_WIDE_H

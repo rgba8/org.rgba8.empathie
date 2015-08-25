@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_xx_class.h
-//
-// Creation Date : Thu 27 Jan 2011 08:42:33 PM CET
-//
-// Modification Date : Tue Jul 14 22:53:28 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_CLASS_H
 #define EMP_XX_CLASS_H

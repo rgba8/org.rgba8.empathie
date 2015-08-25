@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_xx_noop.h
-//
-// Creation Date : Tue 12 Oct 2010 08:52:13 AM CEST
-//
-// Modification Date : Fri Jun 26 19:54:54 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_NOOP_H
 #define EMP_XX_NOOP_H

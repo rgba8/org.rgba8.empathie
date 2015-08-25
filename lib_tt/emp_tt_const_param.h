@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_const_param.h
-//
-// Creation Date : Thu 25 Nov 2010 02:31:02 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:09:58 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_CONST_PARAM_H
 #define EMP_TT_CONST_PARAM_H

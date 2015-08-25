@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_iterate.h
-//
-// Creation Date : Wed 03 Nov 2010 12:39:04 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:06:37 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_ITERATE_H
 #define EMP_PP_ITERATE_H

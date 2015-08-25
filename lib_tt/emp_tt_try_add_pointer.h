@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_try_add_pointer.h
-//
-// Creation Date : Thu 25 Nov 2010 04:15:02 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:11:47 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_TRY_ADD_POINTER_H
 #define EMP_TT_TRY_ADD_POINTER_H
@@ -29,15 +19,11 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_TT_DECLARE_VALUE(can_add_pointer, emp::tt::not_<
-                                            emp::tt::is_reference<T>::value>);
+EMP_TT_DECLARE_VALUE(can_add_pointer, emp::tt::not_<emp::tt::is_reference<T>::value>);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_TT_DECLARE_TYPE(try_add_pointer, typename EMP_PP_FORWARD_3(
-                                                emp::tt::try_<T,
-                                                emp::tt::can_add_pointer,
-                                                emp::tt::add_pointer>::type));
+EMP_TT_DECLARE_TYPE(try_add_pointer, typename EMP_PP_FORWARD_3(emp::tt::try_<T, can_add_pointer, add_pointer>::type));
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

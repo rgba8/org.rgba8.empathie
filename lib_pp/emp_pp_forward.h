@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_forward.h
-//
-// Creation Date : Thu 25 Nov 2010 06:02:25 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:05:50 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_FORWARD_H
 #define EMP_PP_FORWARD_H

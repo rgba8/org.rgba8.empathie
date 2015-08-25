@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_token.h
-//
-// Creation Date : Mon 11 Oct 2010 10:47:27 PM CEST
-//
-// Modification Date : Tue Jan 14 19:27:07 2014
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_TOKEN_H
 #define EMP_PP_TOKEN_H

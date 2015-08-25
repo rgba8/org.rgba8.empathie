@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_remove_reference.h
-//
-// Creation Date : Thu 25 Nov 2010 02:58:52 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:11:34 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_REMOVE_REFERENCE_H
 #define EMP_TT_REMOVE_REFERENCE_H

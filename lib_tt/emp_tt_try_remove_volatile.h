@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_try_remove_volatile.h
-//
-// Creation Date : Thu 25 Nov 2010 04:05:23 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:12:00 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_TRY_REMOVE_VOLATILE_H
 #define EMP_TT_TRY_REMOVE_VOLATILE_H
@@ -26,12 +16,8 @@
 namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
-//
 //-----------------------------------------------------------------------------
-EMP_TT_DECLARE_TYPE(try_remove_volatile, typename EMP_PP_FORWARD_3(
-                                            emp::tt::try_<T,
-                                            emp::tt::is_volatile,
-                                            emp::tt::remove_volatile>::type));
+EMP_TT_DECLARE_TYPE(try_remove_volatile, typename EMP_PP_FORWARD_3(try_<T, is_volatile, remove_volatile>::type));
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

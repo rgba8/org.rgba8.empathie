@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_cast.h
-//
-// Creation Date : Tue 11 Jan 2011 04:07:21 PM CET
-//
-// Modification Date : lun. 29 juin 2015 19:59:26 CEST
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_CAST_H
 #define EMP_TT_CAST_H

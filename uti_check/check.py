@@ -39,13 +39,13 @@ gIgnoreTokens = [ "EMP_PP_ITERATION_USER_UNDEF" ]
 ##-----------------------------------------------------------------------------
 ##
 ##-----------------------------------------------------------------------------
-gLine_SPY = "##---------------------------------------------------------------\
---------------"
-gLine_S0 = "//----------------------------------------------------------------\
--------------"
+gLine_SPY = "##-----------------------------------------------------------------------------"
+gLine_S0 = "//-----------------------------------------------------------------------------"
 gLine_UNDEF = "#undef"
 gLine_ENDIF = "#endif"
 gLine_EMPTY = ""
+
+g_szHeader = gLine_S0 + "\n" + "// @rgba8.org\n" + gLine_S0 + "\n"
 
 ##-----------------------------------------------------------------------------
 ##
@@ -267,24 +267,23 @@ def CheckHeader(szFile, a_bCheckTodo):
     pFile = open(szFile, "r")
     aLines = pFile.readlines()
 
-    uiLineFilename = 2
-    szFilename = aLines[uiLineFilename].rstrip('\n')
+    uiError = 0
+    uiErrorHeader = 0
 
-    uiLineIfndef = 13
+    szHeader = aLines[0] + aLines[1] + aLines[2]
+    uiErrorHeader = szHeader != g_szHeader
+    uiError += uiErrorHeader
+
+    uiLineIfndef = 3
     szIfndef = aLines[uiLineIfndef].rstrip('\n')
 
-    uiLineDefine = 14
+    uiLineDefine = 4
     szDefine = aLines[uiLineDefine].rstrip('\n')
 
-    uiError = 0
     uiErrorDefineUnderflow = 0
     uiErrorUndefUnderflow = 0
 
     szComputedFilename = os.path.split(szFile)[1]
-
-    szCheckFilename = "// File Name : " + szComputedFilename
-    uiErrorFile = szCheckFilename != szFilename
-    uiError += uiErrorFile
 
     szComputedGuard = ComputeHeaderGuard(szComputedFilename)
     szCheckIfndef = "#ifndef " + szComputedGuard
@@ -320,9 +319,6 @@ def CheckHeader(szFile, a_bCheckTodo):
                         gLine_S0,
                         szCheckUndef,
                         gLine_EMPTY ]
-            ##aDefineUnderflow, uiErrorDefineUnderflow = CheckUnderflow(aLines,
-            ##    szFile, greDefine, greUndef, szPpH, szPpHUndef)
-            ##uiError += uiErrorDefineUnderflow
         else:
             uiErrorFileExtension = 1
             uiError += uiErrorFileExtension
@@ -337,9 +333,6 @@ def CheckHeader(szFile, a_bCheckTodo):
                         gLine_S0,
                         szCheckUndef,
                         gLine_EMPTY ]
-            ##aUndefUnderflow, uiErrorUndefUnderflow = CheckUnderflow(aLines,
-            ##    szFile, greUndef, greDefine, szPpHUndef, szPpH)
-            ##uiError += uiErrorUndefUnderflow
         else:
             uiErrorFileExtension = 1
             uiError += uiErrorFileExtension
@@ -368,21 +361,15 @@ def CheckHeader(szFile, a_bCheckTodo):
         aLineTodo, uiErrorLineTodo = CheckLineToken(aLines, "todo")
     uiError += uiErrorLineTodo
     
-    ##aExternalGuard, uiErrorExternalGuard = CheckExternalGuard(aLines)
-    ##uiError += uiErrorExternalGuard
-
     if  uiError:
         print gLine_SPY
         print "## File : %s" % (szFile)
-        if uiErrorFile:
-            print "Line %d : %s != %s" % (
-                uiLineFilename+1, szFilename, szCheckFilename)
+        if uiErrorHeader:
+            print "Line %d : %s != %s" % (0, szHeader, g_szHeader)
         if uiErrorIfndef:
-            print "Line %d : %s != %s" % (
-                uiLineIfndef+1, szIfndef, szCheckIfndef)
+            print "Line %d : %s != %s" % (uiLineIfndef+1, szIfndef, szCheckIfndef)
         if uiErrorDefine:
-            print "Line %d : %s != %s" % (
-                uiLineDefine+1, szDefine, szCheckDefine)
+            print "Line %d : %s != %s" % (uiLineDefine+1, szDefine, szCheckDefine)
         if uiErrorFileExtension:
             print "## Invalid file extension : %s" % (szComputedFilename)
         if uiErrorFooter:
@@ -403,9 +390,6 @@ def CheckHeader(szFile, a_bCheckTodo):
         if uiErrorLineTodo:
             print "## Todo found"
             PrintList(aLineTodo)
-        ##if uiErrorExternalGuard:
-          ##  print "## Invalid external guard"
-            ##PrintList(aExternalGuard)
     return uiError, szDefine
 
 ##-----------------------------------------------------------------------------
@@ -416,13 +400,13 @@ def CheckSource(szFile, a_bCheckTodo):
     aLines = pFile.readlines()
 
     uiError = 0
+    uiErrorHeader = 0
 
-    uiLineFilename = 2
-    szFilename = ""
-    if len(aLines) > uiLineFilename:
-        szFilename = aLines[uiLineFilename].rstrip('\n')
-    
-    uiLineInclude = 13
+    szHeader = aLines[0] + aLines[1] + aLines[2]
+    uiErrorHeader = szHeader != g_szHeader
+    uiError += uiErrorHeader
+
+    uiLineInclude = 3
     szInclude = ""
     if len(aLines) > uiLineInclude:
         szInclude = aLines[uiLineInclude].rstrip('\n')
@@ -430,19 +414,11 @@ def CheckSource(szFile, a_bCheckTodo):
     szPath = os.path.split(szFile)[0]
     szComputedFilename = os.path.split(szFile)[1]
 
-    szCheckFilename = "// File Name : " + szComputedFilename
-    uiErrorFile = szCheckFilename != szFilename
-    uiError += uiErrorFile
-
     szComputed_H = os.path.splitext(szComputedFilename)[0] + ".h"
     szComputed_HPP = os.path.splitext(szComputedFilename)[0] + ".hpp"
 
     szCheckInclude = "#include \"" + szComputed_H + "\""
     if os.path.isfile(szPath + "/" + szComputed_HPP):
-        ##print szFile
-        ##print szCheckFilename
-        ##print szComputed_H
-        ##print szComputed_HPP
         szCheckInclude = "#include \"" + szComputed_HPP + "\""
 
     uiErrorInclude = szCheckInclude != szInclude
@@ -467,12 +443,10 @@ def CheckSource(szFile, a_bCheckTodo):
     if  uiError:
         print gLine_SPY
         print "## File : %s" % (szFile)
-        if uiErrorFile:
-            print "Line %d : %s != %s" % (
-                uiLineFilename+1, szFilename, szCheckFilename)
+        if uiErrorHeader:
+            print "Line %d : %s != %s" % (0, szHeader, g_szHeader)
         if uiErrorInclude:
-            print "Line %d : %s != %s" % (
-                uiLineInclude+1, szInclude, szCheckInclude)
+            print "Line %d : %s != %s" % (uiLineInclude+1, szInclude, szCheckInclude)
         if uiErrorFooter:
             print "## Invalid footer"
             PrintList(aFooterDiff)
@@ -485,7 +459,6 @@ def CheckSource(szFile, a_bCheckTodo):
         if uiErrorLineTodo:
             print "## Todo found"
             PrintList(aLineTodo)
-
     return uiError
 
 ##-----------------------------------------------------------------------------

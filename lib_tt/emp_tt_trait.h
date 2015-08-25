@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_trait.h
-//
-// Creation Date : Tue 14 Sep 2010 05:11:21 PM CEST
-//
-// Modification Date : Fri Jun 26 20:12:04 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_TRAIT_H
 #define EMP_TT_TRAIT_H

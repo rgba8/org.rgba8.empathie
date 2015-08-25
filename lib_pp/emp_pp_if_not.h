@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_if_not.h
-//
-// Creation Date : Mon 11 Oct 2010 10:53:25 PM CEST
-//
-// Modification Date : Sat Jan 18 12:33:29 2014
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_IF_NOT_H
 #define EMP_PP_IF_NOT_H

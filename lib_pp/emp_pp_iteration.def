@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_iteration.def
-//
-// Creation Date : Tue 19 Oct 2010 05:32:00 PM CEST
-//
-// Modification Date : mar. 26 nov. 2013 18:06:01 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_ITERATION_DEF
 #define EMP_PP_ITERATION_DEF

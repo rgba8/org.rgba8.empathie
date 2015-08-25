@@ -1,21 +1,10 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_is_not_const.h
-//
-// Creation Date : Thu 25 Nov 2010 04:16:29 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:10:32 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_IS_NOT_CONST_H
 #define EMP_TT_IS_NOT_CONST_H
 
 //-----------------------------------------------------------------------------
-//
 //-----------------------------------------------------------------------------
 #include "emp_tt_is_const.h"
 #include "emp_tt_not.h"

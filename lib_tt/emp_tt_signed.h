@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_signed.h
-//
-// Creation Date : Mon 06 Jun 2011 08:51:10 AM CEST
-//
-// Modification Date : Fri Jun 26 20:12:35 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_SIGNED_H
 #define EMP_TT_SIGNED_H

@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_void.h
-//
-// Creation Date : Mon 08 Nov 2010 11:29:40 AM CET
-//
-// Modification Date : Fri Jun 26 20:11:05 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_VOID_H
 #define EMP_TT_VOID_H
@@ -22,7 +12,7 @@ namespace emp { namespace tt {
 //-----------------------------------------------------------------------------
 EMP_NOCOPY_CLASS(void_)
 public:
-    void_(void);
+    void_(void) {}
 };
 
 //-----------------------------------------------------------------------------

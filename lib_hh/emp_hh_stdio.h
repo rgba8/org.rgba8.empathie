@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_hh_stdio.h
-//
-// Creation Date : Mon 10 Jan 2011 12:24:32 PM CET
-//
-// Modification Date : Tue Jan 14 19:24:44 2014
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_HH_STDIO_H
 #define EMP_HH_STDIO_H

@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_remove_volatile.h
-//
-// Creation Date : Mon 22 Nov 2010 03:02:55 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:11:38 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_REMOVE_VOLATILE_H
 #define EMP_TT_REMOVE_VOLATILE_H

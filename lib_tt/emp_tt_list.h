@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_list.h
-//
-// Creation Date : Mon 07 Feb 2011 05:11:54 PM CET
-//
-// Modification Date : lun. 29 juin 2015 19:46:57 CEST
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_LIST_H
 #define EMP_TT_LIST_H
@@ -127,22 +117,12 @@ public:
 //-----------------------------------------------------------------------------
 typedef EMP_TT_LIST_2(unsigned int, int) list_ui_si;
 
-#ifndef EMP_TT_ASSERT_H
 #include "emp_tt_assert.h"
-#endif
 
-EMP_STATIC_ASSERT_TYPE_EQUAL(
-        EMP_PP_FORWARD(emp::tt::list_type<list_ui_si, 0>::type),
-        unsigned int);
-EMP_STATIC_ASSERT_TYPE_EQUAL(
-        EMP_PP_FORWARD(emp::tt::list_type<list_ui_si, 1>::type),
-        int);
-
-EMP_STATIC_ASSERT(
-        (emp::tt::list_index<list_ui_si, unsigned int>::value == 0));
-
-EMP_STATIC_ASSERT(
-        (emp::tt::list_index<list_ui_si, int>::value == 1));
+EMP_STATIC_ASSERT_TYPE_EQUAL(EMP_PP_FORWARD(emp::tt::list_type<list_ui_si, 0>::type), unsigned int);
+EMP_STATIC_ASSERT_TYPE_EQUAL(EMP_PP_FORWARD(emp::tt::list_type<list_ui_si, 1>::type), int);
+EMP_STATIC_ASSERT((emp::tt::list_index<list_ui_si, unsigned int>::value == 0));
+EMP_STATIC_ASSERT((emp::tt::list_index<list_ui_si, int>::value == 1));
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

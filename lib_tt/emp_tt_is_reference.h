@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_is_reference.h
-//
-// Creation Date : Fri 12 Nov 2010 06:56:15 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:10:58 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_IS_REFERENCE_H
 #define EMP_TT_IS_REFERENCE_H

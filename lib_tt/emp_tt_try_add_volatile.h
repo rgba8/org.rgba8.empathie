@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_try_add_volatile.h
-//
-// Creation Date : Thu 25 Nov 2010 04:15:02 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:11:52 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_TRY_ADD_VOLATILE_H
 #define EMP_TT_TRY_ADD_VOLATILE_H
@@ -27,10 +17,7 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_TT_DECLARE_TYPE(try_add_volatile, typename EMP_PP_FORWARD_3(
-                                                emp::tt::try_<T,
-                                                emp::tt::is_not_volatile,
-                                                emp::tt::add_volatile>::type));
+EMP_TT_DECLARE_TYPE(try_add_volatile, typename EMP_PP_FORWARD_3(try_<T, is_not_volatile, add_volatile>::type));
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

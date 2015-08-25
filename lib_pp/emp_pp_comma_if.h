@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_comma_if.h
-//
-// Creation Date : Mon 11 Oct 2010 10:57:01 PM CEST
-//
-// Modification Date : mar. 26 nov. 2013 18:06:20 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_COMMA_IF_H
 #define EMP_PP_COMMA_IF_H

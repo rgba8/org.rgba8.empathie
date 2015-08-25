@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_are_not_equal.h
-//
-// Creation Date : Mon 08 Nov 2010 03:49:44 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:12:29 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_ARE_NOT_EQUAL_H
 #define EMP_TT_ARE_NOT_EQUAL_H

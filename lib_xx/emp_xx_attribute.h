@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_xx_attribute.h
-//
-// Creation Date : Tue 09 Nov 2010 12:33:00 PM CET
-//
-// Modification Date : Tue Jul 14 22:54:21 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_ATTRIBUTE_H
 #define EMP_XX_ATTRIBUTE_H

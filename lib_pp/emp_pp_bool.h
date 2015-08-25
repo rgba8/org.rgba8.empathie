@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_bool.h
-//
-// Creation Date : Mon 11 Oct 2010 10:53:17 PM CEST
-//
-// Modification Date : Tue Jan 14 19:25:59 2014
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_BOOL_H
 #define EMP_PP_BOOL_H

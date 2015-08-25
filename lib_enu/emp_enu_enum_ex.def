@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_enu_enum_ex.def
-//
-// Creation Date : Sun 23 Jan 2011 12:01:44 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:15:14 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_ENU_ENUM_EX_DEF
 #define EMP_ENU_ENUM_EX_DEF
@@ -73,23 +63,12 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_ENUM_FIRST_LABEL(x_Label)\
-    XTMP_ENU_SOLVE_LABEL(x_Label)
-
-#define EMP_ENUM_LAST_LABEL(x_Label)\
-    XTMP_ENU_SOLVE_LABEL(x_Label)
-
-#define EMP_ENUM_FIRST_LABEL_EX(x_Label, x_User)\
-    XTMP_ENU_SOLVE_LABEL(x_Label, EMP_PP_SOLVE(x_User))
-
-#define EMP_ENUM_FIRST_VALUE_EX(x_Label, x_Value, x_User)\
-    XTMP_ENU_SOLVE_VALUE(x_Label, x_Value, EMP_PP_SOLVE(x_User))
-
-#define EMP_ENUM_LAST_LABEL_EX(x_Label, x_User)\
-    XTMP_ENU_SOLVE_LABEL(x_Label, EMP_PP_SOLVE(x_User))
-
-#define EMP_ENUM_LAST_VALUE_EX(x_Label, x_Value, x_User)\
-    XTMP_ENU_SOLVE_VALUE(x_Label, x_Value, EMP_PP_SOLVE(x_User))
+#define EMP_ENUM_FIRST_LABEL(x_Label)                     XTMP_ENU_SOLVE_LABEL(x_Label)
+#define EMP_ENUM_LAST_LABEL(x_Label)                      XTMP_ENU_SOLVE_LABEL(x_Label)
+#define EMP_ENUM_FIRST_LABEL_EX(x_Label, x_User)          XTMP_ENU_SOLVE_LABEL(x_Label, EMP_PP_SOLVE(x_User))
+#define EMP_ENUM_FIRST_VALUE_EX(x_Label, x_Value, x_User) XTMP_ENU_SOLVE_VALUE(x_Label, x_Value, EMP_PP_SOLVE(x_User))
+#define EMP_ENUM_LAST_LABEL_EX(x_Label, x_User)           XTMP_ENU_SOLVE_LABEL(x_Label, EMP_PP_SOLVE(x_User))
+#define EMP_ENUM_LAST_VALUE_EX(x_Label, x_Value, x_User)  XTMP_ENU_SOLVE_VALUE(x_Label, x_Value, EMP_PP_SOLVE(x_User))
 
 #define XTMP_ENU_SOLVE_LABEL(...) EMP_ENUM_LABEL_EX_IMPL(__VA_ARGS__)
 #define XTMP_ENU_SOLVE_VALUE(...) EMP_ENUM_VALUE_EX_IMPL(__VA_ARGS__)

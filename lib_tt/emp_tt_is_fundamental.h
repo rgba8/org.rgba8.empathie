@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_is_fundamental.h
-//
-// Creation Date : Mon 08 Nov 2010 03:16:45 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:10:27 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_IS_FUNDAMENTAL_H
 #define EMP_TT_IS_FUNDAMENTAL_H
@@ -27,8 +17,7 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_TT_DECLARE_VALUE(is_fundamental,
-    emp::tt::or_<is_arithmetic<T>::value EMP_PP_COMMA() is_void<T>::value>);
+EMP_TT_DECLARE_VALUE(is_fundamental, emp::tt::or_<is_arithmetic<T>::value EMP_PP_COMMA() is_void<T>::value>);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

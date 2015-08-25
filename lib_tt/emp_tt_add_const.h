@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_add_const.h
-//
-// Creation Date : Mon 08 Nov 2010 03:35:23 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:09:33 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_ADD_CONST_H
 #define EMP_TT_ADD_CONST_H
@@ -26,14 +16,10 @@ namespace emp { namespace tt {
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-class add_const
-{
+EMP_NOINSTANCE_CLASS(add_const)
+EMP_STATIC_ASSERT(emp::tt::is_not_const<T>::value);
 public:
     typedef T const type;
-private:
-    EMP_STATIC_ASSERT(emp::tt::is_not_const<T>::value);
-private:
-    EMP_XX_NOINSTANCE(add_const);
 };
 
 //-----------------------------------------------------------------------------

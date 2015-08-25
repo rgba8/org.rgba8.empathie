@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_xx_string.h
-//
-// Creation Date : Thu 02 Dec 2010 04:11:39 PM CET
-//
-// Modification Date : sam. 20 sept. 2014 09:48:28 CEST
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_STRING_H
 #define EMP_XX_STRING_H

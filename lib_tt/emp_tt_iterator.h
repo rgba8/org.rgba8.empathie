@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_iterator.h
-//
-// Creation Date : Sun 30 Jan 2011 07:45:30 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:11:05 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_ITERATOR_H
 #define EMP_TT_ITERATOR_H
@@ -28,10 +18,7 @@ namespace emp { namespace tt {
 template <typename T>
 EMP_NOINSTANCE_CLASS(iterator)
 public:
-    typedef typename emp::tt::if_else<
-        emp::tt::is_const<T>::value,
-        typename T::const_iterator,
-        typename T::iterator>::type type;
+    typedef typename if_else<is_const<T>::value, typename T::const_iterator, typename T::iterator>::type type;
 };
 
 //-----------------------------------------------------------------------------

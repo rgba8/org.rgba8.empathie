@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_def.h
-//
-// Creation Date : Fri 08 Oct 2010 08:39:11 AM CEST
-//
-// Modification Date : lun. 29 juin 2015 19:58:23 CEST
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_DEF_H
 #define EMP_TT_DEF_H

@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_extract.h
-//
-// Creation Date : Tue 18 Jan 2011 02:13:18 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:10:06 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_EXTRACT_H
 #define EMP_TT_EXTRACT_H
@@ -59,8 +49,7 @@ private:
     static false_type apply(...);
 
 public:
-    typedef typename extract_impl<T,
-        sizeof(apply<T>(0)) == sizeof(true_type)>::type type;
+    typedef typename extract_impl<T, sizeof(apply<T>(0)) == sizeof(true_type)>::type type;
 
 private:
     EMP_XX_NOINSTANCE(extract);

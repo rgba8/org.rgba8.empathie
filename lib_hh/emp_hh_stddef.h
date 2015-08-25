@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_hh_stddef.h
-//
-// Creation Date : Mon 10 Jan 2011 12:24:32 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:13:27 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_HH_STDDEF_H
 #define EMP_HH_STDDEF_H

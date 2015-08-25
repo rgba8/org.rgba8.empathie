@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_is_integral.h
-//
-// Creation Date : Mon 08 Nov 2010 03:05:47 PM CET
-//
-// Modification Date : lun. 29 juin 2015 19:49:55 CEST
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_IS_INTEGRAL_H
 #define EMP_TT_IS_INTEGRAL_H
@@ -20,6 +10,8 @@
 #include "emp_tt_def.h"
 #include "emp_tt_trait.h"
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 #include "emp_pp_if.h"
 #include "emp_pp_if_else.h"
 

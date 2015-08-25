@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_enable_if.h
-//
-// Creation Date : Sat 13 Nov 2010 08:21:22 AM CET
-//
-// Modification Date : Fri Jun 26 20:15:33 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_ENABLE_IF_H
 #define EMP_TT_ENABLE_IF_H

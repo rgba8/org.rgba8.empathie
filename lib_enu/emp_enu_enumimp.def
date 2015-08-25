@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_enu_enumimp.def
-//
-// Creation Date : Mon 01 Nov 2010 01:41:05 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:15:15 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_ENU_ENUMIMP_DEF
 #define EMP_ENU_ENUMIMP_DEF
@@ -62,29 +52,27 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_RETURN EMP_ENUM_NAME()::Value EMP_ENUM_NAME()::from(unsigned int const a_uiFrom)
+EMP_RETURN EMP_ENUM_NAME()::Value EMP_ENUM_NAME()::from(uint const a_uiFrom)
 {
 // TODO : runtime_cast
-    EMP_ENUM_NAME()::CValue eValue =
-        static_cast<EMP_ENUM_NAME()::Value>(a_uiFrom);
+    EMP_ENUM_NAME()::CValue eValue = static_cast<EMP_ENUM_NAME()::Value>(a_uiFrom);
     EMP_ASSERT(is_valid(eValue));
     return eValue;
 }
 
-EMP_RETURN bool EMP_ENUM_NAME()::is_valid(
-    EMP_ENUM_NAME()::CValue a_eValue)
+EMP_RETURN bool EMP_ENUM_NAME()::is_valid(EMP_ENUM_NAME()::CValue a_eValue)
 {
     switch (a_eValue)
     {
-#define XTMP_ENU_CASE(x_Name) case EMP_ENUM_NAME()::x_Name: { return true; }
-#define EMP_ENUM_FIRST_LABEL(x_Name) XTMP_ENU_CASE(x_Name)
-#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value) XTMP_ENU_CASE(x_Name)
-#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User) XTMP_ENU_CASE(x_Name)
+#define XTMP_ENU_CASE(x_Name)                            case EMP_ENUM_NAME()::x_Name: { return true; }
+#define EMP_ENUM_FIRST_LABEL(x_Name)                     XTMP_ENU_CASE(x_Name)
+#define EMP_ENUM_FIRST_VALUE(x_Name, x_Value)            XTMP_ENU_CASE(x_Name)
+#define EMP_ENUM_FIRST_LABEL_EX(x_Name, x_User)          XTMP_ENU_CASE(x_Name)
 #define EMP_ENUM_FIRST_VALUE_EX(x_Name, x_Value, x_User) XTMP_ENU_CASE(x_Name)
 
-#define EMP_ENUM_LAST_LABEL(x_Name) XTMP_ENU_CASE(x_Name)
-#define EMP_ENUM_LAST_VALUE(x_Name, x_Value) XTMP_ENU_CASE(x_Name)
-#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User) XTMP_ENU_CASE(x_Name)
+#define EMP_ENUM_LAST_LABEL(x_Name)                     XTMP_ENU_CASE(x_Name)
+#define EMP_ENUM_LAST_VALUE(x_Name, x_Value)            XTMP_ENU_CASE(x_Name)
+#define EMP_ENUM_LAST_LABEL_EX(x_Name, x_User)          XTMP_ENU_CASE(x_Name)
 #define EMP_ENUM_LAST_VALUE_EX(x_Name, x_Value, x_User) XTMP_ENU_CASE(x_Name)
 
     EMP_ENUM_VALUES()
@@ -99,7 +87,8 @@ EMP_RETURN bool EMP_ENUM_NAME()::is_valid(
 #undef EMP_ENUM_LAST_LABEL_EX
 #undef EMP_ENUM_LAST_VALUE_EX
 #undef XTMP_ENU_CASE
-        default: { break; }
+        default:
+        { break; }
     };
     return false;
 }

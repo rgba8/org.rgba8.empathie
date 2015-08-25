@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_is_void.h
-//
-// Creation Date : Mon 08 Nov 2010 03:10:13 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:09:19 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_IS_VOID_H
 #define EMP_TT_IS_VOID_H

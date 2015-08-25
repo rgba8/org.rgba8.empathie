@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_add_reference.h
-//
-// Creation Date : Thu 25 Nov 2010 02:52:13 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:09:38 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_ADD_REFERENCE_H
 #define EMP_TT_ADD_REFERENCE_H

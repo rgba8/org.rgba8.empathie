@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_is_not_param.h
-//
-// Creation Date : Mon 22 Nov 2010 02:52:55 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:10:41 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_IS_NOT_PARAM_H
 #define EMP_TT_IS_NOT_PARAM_H

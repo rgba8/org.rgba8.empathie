@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_more.h
-//
-// Creation Date : Tue 11 Jan 2011 01:45:50 PM CET
-//
-// Modification Date : lun. 29 juin 2015 20:00:02 CEST
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_MORE_H
 #define EMP_TT_MORE_H

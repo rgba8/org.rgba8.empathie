@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_bool.h
-//
-// Creation Date : Mon 08 Nov 2010 11:43:30 AM CET
-//
-// Modification Date : Fri Jun 26 20:16:45 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_BOOL_H
 #define EMP_TT_BOOL_H
@@ -29,8 +19,7 @@ namespace emp { namespace tt {
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <bool t_bValue>
-EMP_NOINSTANCE_CLASS_BASE(  bool_, private,
-                            EMP_PP_FORWARD(integral<bool, t_bValue>))
+EMP_NOINSTANCE_CLASS_BASE(bool_, private, EMP_PP_FORWARD(integral<bool, t_bValue>))
 public:
     using tbase::value;
 };

@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_tt_array.h
-//
-// Creation Date : Thu 04 Nov 2010 03:37:46 PM CET
-//
-// Modification Date : Fri Jun 26 20:16:22 2015
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_ARRAY_H
 #define EMP_TT_ARRAY_H

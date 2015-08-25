@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : emp_pp_for.h
-//
-// Creation Date : Mon 11 Oct 2010 11:01:14 PM CEST
-//
-// Modification Date : mar. 26 nov. 2013 18:05:21 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_FOR_H
 #define EMP_PP_FOR_H
