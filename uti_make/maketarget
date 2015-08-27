@@ -1,15 +1,5 @@
 ##-----------------------------------------------------------------------------
-##
-## File Name : makefile
-##
-## Creation Date : Tue Jun 22 23:12:04 2010
-##
-## Modification Date : Thu Jun 25 20:38:05 2015
-##
-## Created By : ksej - www.rgba8.org
-##
-## Description :
-##
+## @rgba8.org
 ##-----------------------------------------------------------------------------
 ARCH_DIRECTORY		?=  $(ARCH)/
 BUILD_DIRECTORY		?=  $(ARCH_DIRECTORY)$(BUILD)/

@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : main.h
-//
-// Creation Date : lun. 18 nov. 2013 22:23:44 CET
-//
-// Modification Date : mar. 26 nov. 2013 18:15:01 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef MAIN_H
 #define MAIN_H

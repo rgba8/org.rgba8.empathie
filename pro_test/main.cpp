@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : main.cpp
-//
-// Creation Date : lun. 18 nov. 2013 22:22:29 CET
-//
-// Modification Date : lun. 29 juin 2015 23:24:41 CEST
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #include "main.h"
 

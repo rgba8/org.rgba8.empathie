@@ -1,15 +1,5 @@
 ##-----------------------------------------------------------------------------
-##
-## File Name : makefile
-##
-## Creation Date : Mon 31 Jan 2011 08:01:47 PM CET
-##
-## Modification Date : jeu. 28 mai 2015 22:58:37 CEST
-##
-## Created By : ksej - www.rgba8.org
-##
-## Description :
-##
+## @rgba8.org
 ##-----------------------------------------------------------------------------
 ifeq (, $(wildcard $(ROOT)makeuser))
 $(error no $(ROOT)makeuser found)

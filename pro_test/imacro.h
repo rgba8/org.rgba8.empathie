@@ -1,15 +1,5 @@
 //-----------------------------------------------------------------------------
-//
-// File Name : imacro.h
-//
-// Creation Date : Wed 26 Jan 2011 04:18:07 PM CET
-//
-// Modification Date : mar. 26 nov. 2013 18:14:58 CET
-//
-// Created By : ksej - www.rgba8.org
-//
-// Description :
-//
+// @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef IMACRO_H
 #define IMACRO_H

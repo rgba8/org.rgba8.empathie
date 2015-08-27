@@ -1,16 +1,6 @@
 #!/usr/bin/python
 ##-----------------------------------------------------------------------------
-##
-## File Name : StcCpp.py
-##
-## Creation Date : Thu 14 Oct 2010 07:23:55 PM CEST
-##
-## Modification Date : lun. 29 juin 2015 22:57:54 CEST
-##
-## Created By : ksej - www.rgba8.org
-##
-## Description :
-##
+## @rgba8.org
 ##-----------------------------------------------------------------------------
 import os
 import re
