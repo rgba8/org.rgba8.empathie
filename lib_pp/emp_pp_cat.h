@@ -1,22 +1,18 @@
 //-----------------------------------------------------------------------------
-// emp_pp_not.h - @rgba8.org
+// emp_pp_cat.h - @rgba8.org
 //-----------------------------------------------------------------------------
-#ifndef EMP_PP_NOT_H
-#define EMP_PP_NOT_H
+#ifndef EMP_PP_CAT_H
+#define EMP_PP_CAT_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_pp_cat.h"
+#define EMP_PP_CAT(x_Left, ...) EMP_PP_CAT_IMP(x_Left, __VA_ARGS__)
+#define EMP_PP_CAT_IMP(x_Left, ...) x_Left ## __VA_ARGS__
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_NOT(x_Value) EMP_PP_CAT(EMP_PP_NOT_, x_Value)
-
-#define EMP_PP_NOT_0 1
-#define EMP_PP_NOT_1 0
-
-#define EMP_PP_NOT_false 1
-#define EMP_PP_NOT_true 0
+#define EMP_PP_CAT_3(x_a, x_b, x_c) EMP_PP_CAT_3_IMP(x_a, x_b, x_c)
+#define EMP_PP_CAT_3_IMP(x_a, x_b, x_c) x_a ## x_b ## x_c
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

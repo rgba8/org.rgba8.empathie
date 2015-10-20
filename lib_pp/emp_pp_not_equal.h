@@ -1,19 +1,19 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_pp_not_equal.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_NOT_EQUAL_H
 #define EMP_PP_NOT_EQUAL_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+#include "emp_pp_cat.h"
 #include "emp_pp_if_else.h"
-#include "emp_pp_token.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_PP_NOT_EQUAL(x_Left, x_Right) EMP_PP_NOT_EQUAL_IMP(x_Left, x_Right)
 #define EMP_PP_NOT_EQUAL_IMP(x_Left, x_Right)\
-EMP_PP_TOKEN(\
+EMP_PP_CAT(\
     EMP_PP_NOT_EQUAL_CHECK_,\
     EMP_PP_NOT_EQUAL_ ## x_Left(0, EMP_PP_NOT_EQUAL_ ## x_Right))
 

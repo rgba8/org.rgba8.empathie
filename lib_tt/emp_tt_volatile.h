@@ -1,61 +1,43 @@
 //-----------------------------------------------------------------------------
-// emp_tt_extract.h - @rgba8.org
+// emp_tt_volatile.h - @rgba8.org
 //-----------------------------------------------------------------------------
-#ifndef EMP_TT_EXTRACT_H
-#define EMP_TT_EXTRACT_H
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#include "emp_tt_false.h"
-#include "emp_tt_null.h"
-#include "emp_tt_true.h"
+#ifndef EMP_TT_VOLATILE_H
+#define EMP_TT_VOLATILE_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 namespace emp { namespace tt {
 
-/* @@0 remove
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T, bool t_bExtract>
-class extract_impl
-{
-public:
-    typedef typename T::type type;
-private:
-    EMP_XX_NOINSTANCE(extract_impl);
-};
+EMP_TT_DECLARE_VALUE(is_volatile, false_)
+EMP_TT_DECLARE_VALUE_PARTIAL(is_volatile, T volatile, true_)
+EMP_TT_DECLARE_VALUE_PARTIAL(is_volatile, T const volatile, true_)
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+EMP_TT_DECLARE_VALUE(is_not_volatile, not_<is_volatile<T>::value>)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-class extract_impl<T, false>
-{
-public:
-    typedef emp::tt::null type;
-private:
-    EMP_XX_NOINSTANCE(extract_impl);
+EMP_NOINSTANCE_STRUCT(add_volatile_t)
+    static_assert(is_not_volatile<T>::value, "");
+    typedef T volatile type;
 };
+
+template <typename T> using add_volatile = typename add_volatile_t<T>::type;
+template <typename T> using try_add_volatile = try_<T, is_not_volatile, add_volatile>;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T>
-class extract
-{
-private:
-    template <typename t_Extract>
-    static true_type apply(typename t_Extract::type*);
+template <typename T> class remove_volatile_t;
+EMP_TT_DECLARE_TYPE_PARTIAL(remove_volatile_t, T volatile, T)
+EMP_TT_DECLARE_TYPE_PARTIAL(remove_volatile_t, T const volatile, T)
 
-    template <typename t_Extract>
-    static false_type apply(...);
+template <typename T> using remove_volatile = typename remove_volatile_t<T>::type;
+template <typename T> using try_remove_volatile = try_<T, is_volatile, remove_volatile>;
 
-public:
-    typedef typename extract_impl<T, sizeof(apply<T>(0)) == sizeof(true_type)>::type type;
-
-private:
-    EMP_XX_NOINSTANCE(extract);
-};
-*/
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 } }

@@ -1,18 +1,8 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_tt_return.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_RETURN_H
 #define EMP_TT_RETURN_H
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#include "emp_tt_if_else.h"
-#include "emp_tt_is_fundamental.h"
-#include "emp_tt_is_pointer.h"
-#include "emp_tt_is_reference.h"
-#include "emp_tt_or.h"
-#include "emp_tt_try_remove_const.h"
-#include "emp_tt_try_add_reference.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -20,44 +10,46 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T>
-EMP_NOINSTANCE_CLASS(return_)
-public:
-    typedef typename emp::tt::if_else
+template <typename T> using return_ =
+    if_else
     <
-        emp::tt::or_
+        or_<is_fundamental<T>::value, is_pointer<T>::value>::value,
+        try_remove_const<T>,
+        if_else
         <
-            emp::tt::is_fundamental<T>::value,
-            emp::tt::is_pointer<T>::value
-        >::value,
-        typename emp::tt::try_remove_const<T>::type,
-        typename emp::tt::if_else
-        <
-            emp::tt::is_reference<T>::value,
+            is_reference<T>::value,
             T,
-            typename emp::tt::try_add_reference<T>::type
-        >::type
-    >::type type;
-};
+            try_add_reference<T>
+        >
+    >;
+
+static_assert(equal<return_<char>, char>::value, "");
+static_assert(equal<return_<char const>, char>::value, "");
+static_assert(equal<return_<char const*>, char const*>::value, "");
+static_assert(equal<return_<char const* const>, char const*>::value, "");
+static_assert(equal<return_<char&>, char&>::value, "");
+static_assert(equal<return_<char const&>, char const&>::value, "");
+static_assert(equal<return_<return_<char>>, return_<char>>::value, "");
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+template <typename T>
+using const_return =
+    if_else
+    <
+        or_<is_fundamental<T>::value, is_pointer<T>::value>::value,
+        try_remove_const<T>,
+        if_else
+        <
+            is_reference<T>::value,
+            const_param<T>,
+            try_add_reference<try_add_const<T>>
+        >
+    >;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 } }
-
-#ifndef EMP_TT_ASSERT_H
-#include "emp_tt_assert.h"
-#endif
-
-EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::return_<char>::type, char);
-EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::return_<char const>::type, char);
-EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::return_<char const*>::type, char const*);
-EMP_STATIC_ASSERT_TYPE_EQUAL(   emp::tt::return_<char const* const>::type,
-                                char const*);
-EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::return_<char&>::type, char&);
-EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::return_<char const&>::type, char const&);
-EMP_STATIC_ASSERT_TYPE_EQUAL(
-                            emp::tt::return_<emp::tt::return_<char> >::type,
-                            emp::tt::return_<char>&);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

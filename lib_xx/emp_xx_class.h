@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_xx_class.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_CLASS_H
 #define EMP_XX_CLASS_H
@@ -12,17 +12,17 @@
 //-----------------------------------------------------------------------------
 namespace emp { namespace rfx  {
 
-    template <typename> class class_t;
-    template <typename> class member_t;
-    class reflection_c;
-    template <typename T>
-    EMP_RETURN bool reflect(reflection_c& a_rReflection);
-
+    template <typename> class type_t;
+    // @@0 rfx template <typename> class member_t;
+    // @@0 rfx class reflection_c;
+    // @@0 rfx template <typename T> EMP_RETURN bool reflect(reflection_c& a_rReflection);
 } }
 
 #define EMP_RFX_FRIEND(...)\
-    friend class emp::rfx::class_t<__VA_ARGS__>;\
-    friend EMP_RETURN bool emp::rfx::reflect<__VA_ARGS__>(emp::rfx::reflection_c&);
+    friend class emp::rfx::type_t<__VA_ARGS__>;
+
+    // @@0 rfx
+//    friend EMP_RETURN bool emp::rfx::reflect<__VA_ARGS__>(emp::rfx::reflection_c&);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -63,12 +63,12 @@ class x_Name\
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_CLASS_BASE(x_Name, x_Modifier, x_Base)\
-class x_Name : x_Modifier x_Base\
+#define EMP_CLASS_BASE(x_Name, x_Modifier, ...)\
+class x_Name : x_Modifier __VA_ARGS__\
 {\
     EMP_RFX_FRIEND(x_Name)\
 public:\
-    typedef x_Base tbase;\
+    typedef __VA_ARGS__ tbase;\
 private:
 
 //-----------------------------------------------------------------------------
@@ -81,12 +81,12 @@ class x_Name\
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_NOCOPY_CLASS_BASE(x_Name, x_Modifier, x_Base)\
-class x_Name : x_Modifier x_Base\
+#define EMP_NOCOPY_CLASS_BASE(x_Name, x_Modifier, ...)\
+class x_Name : x_Modifier __VA_ARGS__\
 {\
     EMP_RFX_FRIEND(x_Name)\
 public:\
-    typedef x_Base tbase;\
+    typedef __VA_ARGS__ tbase;\
 private:\
     EMP_XX_NOCOPY(x_Name);
 
@@ -104,19 +104,24 @@ private:\
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_NOINSTANCE_CLASS(x_Name)\
-class x_Name\
+#define EMP_NOINSTANCE_IMPL(x_Type, ...)\
+x_Type __VA_ARGS__\
 {\
 private:\
-    EMP_XX_NOINSTANCE(x_Name);
+    EMP_XX_NOINSTANCE(__VA_ARGS__);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_NOINSTANCE_CLASS_BASE(x_Name, x_Modifier, x_Base)\
-class x_Name : x_Modifier x_Base\
+#define EMP_NOINSTANCE_CLASS(...) EMP_NOINSTANCE_IMPL(class, __VA_ARGS__)
+#define EMP_NOINSTANCE_STRUCT(...) EMP_NOINSTANCE_IMPL(struct, __VA_ARGS__) public:
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#define EMP_NOINSTANCE_CLASS_BASE(x_Name, x_Modifier, ...)\
+class x_Name : x_Modifier __VA_ARGS__\
 {\
 public:\
-    typedef x_Base tbase;\
+    typedef __VA_ARGS__ tbase;\
 private:\
     EMP_XX_NOINSTANCE(x_Name);
 

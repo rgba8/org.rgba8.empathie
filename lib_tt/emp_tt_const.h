@@ -1,38 +1,53 @@
 //-----------------------------------------------------------------------------
-// emp_pp_or.h - @rgba8.org
+// emp_tt_const.h - @rgba8.org
 //-----------------------------------------------------------------------------
-#ifndef EMP_PP_OR_H
-#define EMP_PP_OR_H
+#ifndef EMP_TT_CONST_H
+#define EMP_TT_CONST_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_pp_bool.h"
-#include "emp_pp_cat.h"
+#include "emp_tt_logical.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_OR(x_Left, x_Right) EMP_PP_OR_IMP(x_Left, x_Right)
-#define EMP_PP_OR_IMP(x_Left, x_Right)\
-EMP_PP_CAT_3(EMP_PP_OR_IMP_, EMP_PP_BOOL(x_Left), EMP_PP_BOOL(x_Right))
+namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_OR_IMP_00 0
-#define EMP_PP_OR_IMP_01 1
-#define EMP_PP_OR_IMP_10 1
-#define EMP_PP_OR_IMP_11 1
+EMP_TT_DECLARE_VALUE(is_const, false_)
+EMP_TT_DECLARE_VALUE_PARTIAL(is_const, T const, true_)
+EMP_TT_DECLARE_VALUE_PARTIAL(is_const, T const volatile, true_)
+
+EMP_TT_DECLARE_VALUE(is_not_const, not_<is_const<T>::value>)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_OR_3(x_a, x_b, x_c) EMP_PP_OR_3_IMP(x_a, x_b, x_c)
-#define EMP_PP_OR_3_IMP(x_a, x_b, x_c)\
-EMP_PP_CAT_3(EMP_PP_OR_IMP_, EMP_PP_BOOL(x_a), EMP_PP_OR(x_b, x_c))
+template <typename T>
+EMP_NOINSTANCE_STRUCT(add_const_t)
+    static_assert(is_not_const<T>::value, "");
+    typedef T const type;
+};
+
+template <typename T> using add_const = typename add_const_t<T>::type;
+template <typename T> using try_add_const = try_<T, is_not_const, add_const>;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_OR_4(x_a, x_b, x_c, x_d) EMP_PP_OR_4_IMP(x_a, x_b, x_c, x_d)
-#define EMP_PP_OR_4_IMP(x_a, x_b, x_c, x_d)\
-EMP_PP_CAT_3(EMP_PP_OR_IMP_, EMP_PP_OR(x_a, x_b), EMP_PP_OR(x_c, x_d))
+template <typename T>
+class remove_const_t;
+
+EMP_TT_DECLARE_TYPE_PARTIAL(remove_const_t, T const, T)
+EMP_TT_DECLARE_TYPE_PARTIAL(remove_const_t, T volatile const, T)
+
+template <typename T> using remove_const = typename remove_const_t<T>::type;
+template <typename T> using try_remove_const = try_<T, is_const, remove_const>;
+
+
+
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+} }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

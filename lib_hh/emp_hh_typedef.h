@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_hh_typedef.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_HH_TYPEDEF_H
 #define EMP_HH_TYPEDEF_H
@@ -12,6 +12,8 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TYPEDEF_IMP(x_Type, x_Alias)\
+    typedef x_Type& r_##x_Alias;\
+    typedef x_Type const& cr_##x_Alias;\
     typedef x_Type const c_##x_Alias;\
     typedef x_Type* p_##x_Alias;\
     typedef x_Type const* pc_##x_Alias;\

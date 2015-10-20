@@ -1,15 +1,14 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_tt_param.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_PARAM_H
 #define EMP_TT_PARAM_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_tt_try_add_const.h"
-#include "emp_tt_try_add_reference.h"
-#include "emp_tt_if_else.h"
-#include "emp_tt_is_param.h"
+#include "emp_tt_const.h"
+#include "emp_tt_fundamental.h"
+#include "emp_tt_reference.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -17,31 +16,49 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+EMP_TT_DECLARE_VALUE(is_param, or_<is_fundamental<T>::value, is_pointer<T>::value>)
+EMP_TT_DECLARE_VALUE(is_not_param, not_<is_param<T>::value>)
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 template <typename T>
-EMP_NOINSTANCE_CLASS(param)
+using param = if_else<is_param<T>::value, try_add_const<T>, try_add_reference<try_add_const<T>>>;
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+static_assert(is_param<int>::value, "");
+static_assert(equal<try_add_const<int>, int const>::value, "");
+static_assert(equal<param<int>, int const>::value, "");
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+template <typename T>
+EMP_NOINSTANCE_CLASS(const_param_t)
 public:
-    typedef typename emp::tt::if_else
+    typedef if_else
     <
-        emp::tt::is_param<T>::value,
-        typename emp::tt::try_add_const<T>::type,
-        typename emp::tt::try_add_reference<
-            typename emp::tt::try_add_const<T>::type
-        >::type
-    >::type type;
+        emp::tt::is_pointer<T>::value,
+        try_add_const<try_add_pointer<try_impl<try_remove_pointer<T>, emp::tt::is_pointer<T>::value, emp::tt::const_param_t>>>,
+        if_else
+        <
+            emp::tt::is_reference<T>::value,
+            try_add_reference<try_impl<try_remove_reference<T>, emp::tt::is_reference<T>::value, emp::tt::const_param_t>>,
+            try_add_const<T>
+        >
+    > type;
 };
+
+template <typename T> using const_param = param<typename emp::tt::const_param_t<T>::type>;
+
+static_assert(equal<const_param<int>, int const>::value, "int");
+static_assert(equal<const_param<int*>, int const* const>::value, "int*");
+static_assert(equal<const_param<int**>, int const* const* const>::value, "int**");
+static_assert(equal<const_param<int**&>, int const* const* const&>::value, "int**&");
+static_assert(equal<const_param<char const* const>, char const* const>::value, "char const* const");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 } }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#include "emp_tt_assert.h"
-#include "emp_tt_are_equal.h"
-
-EMP_STATIC_ASSERT(emp::tt::is_param<int>::value);
-EMP_STATIC_ASSERT((emp::tt::are_equal<emp::tt::try_add_const<int>::type, int const>::value));
-EMP_STATIC_ASSERT((emp::tt::are_equal<emp::tt::param<int>::type, int const>::value));
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

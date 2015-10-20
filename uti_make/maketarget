@@ -1,5 +1,5 @@
 ##-----------------------------------------------------------------------------
-## @rgba8.org
+## maketarget - @rgba8.org
 ##-----------------------------------------------------------------------------
 ARCH_DIRECTORY		?=  $(ARCH)/
 BUILD_DIRECTORY		?=  $(ARCH_DIRECTORY)$(BUILD)/
@@ -96,7 +96,7 @@ UTI_GPP_X86_64  ?=  $(CCACHE) g++ -pipe
 ##-----------------------------------------------------------------------------
 CPPFLAGS    ?= #-std=c++11
 
-CXXFLAGS    ?=  -std=c++11
+CXXFLAGS    ?=  -std=c++14
 CXXFLAGS    +=  -Wall
 CXXFLAGS    +=  -Werror
 CXXFLAGS    +=  -Wabi

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_pp_if.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_IF_H
 #define EMP_PP_IF_H
@@ -7,16 +7,15 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #include "emp_pp_bool.h"
-#include "emp_pp_token.h"
+#include "emp_pp_cat.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_IF(x_Condition, x_Then) EMP_PP_IF_IMP(x_Condition, x_Then)
-#define EMP_PP_IF_IMP(x_Condition, x_Then)\
-    EMP_PP_TOKEN(EMP_PP_IF_IMP_, EMP_PP_BOOL(x_Condition))(x_Then)
+#define EMP_PP_IF(x_Condition, ...) EMP_PP_IF_IMP(x_Condition, __VA_ARGS__)
+#define EMP_PP_IF_IMP(x_Condition, ...) EMP_PP_CAT(EMP_PP_IF_IMP_, EMP_PP_BOOL(x_Condition))(__VA_ARGS__)
 
-#define EMP_PP_IF_IMP_0(x_Then)
-#define EMP_PP_IF_IMP_1(x_Then) x_Then
+#define EMP_PP_IF_IMP_0(...)
+#define EMP_PP_IF_IMP_1(...) __VA_ARGS__
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

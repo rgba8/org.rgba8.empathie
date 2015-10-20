@@ -1,17 +1,17 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_pp_dec.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_DEC_H
 #define EMP_PP_DEC_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_pp_token.h"
+#include "emp_pp_cat.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_PP_DEC(x_Value) EMP_PP_DEC_IMP(x_Value)
-#define EMP_PP_DEC_IMP(x_Value) EMP_PP_TOKEN(EMP_PP_DEC_, x_Value)
+#define EMP_PP_DEC_IMP(x_Value) EMP_PP_CAT(EMP_PP_DEC_, x_Value)
 
 #define EMP_PP_DEC_0 EMP_PP_ERROR_EMP_PP_DEC_UNDERFLOW
 #define EMP_PP_DEC_1 0

@@ -1,38 +1,53 @@
 //-----------------------------------------------------------------------------
-// emp_pp_or.h - @rgba8.org
+// emp_tt_finally.h - @rgba8.org
 //-----------------------------------------------------------------------------
-#ifndef EMP_PP_OR_H
-#define EMP_PP_OR_H
+#ifndef EMP_TT_FINALLY_H
+#define EMP_TT_FINALLY_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_pp_bool.h"
-#include "emp_pp_cat.h"
+#include <utility>
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_OR(x_Left, x_Right) EMP_PP_OR_IMP(x_Left, x_Right)
-#define EMP_PP_OR_IMP(x_Left, x_Right)\
-EMP_PP_CAT_3(EMP_PP_OR_IMP_, EMP_PP_BOOL(x_Left), EMP_PP_BOOL(x_Right))
+namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_OR_IMP_00 0
-#define EMP_PP_OR_IMP_01 1
-#define EMP_PP_OR_IMP_10 1
-#define EMP_PP_OR_IMP_11 1
+template <typename T, bool t_bDefault>
+struct finally_t
+{
+private:
+    T m_Finalizer;
+    bool m_bFinalize = t_bDefault;
+
+public:
+    finally_t(T&& a_rFinalize) :
+        m_Finalizer(std::move(a_rFinalize)), m_bFinalize(false) {}
+
+    finally_t(finally_t&& a_rFrom) :
+        m_Finalizer(std::move(a_rFrom.m_Finalizer)), m_bFinalize(a_rFrom.m_bFinalize)
+    { a_rFrom.release(); }
+
+    ~finally_t(void) { if (m_bFinalize) { m_Finalizer(); } }
+
+    void release(void) { m_bFinalize = false; }
+
+private:
+    finally_t(finally_t const&) = delete;
+    finally_t& operator=(finally_t const&) = delete;
+    finally_t& operator=(finally_t&&) = delete;
+};
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_OR_3(x_a, x_b, x_c) EMP_PP_OR_3_IMP(x_a, x_b, x_c)
-#define EMP_PP_OR_3_IMP(x_a, x_b, x_c)\
-EMP_PP_CAT_3(EMP_PP_OR_IMP_, EMP_PP_BOOL(x_a), EMP_PP_OR(x_b, x_c))
+template <typename T>
+EMP_RETURN auto finally(T&& a_tLambda)
+{ return finally_t<T, true>(std::forward<T>(a_tLambda)); }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_OR_4(x_a, x_b, x_c, x_d) EMP_PP_OR_4_IMP(x_a, x_b, x_c, x_d)
-#define EMP_PP_OR_4_IMP(x_a, x_b, x_c, x_d)\
-EMP_PP_CAT_3(EMP_PP_OR_IMP_, EMP_PP_OR(x_a, x_b), EMP_PP_OR(x_c, x_d))
+} }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

@@ -1,61 +1,46 @@
 //-----------------------------------------------------------------------------
-// emp_tt_extract.h - @rgba8.org
+// emp_tt_reference.h - @rgba8.org
 //-----------------------------------------------------------------------------
-#ifndef EMP_TT_EXTRACT_H
-#define EMP_TT_EXTRACT_H
+#ifndef EMP_TT_REFERENCE_H
+#define EMP_TT_REFERENCE_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_tt_false.h"
-#include "emp_tt_null.h"
-#include "emp_tt_true.h"
+#include "emp_tt_logical.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 namespace emp { namespace tt {
 
-/* @@0 remove
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T, bool t_bExtract>
-class extract_impl
-{
-public:
-    typedef typename T::type type;
-private:
-    EMP_XX_NOINSTANCE(extract_impl);
-};
+EMP_TT_DECLARE_VALUE(is_reference, false_)
+EMP_TT_DECLARE_VALUE_PARTIAL(is_reference, T&, true_)
+EMP_TT_DECLARE_VALUE(is_not_reference, not_<is_reference<T>::value>)
+
+static_assert(is_reference<char&>::value, "");
+static_assert(is_reference<char>::value == false, "");
+static_assert(is_reference<char const*&>::value, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T>
-class extract_impl<T, false>
-{
-public:
-    typedef emp::tt::null type;
-private:
-    EMP_XX_NOINSTANCE(extract_impl);
-};
+EMP_TT_DECLARE_TYPE(add_reference_t, T&)
+
+template <typename T> using add_reference = typename add_reference_t<T>::type;
+template <typename T> using try_add_reference = try_<T, is_not_reference, add_reference>;
+
+static_assert(equal<add_reference<int>, int&>::value, "");
+static_assert(equal<try_add_reference<int>, int&>::value, "");
+static_assert(equal<try_add_reference<int&>, int&>::value, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T>
-class extract
-{
-private:
-    template <typename t_Extract>
-    static true_type apply(typename t_Extract::type*);
+template <typename T> class remove_reference_t;
+EMP_TT_DECLARE_TYPE_PARTIAL(remove_reference_t, T&, T)
 
-    template <typename t_Extract>
-    static false_type apply(...);
+template <typename T> using remove_reference = typename remove_reference_t<T>::type;
+template <typename T> using try_remove_reference = try_<T, is_reference, remove_reference>;
 
-public:
-    typedef typename extract_impl<T, sizeof(apply<T>(0)) == sizeof(true_type)>::type type;
-
-private:
-    EMP_XX_NOINSTANCE(extract);
-};
-*/
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 } }

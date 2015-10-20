@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_pp_argument.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_PP_ARGUMENT_H
 #define EMP_PP_ARGUMENT_H
@@ -7,28 +7,19 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #include "emp_pp_and.h"
+#include "emp_pp_cat.h"
 #include "emp_pp_comma_if.h"
 #include "emp_pp_for.h"
 #include "emp_pp_inc.h"
 #include "emp_pp_not_equal.h"
-#include "emp_pp_token.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_TYPE(x_Index)\
-    EMP_PP_TOKEN(t_tType, x_Index)
-
-#define EMP_PP_TYPEDEF(x_Index)\
-    EMP_PP_TOKEN(type, x_Index)
-
-#define EMP_PP_PARAMETER(x_Index)\
-    EMP_PP_TOKEN(a_trParam, x_Index)
-
-#define EMP_PP_ARGUMENT(x_Index)\
-    EMP_PP_TYPE(x_Index) const& EMP_PP_PARAMETER(x_Index)
-
-#define EMP_PP_MEMBER(x_Index)\
-    EMP_PP_TOKEN(m_tValue, x_Index)
+#define EMP_PP_TYPE(x_Index)      EMP_PP_CAT(t_tType, x_Index)
+#define EMP_PP_TYPEDEF(x_Index)   EMP_PP_CAT(type, x_Index)
+#define EMP_PP_PARAMETER(x_Index) EMP_PP_CAT(a_trParam, x_Index)
+#define EMP_PP_ARGUMENT(x_Index)  EMP_PP_TYPE(x_Index) const& EMP_PP_PARAMETER(x_Index)
+#define EMP_PP_MEMBER(x_Index)    EMP_PP_CAT(m_tValue, x_Index)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -50,7 +41,7 @@
     EMP_PP_COMMA_IF_NOT_LAST(x_Depth, x_Index, x_Count)
 
 #define EMP_PP_TEMPLATE_ARGUMENT_CONST(x_Depth, x_Index, x_Count)\
-    typename emp::tt::const_param<EMP_PP_TYPE(x_Index)>::type\
+    emp::tt::const_param<EMP_PP_TYPE(x_Index)>\
     EMP_PP_COMMA_IF_NOT_LAST(x_Depth, x_Index, x_Count)
 
 #define EMP_PP_TEMPLATE_LIST_BEGIN(x_Depth, x_Index, x_Count)\
@@ -93,7 +84,7 @@
 //-----------------------------------------------------------------------------
 #define EMP_PP_FOR_ARGUMENTS(x_Depth, x_Count, x_Macro, x_Left, x_Right)\
     EMP_PP_COMMA_IF(EMP_PP_AND(x_Left, x_Count))\
-    EMP_PP_TOKEN(EMP_PP_FOR_, x_Depth)(x_Depth, 0, x_Count, x_Macro)\
+    EMP_PP_CAT(EMP_PP_FOR_, x_Depth)(x_Depth, 0, x_Count, x_Macro)\
     EMP_PP_COMMA_IF(EMP_PP_AND(x_Right, x_Count))
 
 //-----------------------------------------------------------------------------

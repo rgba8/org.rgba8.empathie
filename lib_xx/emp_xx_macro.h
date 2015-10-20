@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_xx_macro.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_MACRO_H
 #define EMP_XX_MACRO_H
@@ -38,16 +38,16 @@
 #error EMP_XX_CNT_TUPLE_COUNT not defined
 #endif
 
-#ifndef EMP_XX_MEM_ALLOCATE_COUNT
-#error EMP_XX_MEM_ALLOCATE_COUNT not defined
+#ifdef EMP_XX_MEM_ALLOCATE_COUNT
+#error EMP_XX_MEM_ALLOCATE_COUNT defined
 #endif
 
-#ifndef EMP_XX_STR_FORMAT_COUNT
-#error EMP_XX_STR_FORMAT_COUNT not defined
+#ifdef EMP_XX_STR_FORMAT_COUNT
+#error EMP_XX_STR_FORMAT_COUNT defined
 #endif
 
-#ifndef EMP_XX_FCT_FUNCTION_COUNT
-#error EMP_XX_FCT_FUNCTION_COUNT not defined
+#ifdef EMP_XX_FCT_FUNCTION_COUNT
+#error EMP_XX_FCT_FUNCTION_COUNT defined
 #endif
 
 //-----------------------------------------------------------------------------
@@ -90,20 +90,64 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+#include "emp_pp_and.h"
+#include "emp_pp_cat.h"
+#include "emp_pp_forward.h"
+#include "emp_pp_if.h"
+#include "emp_pp_if_else.h"
+#include "emp_pp_not.h"
+
 #include "emp_xx_attribute.h"
 #include "emp_xx_build.h"
 #include "emp_xx_call.h"
 #include "emp_xx_class.h"
 #include "emp_xx_pragma.h"
 #include "emp_xx_noop.h"
+#include "emp_xx_vaargs.h"
 
 #include "emp_hh_typedef.h"
 
-#include "emp_ast_asserter.h"
+#include "emp_tt_logical.h"
+#include "emp_tt_fundamental.h"
+#include "emp_tt_enum.h"
+#include "emp_tt_limit.h"
+#include "emp_tt_class.h"
+
+#include "emp_ast_assert.h"
+#include "emp_ast_cast.h"
+
+#include "emp_mem_allocator.h"
+#include "emp_mem_delete.h"
+#include "emp_mem_pointer.h"
+
+#include "emp_fct_function.h"
+
+#include "emp_cnt_shell.h"
+#include "emp_cnt_map.h"
+#include "emp_cnt_vector.h"
+#include "emp_cnt_vector_map.h"
+#include "emp_cnt_array.h"
+#include "emp_cnt_foreach.h"
+#include "emp_cnt_string.h"
 
 #include "emp_log_logger.h"
 
-#include "emp_str_string.h"
+#include "emp_loc_string.h"
+#include "emp_loc_localizer.h"
+
+#include "emp_tim_time.h"
+#include "emp_tim_manager.h"
+
+#include "emp_mat_vector.h"
+#include "emp_mat_matrix.h"
+#include "emp_mat_algebra.h"
+#include "emp_mat_trigonometry.h"
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+using namespace emp::cnt;
+using namespace emp::str;
+using namespace emp::tt;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

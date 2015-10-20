@@ -1,20 +1,16 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_tt_dereference.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_TT_DEREFERENCE_H
 #define EMP_TT_DEREFERENCE_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_tt_if_else.h"
-#include "emp_tt_is_pointer.h"
-#include "emp_tt_is_reference.h"
-#include "emp_tt_try_add_pointer.h"
-#include "emp_tt_try_add_reference.h"
-#include "emp_tt_try_remove_const.h"
-#include "emp_tt_try_remove_pointer.h"
-#include "emp_tt_try_remove_reference.h"
-#include "emp_tt_try_remove_volatile.h"
+#include "emp_tt_const.h"
+#include "emp_tt_logical.h"
+#include "emp_tt_pointer.h"
+#include "emp_tt_reference.h"
+#include "emp_tt_volatile.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -25,19 +21,25 @@ namespace emp { namespace tt {
 template <typename T>
 EMP_NOINSTANCE_CLASS(dereference)
 public:
-    typedef typename if_else<is_reference<T>::value,
-        typename if_else<is_pointer<typename try_remove_reference<T>::type>::value,
-            typename try_remove_const<typename try_remove_volatile<typename try_remove_reference<T>::type>::type>::type,
+    typedef if_else
+    <
+        is_reference<T>::value,
+        if_else
+        <
+            is_pointer<try_remove_reference<T>>::value,
+            try_remove_const<try_remove_volatile<try_remove_reference<T>>>,
             T
-        >::type,
-        typename if_else<is_pointer<T>::value,
-            typename try_remove_const<typename try_remove_volatile<T>::type>::type,
-            typename emp::tt::add_reference<T>::type
-        >::type
-    >::type timpl;
+        >,
+        if_else
+        <
+            is_pointer<T>::value,
+            try_remove_const<try_remove_volatile<T>>,
+            add_reference<T>
+        >
+    > timpl;
 
-    typedef typename try_add_reference<typename try_remove_pointer<timpl>::type>::type treturn;
-    typedef typename if_else<is_reference<T>::value, T, typename add_reference<T>::type>::type tparam;
+    typedef try_add_reference<try_remove_pointer<timpl>> treturn;
+    typedef if_else<is_reference<T>::value, T, add_reference<T>> tparam;
 
     static treturn apply(tparam a_rtValue);
 };
@@ -50,16 +52,14 @@ class dereference_impl;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename  T>
-EMP_NOINSTANCE_CLASS(dereference_impl<T&>)
-public:
+EMP_NOINSTANCE_STRUCT(dereference_impl<T&>)
     static EMP_RETURN T& apply(T& a_rValue) { return a_rValue; }
 };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-EMP_NOINSTANCE_CLASS(dereference_impl<T*>)
-public:
+EMP_NOINSTANCE_STRUCT(dereference_impl<T*>)
     static EMP_RETURN T& apply(T* const a_pValue)
     { return emp::tt::dereference<T>::apply(*a_pValue); }
 };
@@ -72,17 +72,15 @@ EMP_RETURN typename dereference<T>::treturn dereference<T>::apply(typename deref
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+static_assert(equal<dereference<char>::treturn, char&>::value, "");
+static_assert(equal<dereference<char const>::treturn, char const &>::value, "");
+static_assert(equal<dereference<char const&>::treturn, char const &>::value, "");
+static_assert(equal<dereference<char const* const>::treturn, char const&>::value, "");
+static_assert(equal<dereference<char const* const&>::treturn, char const&>::value, "");
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 } }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#include "emp_tt_assert.h"
-
-EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::dereference<char>::treturn, char&);
-EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::dereference<char const>::treturn, char const &);
-EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::dereference<char const&>::treturn, char const &);
-EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::dereference<char const* const>::treturn, char const&);
-EMP_STATIC_ASSERT_TYPE_EQUAL(emp::tt::dereference<char const* const&>::treturn, char const&);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
