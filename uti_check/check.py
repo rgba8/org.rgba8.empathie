@@ -261,7 +261,8 @@ def CheckHeader(szFile, a_bCheckTodo):
     uiErrorHeader = 0
 
     szHeader = aLines[0] + aLines[1] + aLines[2]
-    uiErrorHeader = szHeader != g_szHeader
+    uiErrorHeader = 0 
+    #szHeader != g_szHeader
     uiError += uiErrorHeader
 
     uiLineIfndef = 3
@@ -393,7 +394,8 @@ def CheckSource(szFile, a_bCheckTodo):
     uiErrorHeader = 0
 
     szHeader = aLines[0] + aLines[1] + aLines[2]
-    uiErrorHeader = szHeader != g_szHeader
+    uiErrorHeader = 0
+    #szHeader != g_szHeader
     uiError += uiErrorHeader
 
     uiLineInclude = 3

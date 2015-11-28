@@ -44,7 +44,7 @@ static_assert(equal<try_add_pointer<int const* const>, int const* const*>::value
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T> class remove_pointer_t;
+template <typename T> struct remove_pointer_t;
 EMP_TT_DECLARE_TYPE_PARTIAL(remove_pointer_t, T*, T)
 EMP_TT_DECLARE_TYPE_PARTIAL(remove_pointer_t, T* const, T)
 EMP_TT_DECLARE_TYPE_PARTIAL(remove_pointer_t, T* volatile, T)

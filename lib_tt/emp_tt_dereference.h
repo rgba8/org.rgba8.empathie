@@ -19,8 +19,7 @@ namespace emp { namespace tt {
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-EMP_NOINSTANCE_CLASS(dereference)
-public:
+EMP_NOINSTANCE(struct, dereference)
     typedef if_else
     <
         is_reference<T>::value,
@@ -47,19 +46,19 @@ public:
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-class dereference_impl;
+struct dereference_impl;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename  T>
-EMP_NOINSTANCE_STRUCT(dereference_impl<T&>)
+EMP_NOINSTANCE(struct, dereference_impl<T&>)
     static EMP_RETURN T& apply(T& a_rValue) { return a_rValue; }
 };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-EMP_NOINSTANCE_STRUCT(dereference_impl<T*>)
+EMP_NOINSTANCE(struct, dereference_impl<T*>)
     static EMP_RETURN T& apply(T* const a_pValue)
     { return emp::tt::dereference<T>::apply(*a_pValue); }
 };

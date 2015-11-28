@@ -21,7 +21,7 @@ EMP_TT_DECLARE_VALUE(is_not_volatile, not_<is_volatile<T>::value>)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-EMP_NOINSTANCE_STRUCT(add_volatile_t)
+EMP_NOINSTANCE(struct, add_volatile_t)
     static_assert(is_not_volatile<T>::value, "");
     typedef T volatile type;
 };
@@ -31,7 +31,7 @@ template <typename T> using try_add_volatile = try_<T, is_not_volatile, add_vola
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T> class remove_volatile_t;
+template <typename T> struct remove_volatile_t;
 EMP_TT_DECLARE_TYPE_PARTIAL(remove_volatile_t, T volatile, T)
 EMP_TT_DECLARE_TYPE_PARTIAL(remove_volatile_t, T const volatile, T)
 

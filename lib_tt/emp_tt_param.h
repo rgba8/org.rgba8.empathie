@@ -16,7 +16,7 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_TT_DECLARE_VALUE(is_param, or_<is_fundamental<T>::value, is_pointer<T>::value>)
+EMP_TT_DECLARE_VALUE(is_param, (or_<is_fundamental<T>::value, is_pointer<T>::value>))
 EMP_TT_DECLARE_VALUE(is_not_param, not_<is_param<T>::value>)
 
 //-----------------------------------------------------------------------------
@@ -33,7 +33,7 @@ static_assert(equal<param<int>, int const>::value, "");
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-EMP_NOINSTANCE_CLASS(const_param_t)
+EMP_NOINSTANCE(struct, const_param_t)
 public:
     typedef if_else
     <

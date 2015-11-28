@@ -13,6 +13,8 @@
 #define EMP_PP_DEC(x_Value) EMP_PP_DEC_IMP(x_Value)
 #define EMP_PP_DEC_IMP(x_Value) EMP_PP_CAT(EMP_PP_DEC_, x_Value)
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 #define EMP_PP_DEC_0 EMP_PP_ERROR_EMP_PP_DEC_UNDERFLOW
 #define EMP_PP_DEC_1 0
 #define EMP_PP_DEC_2 1

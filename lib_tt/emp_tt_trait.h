@@ -6,7 +6,7 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-// TODO : check inclusion CHAR_MIN WCHAR_MIN etc
+// @@0 : check inclusion CHAR_MIN WCHAR_MIN etc
 #include <limits.h>
 #include <wchar.h>
 #include <float.h>
@@ -182,23 +182,23 @@ XTMP_TT_TYPE( float         , EMP_TT_FLOAT       , false , false , false , false
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_TYPE(x_Trait, ...)\
-    template <typename T> EMP_NOINSTANCE_STRUCT(x_Trait) typedef __VA_ARGS__ type; };
+    template <typename T> EMP_NOINSTANCE(struct, x_Trait) typedef __VA_ARGS__ type; };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_TYPE_PARTIAL(x_Trait, x_Partial, ...)\
-    template <typename T> EMP_NOINSTANCE_STRUCT(x_Trait<x_Partial>) typedef __VA_ARGS__ type; };
+    template <typename T> EMP_NOINSTANCE(struct, x_Trait<x_Partial>) typedef __VA_ARGS__ type; };
     
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_VALUE(x_Trait, ...)\
-    template <typename T> EMP_NOINSTANCE_CLASS_BASE(x_Trait, public, __VA_ARGS__) };
+    template <typename T> EMP_NOINSTANCE_BASE(struct, x_Trait, public, __VA_ARGS__) };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_VALUE_PARTIAL_SPECIAL(x_bPartial, x_Trait, x_Partial, ...)\
 template <EMP_PP_IF(x_bPartial, typename T)>\
-    EMP_NOINSTANCE_CLASS_BASE(x_Trait<x_Partial>, public, __VA_ARGS__) };
+    EMP_NOINSTANCE_BASE(struct, x_Trait<x_Partial>, public, __VA_ARGS__) };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

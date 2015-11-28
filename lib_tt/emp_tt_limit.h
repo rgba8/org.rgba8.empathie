@@ -25,13 +25,13 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T> EMP_NOINSTANCE_STRUCT(min) };
-template <typename T> EMP_NOINSTANCE_STRUCT(max) };
+template <typename T> EMP_NOINSTANCE(struct, min) };
+template <typename T> EMP_NOINSTANCE(struct, max) };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define XTMP_TT_TYPE_IMPL(x_Type, x_Name, x_Value)\
-template <> EMP_NOINSTANCE_STRUCT(x_Name<x_Type>) static constexpr x_Type value = x_Value; };
+template <> EMP_NOINSTANCE(struct, x_Name<x_Type>) static constexpr x_Type value = x_Value; };
 
 #define XTMP_TT_TYPE(x_Type, x_Name, x_Integral, x_Signedness, x_Distinct, x_Signed)\
 XTMP_TT_TYPE_IMPL(x_Type, min, XTMP_TT_MIN(x_Name))\
@@ -66,10 +66,10 @@ template <typename T> EMP_INLINE EMP_RETURN bool is_not_max(T const a_rtValue) {
 
 
 template <typename T, T first, T... params>
-EMP_NOINSTANCE_STRUCT(max_t) static constexpr const T value = max_t<T, first, max_t<T, params...>::value>::value; };
+EMP_NOINSTANCE(struct, max_t) static constexpr const T value = max_t<T, first, max_t<T, params...>::value>::value; };
 
 template <typename T, T first, T last>
-EMP_NOINSTANCE_STRUCT(max_t<T, first, last>) static constexpr const T value = first > last ? first : last; };
+EMP_NOINSTANCE(struct, (max_t<T, first, last>)) static constexpr const T value = first > last ? first : last; };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -79,19 +79,31 @@ EMP_NOINSTANCE_STRUCT(max_t<T, first, last>) static constexpr const T value = fi
 #define EMP_TT_MIN_VAR(x_Variable) x_Variable = emp::tt::min<emp::tt::try_remove_reference<decltype(x_Variable)>>::value
 #define EMP_TT_MAX_VAR(x_Variable) x_Variable = emp::tt::max<emp::tt::try_remove_reference<decltype(x_Variable)>>::value
 
-/*template <typename T>
-EMP_NOINSTANCE_CLASS(min<T*>)
+/* @@0 wtf template <typename T>
+EMP_NOINSTANCE(class, min<T*>)
 public:
     static_assert(sizeof(T*) == sizeof(uintptr_t), "");
     static const uintptr_t value = emp::tt::min<uintptr_t>::value;
 };
 
 template <typename T>
-EMP_NOINSTANCE_CLASS(max<T*>)
+EMP_NOINSTANCE(class, max<T*>)
 public:
     static_assert(sizeof(T*) == sizeof(uintptr_t), "");
     static const uintptr_t value = emp::tt::max<uintptr_t>::value;
 };*/
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+template <typename T>
+EMP_RETURN T maxof(T const& a_rLeft, T const& a_rRight)
+{ return a_rLeft > a_rRight ? a_rLeft : a_rRight; }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+template <typename T>
+EMP_RETURN T minof(T const& a_rLeft, T const& a_rRight)
+{ return a_rLeft < a_rRight ? a_rLeft : a_rRight; }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

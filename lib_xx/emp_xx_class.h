@@ -7,123 +7,128 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #include "emp_pp_forward.h"
+#include "emp_pp_solve.h"
+
+#include "emp_hh_stddef.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-namespace emp { namespace rfx  {
+#include <tuple>
 
-    template <typename> class type_t;
-    // @@0 rfx template <typename> class member_t;
-    // @@0 rfx class reflection_c;
-    // @@0 rfx template <typename T> EMP_RETURN bool reflect(reflection_c& a_rReflection);
-} }
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+namespace emp { namespace rfx  { template <typename> class type_t; } }
 
 #define EMP_RFX_FRIEND(...)\
-    friend class emp::rfx::type_t<__VA_ARGS__>;
-
-    // @@0 rfx
-//    friend EMP_RETURN bool emp::rfx::reflect<__VA_ARGS__>(emp::rfx::reflection_c&);
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#define EMP_XX_NOINSTANCE(...)\
-EMP_XX_NOCOPY(__VA_ARGS__);\
-private:\
-    class emp_nofriend {};\
-    friend class emp_nofriend;\
-    __VA_ARGS__(void);\
-    virtual ~__VA_ARGS__(void) = 0
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#define EMP_XX_NOASSIGN(...)\
-public:\
-    void emp_nopublic(void) {};\
-private:\
-    __VA_ARGS__(__VA_ARGS__ const& a_rFrom);\
-    __VA_ARGS__ const& operator=(__VA_ARGS__ const& a_rFrom)
+    friend class emp::rfx::type_t<EMP_PP_TRY_SOLVE(__VA_ARGS__)>;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_XX_NOCOPY(...)\
-    EMP_XX_NOASSIGN(__VA_ARGS__)
+public:\
+    void emp_nopublic(void) {};\
+private:\
+    EMP_PP_TRY_SOLVE(__VA_ARGS__)(EMP_PP_TRY_SOLVE(__VA_ARGS__) const& a_rFrom);\
+    EMP_PP_TRY_SOLVE(__VA_ARGS__) const& operator=(EMP_PP_TRY_SOLVE(__VA_ARGS__) const& a_rFrom);
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#define EMP_XX_NOINSTANCE(...)\
+private:\
+    class emp_nofriend {};\
+    friend class emp_nofriend;\
+    EMP_PP_TRY_SOLVE(__VA_ARGS__)(void);\
+    virtual ~EMP_PP_TRY_SOLVE(__VA_ARGS__)(void) = 0;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_XX_NODEFAULT(...)\
 private:\
-    __VA_ARGS__(void)
+    EMP_PP_TRY_SOLVE(__VA_ARGS__)(void);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_CLASS(x_Name)\
-class x_Name\
+#define EMP_XX_TYPE_ACCESS_struct public:
+#define EMP_XX_TYPE_ACCESS_class private:
+#define EMP_XX_TYPE_ACCESS(x_Type) EMP_PP_CAT(EMP_XX_TYPE_ACCESS_, x_Type)
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#define EMP_(x_Type, ...)\
+x_Type EMP_PP_TRY_SOLVE(__VA_ARGS__)\
 {\
-    EMP_RFX_FRIEND(x_Name)
+    EMP_RFX_FRIEND(__VA_ARGS__)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_CLASS_BASE(x_Name, x_Modifier, ...)\
-class x_Name : x_Modifier __VA_ARGS__\
+#define EMP_NOCOPY(x_Type, ...)\
+    EMP_(x_Type, __VA_ARGS__)\
+    EMP_XX_NOCOPY(__VA_ARGS__)
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#define EMP_NOINSTANCE(x_Type, ...)\
+    EMP_NOCOPY(x_Type, __VA_ARGS__)\
+    EMP_XX_NOINSTANCE(__VA_ARGS__)\
+    EMP_XX_TYPE_ACCESS(x_Type)
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#define EMP_TYPEDEF_BASE_2(x_Modifier1, ...)\
+    typedef EMP_PP_TRY_SOLVE(__VA_ARGS__) tbase1;\
+    typedef std::tuple<EMP_PP_TRY_SOLVE(__VA_ARGS__)> tbases;
+
+#define EMP_TYPEDEF_BASE_4(x_Modifier1, x_Base1, x_Modifier2, ...)\
+    typedef EMP_PP_TRY_SOLVE(x_Base1) tbase1;\
+    typedef EMP_PP_TRY_SOLVE(__VA_ARGS__) tbase2;\
+    typedef std::tuple<x_Base1, EMP_PP_TRY_SOLVE(__VA_ARGS__)> tbases;
+
+#define EMP_TYPEDEF_BASE_6(x_Modifier1, x_Base1, x_Modifier2, x_Base2, x_Modifier3, ...)\
+    typedef EMP_PP_TRY_SOLVE(x_Base1) tbase1;\
+    typedef EMP_PP_TRY_SOLVE(x_Base2) tbase2;\
+    typedef EMP_PP_TRY_SOLVE(__VA_ARGS__) tbase3;\
+    typedef std::tuple<x_Base1, x_Base2, EMP_PP_TRY_SOLVE(__VA_ARGS__)> tbases;
+
+#define EMP_TYPEDEF_BASE(...)\
+    EMP_PP_CAT(EMP_TYPEDEF_BASE_, EMP_VAARGS_COUNT(__VA_ARGS__))(__VA_ARGS__)
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#define EMP_INHERITANCE_2(x_Modifier1, ...)\
+    x_Modifier1 EMP_PP_TRY_SOLVE(__VA_ARGS__)
+
+#define EMP_INHERITANCE_4(x_Modifier1, x_Base1, x_Modifier2, ...)\
+    x_Modifier1 EMP_PP_TRY_SOLVE(x_Base1), x_Modifier2 EMP_PP_TRY_SOLVE(__VA_ARGS__)
+
+#define EMP_INHERITANCE_6(x_Modifier1, x_Base1, x_Modifier2, x_Base2, x_Modifier3, ...)\
+    x_Modifier1 EMP_PP_TRY_SOLVE(x_Base1), x_Modifier2 EMP_PP_TRY_SOLVE(x_Base2), x_Modifier3 EMP_PP_TRY_SOLVE(__VA_ARGS__)
+
+#define EMP_INHERITANCE(...)\
+    EMP_PP_CAT(EMP_INHERITANCE_, EMP_VAARGS_COUNT(__VA_ARGS__))(__VA_ARGS__)
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#define EMP_BASE(x_Type, x_Name, ...)\
+x_Type EMP_PP_TRY_SOLVE(x_Name) : EMP_INHERITANCE(__VA_ARGS__)\
 {\
     EMP_RFX_FRIEND(x_Name)\
 public:\
-    typedef __VA_ARGS__ tbase;\
-private:
+    EMP_TYPEDEF_BASE(__VA_ARGS__)\
+    EMP_XX_TYPE_ACCESS(x_Type)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_NOCOPY_CLASS(x_Name)\
-class x_Name\
-{\
-    EMP_RFX_FRIEND(x_Name)\
-    EMP_XX_NOCOPY(x_Name);
+#define EMP_NOCOPY_BASE(x_Type, x_Name, ...)\
+    EMP_BASE(x_Type, x_Name, __VA_ARGS__)\
+    EMP_XX_NOCOPY(x_Name)\
+    EMP_XX_TYPE_ACCESS(x_Type)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_NOCOPY_CLASS_BASE(x_Name, x_Modifier, ...)\
-class x_Name : x_Modifier __VA_ARGS__\
-{\
-    EMP_RFX_FRIEND(x_Name)\
-public:\
-    typedef __VA_ARGS__ tbase;\
-private:\
-    EMP_XX_NOCOPY(x_Name);
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#define EMP_NOCOPY_CLASS_BASE_2(x_Name, x_Modifier, x_Base, x_Mod2, x_Base2)\
-class x_Name : x_Modifier x_Base, x_Mod2 x_Base2\
-{\
-    EMP_RFX_FRIEND(x_Name)\
-public:\
-    typedef x_Base tbase;\
-    typedef x_Base2 tbase2;\
-private:\
-    EMP_XX_NOCOPY(x_Name);
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#define EMP_NOINSTANCE_IMPL(x_Type, ...)\
-x_Type __VA_ARGS__\
-{\
-private:\
-    EMP_XX_NOINSTANCE(__VA_ARGS__);
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#define EMP_NOINSTANCE_CLASS(...) EMP_NOINSTANCE_IMPL(class, __VA_ARGS__)
-#define EMP_NOINSTANCE_STRUCT(...) EMP_NOINSTANCE_IMPL(struct, __VA_ARGS__) public:
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#define EMP_NOINSTANCE_CLASS_BASE(x_Name, x_Modifier, ...)\
-class x_Name : x_Modifier __VA_ARGS__\
-{\
-public:\
-    typedef __VA_ARGS__ tbase;\
-private:\
-    EMP_XX_NOINSTANCE(x_Name);
+#define EMP_NOINSTANCE_BASE(x_Type, x_Name, ...)\
+    EMP_NOCOPY_BASE(x_Type, x_Name, __VA_ARGS__)\
+    EMP_XX_NOINSTANCE(x_Name)\
+    EMP_XX_TYPE_ACCESS(x_Type)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

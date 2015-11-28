@@ -17,6 +17,8 @@ EMP_PP_CAT(\
     EMP_PP_NOT_EQUAL_CHECK_,\
     EMP_PP_NOT_EQUAL_ ## x_Left(0, EMP_PP_NOT_EQUAL_ ## x_Right))
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 #define EMP_PP_NOT_EQUAL_CHECK_EMP_PP_UNDEFINED 1
 #define EMP_PP_NOT_EQUAL_CHECK_EMP_PP_NOT_EQUAL_0(x_Condition, x_Right) 0
 #define EMP_PP_NOT_EQUAL_CHECK_EMP_PP_NOT_EQUAL_1(x_Condition, x_Right) 0

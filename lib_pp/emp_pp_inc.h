@@ -13,6 +13,8 @@
 #define EMP_PP_INC(x_Value) EMP_PP_INC_IMP(x_Value)
 #define EMP_PP_INC_IMP(x_Value) EMP_PP_CAT(EMP_PP_INC_, x_Value)
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 #define EMP_PP_INC_0 1
 #define EMP_PP_INC_1 2
 #define EMP_PP_INC_2 3

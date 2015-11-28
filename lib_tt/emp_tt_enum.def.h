@@ -2,7 +2,7 @@
 // emp_tt_enum.def.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #include "emp_tt_enum.h"
- 
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #ifndef enum_name
@@ -56,7 +56,7 @@ typedef enum_name const EMP_PP_CAT(c_, enum_name);
 //-----------------------------------------------------------------------------
 #ifdef enum_type
 template <typename Dummy = void>
-EMP_NOINSTANCE_STRUCT(enum_class)
+EMP_NOINSTANCE(struct, enum_class(enum_name))
 //{
 
     static constexpr c_size count =
@@ -71,7 +71,7 @@ EMP_NOINSTANCE_STRUCT(enum_class)
 #undef enum_value_ex_3
         0;
 
-    static constexpr enum_name max = emp::tt::max_t<enum_name
+    static constexpr enum_name const max = emp::tt::max_t<enum_name
 #define enum_value_1(x_Name)                     ,enum_name::x_Name
 #define enum_value_2(x_Name, x_Value)            enum_value_1(x_Name)
 #define enum_value_ex_2(x_Name, x_User)          enum_value_1(x_Name)
@@ -83,10 +83,10 @@ EMP_NOINSTANCE_STRUCT(enum_class)
 #undef enum_value_ex_3
         >::value;
 
-    static constexpr aliteral m_sEmpty = "";
-    static constexpr aliteral names[enum_class::count]
+    static constexpr emp::tt::aliteral const m_sEmpty = ALITERAL("");
+    static constexpr emp::tt::aliteral const names[enum_class(enum_name)::count]
     {
-#define enum_value_1(x_Name)                     EMP_PP_STRING(x_Name),
+#define enum_value_1(x_Name)                     ALITERAL(EMP_PP_STRING(x_Name)),
 #define enum_value_2(x_Name, x_Value)            enum_value_1(x_Name)
 #define enum_value_ex_2(x_Name, x_user)          enum_value_1(x_Name)
 #define enum_value_ex_3(x_Name, x_Value, x_User) enum_value_1(x_Name)
@@ -98,7 +98,7 @@ EMP_NOINSTANCE_STRUCT(enum_class)
     };
 
 public:
-    static constexpr enum_name e_values[enum_class::count]
+    static constexpr enum_name const e_values[enum_class(enum_name)::count]
     {
 #define enum_value_1(x_Name)                     enum_name::x_Name,
 #define enum_value_2(x_Name, x_Value)            enum_value_1(x_Name)
@@ -111,7 +111,7 @@ public:
 #undef enum_value_ex_3
     };
 
-    static constexpr size_t st_values[enum_class::count]
+    static constexpr size_t const st_values[enum_class(enum_name)::count]
     {
 #define enum_value_1(x_Name)                     static_cast<size_t>(enum_name::x_Name),
 #define enum_value_2(x_Name, x_Value)            enum_value_1(x_Name)
@@ -137,18 +137,20 @@ public:
     static constexpr EMP_RETURN bool is_valid(enum_name a_eValue)
     { return a_eValue <= max; }
 
+    static constexpr EMP_RETURN bool is_valid_index(c_size a_stIndex)
+    { return a_stIndex <= count; }
+
     template <enum_name t_eValue>
-    EMP_NOINSTANCE_STRUCT(is_valid_t)
+    EMP_NOINSTANCE(struct, is_valid_t)
         static constexpr const bool value = t_eValue <= max;
     };
 
-    // from
-    //
-    static EMP_RETURN enum_name from(size_t const a_stFrom)
+    template <typename T>
+    static EMP_RETURN enum_name from(T const& a_tFrom)
     {
-        // @@2 : runtime_cast
-        enum_name const eValue = static_cast<enum_name>(a_stFrom);
-        EMP_ASSERT(is_valid(eValue));
+        // @@0 : runtime_cast
+        // @@0 : failure
+        enum_name const eValue = static_cast<enum_name>(a_tFrom);
         return eValue;
     }
 
@@ -162,7 +164,7 @@ public:
     }
 
     template <size_t t_stValue>
-    EMP_NOINSTANCE_STRUCT(from_t)
+    EMP_NOINSTANCE(struct, from_t)
         static_assert(is_valid<t_stValue>(), "");
         static constexpr enum_name const value = static_cast<enum_name>(t_stValue);
     };
@@ -186,7 +188,7 @@ public:
     }
 
     template <enum_name t_eValue, typename T = size_t>
-    EMP_NOINSTANCE_STRUCT(to_t)
+    EMP_NOINSTANCE(struct, to_t)
         static_assert(is_valid_t<t_eValue>::value, "");
         static_assert(static_cast<size_t>(t_eValue) <= emp::tt::max<T>::value, "");
         static_assert(t_eValue <= e_values[count - 1], "");
@@ -195,11 +197,21 @@ public:
 
     // name
     //
-    static EMP_RETURN c_aliteral& name(enum_name const a_eValue)
+    static EMP_RETURN emp::tt::c_aliteral& name(enum_name const a_eValue)
     {
-        EMP_ASSERT(is_valid(a_eValue));
+        c_bool bIsValid = is_valid(a_eValue);
+        EMP_ASSERT(bIsValid);
         if (is_valid(a_eValue))
         { return names[to(a_eValue)]; }
+        return m_sEmpty;
+    }
+
+    static EMP_RETURN emp::tt::c_aliteral& name(c_size a_stIndex)
+    {
+        c_bool bIsValid = is_valid_index(a_stIndex);
+        EMP_ASSERT(bIsValid);
+        if (bIsValid)
+        { return names[a_stIndex]; }
         return m_sEmpty;
     }
 
@@ -209,14 +221,14 @@ public:
     static_assert(to_t<max, size_t>::value <= emp::tt::max<size_t>::value, "");
 };
 template <typename D>
-EMP_RETURN enum_class<D>& enum_alias(enum_name const& a_rFrom);
+EMP_RETURN enum_class(enum_name)<D>& enum_alias(enum_name const& a_rFrom);
 
 //template <typename D>
 //EMP_RETURN enum_class<D>& enum_alias_t(enum_name const& a_rFrom);
 
-template <typename D> constexpr aliteral enum_class<D>::names[enum_class<D>::count];
+template <typename D> constexpr emp::tt::aliteral enum_class(enum_name)<D>::names[enum_class(enum_name)<D>::count];
 
-template <typename D> constexpr aliteral enum_class<D>::m_sEmpty;
+template <typename D> constexpr emp::tt::aliteral enum_class(enum_name)<D>::m_sEmpty;
 
 #endif
 

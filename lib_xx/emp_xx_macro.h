@@ -30,12 +30,12 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#ifndef EMP_XX_TT_ARRAY_COUNT
-#error EMP_XX_TT_ARRAY_COUNT not defined
+#ifdef EMP_XX_TT_ARRAY_COUNT
+#error EMP_XX_TT_ARRAY_COUNT defined
 #endif
 
-#ifndef EMP_XX_CNT_TUPLE_COUNT
-#error EMP_XX_CNT_TUPLE_COUNT not defined
+#ifdef EMP_XX_CNT_TUPLE_COUNT
+#error EMP_XX_CNT_TUPLE_COUNT defined
 #endif
 
 #ifdef EMP_XX_MEM_ALLOCATE_COUNT
@@ -92,10 +92,12 @@
 //-----------------------------------------------------------------------------
 #include "emp_pp_and.h"
 #include "emp_pp_cat.h"
+#include "emp_pp_comma_if.h"
 #include "emp_pp_forward.h"
 #include "emp_pp_if.h"
 #include "emp_pp_if_else.h"
 #include "emp_pp_not.h"
+#include "emp_pp_solve.h"
 
 #include "emp_xx_attribute.h"
 #include "emp_xx_build.h"
@@ -147,7 +149,6 @@
 //-----------------------------------------------------------------------------
 using namespace emp::cnt;
 using namespace emp::str;
-using namespace emp::tt;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

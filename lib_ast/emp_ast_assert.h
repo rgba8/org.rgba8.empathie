@@ -42,63 +42,72 @@ namespace emp { namespace ast {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_CLASS(trace_c)
+EMP_(class, trace_c)
 private:
-    tt::aliteral m_sFile;
+    pc_char m_szFile;
     uint m_uiLine;
-    tt::aliteral m_sLine;
-    tt::aliteral m_sFunction;
-    tt::aliteral m_sSignature;
+    pc_char m_szLine;
+    pc_char m_szFunction;
+    pc_char m_szSignature;
 
 public:
     trace_c(
-        tt::c_aliteral& a_sFile,
+        cpc_char& a_szFile,
         c_uint a_uiLine,
-        tt::c_aliteral& a_sLine,
-        tt::c_aliteral& a_sFunction,
-        tt::c_aliteral& a_sSignature):
-        m_sFile(a_sFile),
+        cpc_char& a_szLine,
+        cpc_char& a_szFunction,
+        cpc_char& a_szSignature):
+        m_szFile(a_szFile),
         m_uiLine(a_uiLine),
-        m_sLine(a_sLine),
-        m_sFunction(a_sFunction),
-        m_sSignature(a_sSignature)
+        m_szLine(a_szLine),
+        m_szFunction(a_szFunction),
+        m_szSignature(a_szSignature)
     {}
 
+    /*trace_c& operator=(trace_c const& a_rFrom)
+    {
+        m_szFile = a_rFrom.m_szFile;
+        m_uiLine = a_rFrom.m_uiLine;
+        m_szLine = a_rFrom.m_szLine;
+        m_szFunction = a_rFrom.m_szFunction;
+        m_szSignature = a_rFrom.m_szSignature;
+    }*/
+
 public:
-    EMP_RETURN tt::c_aliteral& file(void) const { return m_sFile; }
+    EMP_RETURN cpc_char file(void) const { return m_szFile; }
     EMP_RETURN uint ui_line(void) const { return m_uiLine; }
-    EMP_RETURN tt::c_aliteral& sz_line(void) const { return m_sLine; }
-    EMP_RETURN tt::c_aliteral& function(void) const { return m_sFunction; }
-    EMP_RETURN tt::c_aliteral& signature(void) const { return m_sSignature; }
+    EMP_RETURN cpc_char& sz_line(void) const { return m_szLine; }
+    EMP_RETURN cpc_char& function(void) const { return m_szFunction; }
+    EMP_RETURN cpc_char& signature(void) const { return m_szSignature; }
 };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_CLASS(assert_c)
+EMP_(class, assert_c)
 private:
     bool m_bCondition;
-    tt::aliteral m_sCondition;
+    cpc_char m_szCondition;
     trace_c  m_Trace;
 
 public:
     assert_c(
         c_bool a_bCondition,
-        tt::c_aliteral& a_sCondition,
+        cpc_char& a_szCondition,
         trace_c const& a_rTrace):
         m_bCondition(a_bCondition),
-        m_sCondition(a_sCondition),
+        m_szCondition(a_szCondition),
         m_Trace(a_rTrace)
     { }
 
 public:
     EMP_RETURN bool b_condition(void) const { return m_bCondition; }
-    EMP_RETURN tt::c_aliteral& sz_condition(void) const { return m_sCondition; }
+    EMP_RETURN cpc_char sz_condition(void) const { return m_szCondition; }
     EMP_RETURN trace_c const& trace(void) const { return m_Trace; }
 };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_NOCOPY_CLASS(asserter_c)
+EMP_NOCOPY(class, asserter_c)
 public:
     asserter_c(void) {}
     void condition(assert_c const& a_rAssert);

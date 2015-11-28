@@ -30,7 +30,7 @@ VALGRIND    ?= false
 CHECK       ?=
 
 ifeq ($(TARGET_OS), osx)
-SDK_ROOT	?= /Applications/XCode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/
+SDK_ROOT	?= /Applications/XCode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/
 else
 ifeq ($(TARGET_OS), lin)
 SDK_ROOT	?= /usr/include/

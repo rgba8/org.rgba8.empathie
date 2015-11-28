@@ -23,7 +23,7 @@ private:
 
 public:
     finally_t(T&& a_rFinalize) :
-        m_Finalizer(std::move(a_rFinalize)), m_bFinalize(false) {}
+        m_Finalizer(std::move(a_rFinalize)), m_bFinalize(t_bDefault) {}
 
     finally_t(finally_t&& a_rFrom) :
         m_Finalizer(std::move(a_rFrom.m_Finalizer)), m_bFinalize(a_rFrom.m_bFinalize)

@@ -62,11 +62,8 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_CLASS_TYPEDEF(x_Depth, x_Index, x_Count)\
-    typedef EMP_PP_TYPE(x_Index) EMP_PP_TYPEDEF(x_Index);
-
-#define EMP_PP_CLASS_MEMBER(x_Depth, x_Index, x_Count)\
-    EMP_PP_TYPE(x_Index) EMP_PP_MEMBER(x_Index);
+#define EMP_PP_CLASS_TYPEDEF(x_Depth, x_Index, x_Count) typedef EMP_PP_TYPE(x_Index) EMP_PP_TYPEDEF(x_Index);
+#define EMP_PP_CLASS_MEMBER(x_Depth, x_Index, x_Count) EMP_PP_TYPE(x_Index) EMP_PP_MEMBER(x_Index);
 
 #define EMP_PP_CLASS_CTOR(x_Depth, x_Index, x_Count)\
     EMP_PP_MEMBER(x_Index)()\

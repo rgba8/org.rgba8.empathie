@@ -35,7 +35,7 @@ static_assert(equal<try_add_reference<int&>, int&>::value, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T> class remove_reference_t;
+template <typename T> struct remove_reference_t;
 EMP_TT_DECLARE_TYPE_PARTIAL(remove_reference_t, T&, T)
 
 template <typename T> using remove_reference = typename remove_reference_t<T>::type;

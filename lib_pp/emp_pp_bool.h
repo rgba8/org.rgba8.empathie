@@ -13,6 +13,7 @@
 //-----------------------------------------------------------------------------
 #define EMP_PP_CHECK_N(x, n, ...) n
 #define EMP_PP_CHECK(...) EMP_PP_CHECK_N(__VA_ARGS__, 0,)
+
 #define EMP_PP_PROBE(x) x, 1,
 
 #define EMP_PP_IS0(x_Value) EMP_PP_CHECK(EMP_PP_CAT(EMP_PP_IS0_, x_Value))

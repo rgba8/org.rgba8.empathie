@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_xx_pragma.h - @rgba8.org
 //-----------------------------------------------------------------------------
 #ifndef EMP_XX_PRAGMA_H
 #define EMP_XX_PRAGMA_H
@@ -15,6 +15,7 @@
 #define EMP_W_FORMAT_NONLITERAL "-Wformat-nonliteral"
 #define EMP_W_FORMAT_SECURITY "-Wformat-security"
 #define EMP_W_UNUSED_PRIVATE_FIELD "-Wunused-private-field"
+#define EMP_W_EXIT_TIME_DESTRUCTORS "-Wexit-time-destructors"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

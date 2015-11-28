@@ -15,8 +15,7 @@ namespace emp { namespace ast {
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename t_From, t_From t_tFrom, typename t_To>
-EMP_NOINSTANCE_CLASS(compile_cast)
-public:
+EMP_NOINSTANCE(struct, compile_cast)
     // explicit min/max
     static_assert(t_tFrom >= emp::tt::min<t_To>::value, "");
     static_assert(t_tFrom <= emp::tt::max<t_To>::value, "");
@@ -109,7 +108,7 @@ EMP_RETURN  bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename t_From, typename t_To>
-EMP_NOINSTANCE_STRUCT(try_cast_detail)
+EMP_NOINSTANCE(struct, try_cast_detail)
     static EMP_RETURN bool apply(t_From a_tFrom, t_To& a_rtTo)
     { return try_cast_impl<t_From, t_To>(a_tFrom, a_rtTo); }
 };
@@ -117,7 +116,7 @@ EMP_NOINSTANCE_STRUCT(try_cast_detail)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename t_From>
-EMP_NOINSTANCE_STRUCT(try_cast_detail<t_From, bool>)
+EMP_NOINSTANCE(struct, (try_cast_detail<t_From, bool>))
     static EMP_RETURN bool apply(t_From a_tFrom, bool& a_rtTo)
     {
         if (a_tFrom != 0 && a_tFrom != 1)
@@ -131,7 +130,7 @@ EMP_NOINSTANCE_STRUCT(try_cast_detail<t_From, bool>)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-EMP_NOINSTANCE_STRUCT(try_cast_detail<T, T>)
+EMP_NOINSTANCE(struct, (try_cast_detail<T, T>))
     static EMP_RETURN bool apply(T a_tFrom, T& a_rtTo)
     {
         static_assert(emp::tt::is_arithmetic<T>::value, "");

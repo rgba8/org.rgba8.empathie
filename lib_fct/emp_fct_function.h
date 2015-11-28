@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #ifndef EMP_FCT_FUNCTION_H
 #define EMP_FCT_FUNCTION_H
- 
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 namespace emp { namespace fct {
@@ -13,7 +13,7 @@ namespace emp { namespace fct {
 template <typename> class function_i;
 
 template <typename R, typename...P>
-EMP_CLASS(function_i<R(*)(P...)>)
+EMP_(class, function_i<R(*)(P...)>)
 public:
     function_i(void) {}
     virtual ~function_i(void) {}
@@ -39,7 +39,7 @@ EMP_RETURN T* function_clone(T* a_pFrom)
 template <typename> class member_handler;
 
 template <typename R, typename O, typename...P>
-EMP_CLASS_BASE(member_handler<R(O::*)(P...)>, public, function_i<R(*)(P...)>)
+EMP_BASE(class, member_handler<R(O::*)(P...)>, public, function_i<R(*)(P...)>)
 private:
     O* m_pObject;
 
@@ -78,7 +78,7 @@ template <typename T>
 class function_t;
 
 template <typename R, typename... P>
-EMP_CLASS(function_t<R(*)(P...)>)
+EMP_(class, function_t<R(*)(P...)>)
 private:
     typedef R(*F)(P...);
     function_i<F>* m_pImpl;
@@ -129,7 +129,7 @@ template <typename> class static_handler;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename R, typename... P>
-EMP_CLASS_BASE(static_handler<R(*)(P...)>, public, function_i<R(*)(P...)>)
+EMP_BASE(class, static_handler<R(*)(P...)>, public, function_i<R(*)(P...)>)
 public:
     typedef R(*F)(P...);
 
@@ -162,7 +162,7 @@ public:
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename R, typename... P>
-EMP_CLASS_BASE(static_handler<function_t<R(*)(P...)>>, public, function_i<R(*)(P...)>)
+EMP_BASE(class, static_handler<function_t<R(*)(P...)>>, public, function_i<R(*)(P...)>)
 public:
     typedef function_t<R(*)(P...)> F;
 
@@ -198,12 +198,12 @@ template <typename S>
 struct remove_first_t;
 
 template <typename R, typename T0, typename... P>
-EMP_NOINSTANCE_STRUCT(remove_first_t<R(*)(T0, P...)>)
+EMP_NOINSTANCE(struct, remove_first_t<R(*)(T0, P...)>)
     typedef R(*type)(P...);
 };
 
 template <typename R, typename T0, typename... P>
-EMP_NOINSTANCE_STRUCT(remove_first_t<function_t<R(*)(T0, P...)>>)
+EMP_NOINSTANCE(struct, remove_first_t<function_t<R(*)(T0, P...)>>)
     typedef R(*type)(P...);
 };
 
@@ -215,7 +215,7 @@ using remove_first = typename remove_first_t<P...>::type;
 template <typename> class bind_handler;
 
 template <typename R, typename P0, typename... P>
-EMP_CLASS_BASE(bind_handler<function_t<R(*)(P0, P...)>>, public, function_i<R(*)(P...)>)
+EMP_BASE(class, bind_handler<function_t<R(*)(P0, P...)>>, public, function_i<R(*)(P...)>)
 private:
     typedef R(*F)(P0, P...);
     P0 m_p0;
@@ -251,7 +251,7 @@ public:
 template <typename> struct member_signature_t;
 
 template <typename R, typename C, typename ...P>
-EMP_NOINSTANCE_STRUCT(member_signature_t<R(C::*)(P...)>)
+EMP_NOINSTANCE(struct, member_signature_t<R(C::*)(P...)>)
     typedef R(*type)(P...);
 };
 

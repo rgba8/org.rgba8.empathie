@@ -23,7 +23,7 @@ EMP_TT_DECLARE_VALUE(is_not_const, not_<is_const<T>::value>)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-EMP_NOINSTANCE_STRUCT(add_const_t)
+EMP_NOINSTANCE(struct, add_const_t)
     static_assert(is_not_const<T>::value, "");
     typedef T const type;
 };
@@ -34,7 +34,7 @@ template <typename T> using try_add_const = try_<T, is_not_const, add_const>;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-class remove_const_t;
+struct remove_const_t;
 
 EMP_TT_DECLARE_TYPE_PARTIAL(remove_const_t, T const, T)
 EMP_TT_DECLARE_TYPE_PARTIAL(remove_const_t, T volatile const, T)

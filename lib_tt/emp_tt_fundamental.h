@@ -52,31 +52,31 @@ EMP_TT_DECLARE_VALUE(is_not_real, not_<is_real<T>::value>)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_TT_DECLARE_VALUE(is_arithmetic, or_<is_integral<T>::value, is_real<T>::value>)
+EMP_TT_DECLARE_VALUE(is_arithmetic, (or_<is_integral<T>::value, is_real<T>::value>))
 EMP_TT_DECLARE_VALUE(is_not_arthmetic, not_<is_arithmetic<T>::value>)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_TT_DECLARE_VALUE(is_fundamental, or_<is_arithmetic<T>::value, is_void<T>::value>)
+EMP_TT_DECLARE_VALUE(is_fundamental, (or_<is_arithmetic<T>::value, is_void<T>::value>))
 EMP_TT_DECLARE_VALUE(is_not_fundamental, not_<is_fundamental<T>::value>)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T> EMP_NOINSTANCE_STRUCT(signed_t) };
+template <typename T> EMP_NOINSTANCE(struct, signed_t) };
 #define XTMP_TT_TYPE(x_Type, x_Name, x_Integral, x_Signdness, x_Distinct, x_Signed)\
 EMP_PP_IF(x_Signdness,\
 \
     EMP_PP_IF(x_Distinct,\
     \
-template <> EMP_NOINSTANCE_STRUCT(signed_t< signed x_Type const volatile >) typedef signed x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT(signed_t< signed x_Type       volatile >) typedef signed x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT(signed_t< signed x_Type const          >) typedef signed x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT(signed_t< signed x_Type                >) typedef signed x_Type type; };\
+template <> EMP_NOINSTANCE(struct, signed_t< signed x_Type const volatile >) typedef signed x_Type type; };\
+template <> EMP_NOINSTANCE(struct, signed_t< signed x_Type       volatile >) typedef signed x_Type type; };\
+template <> EMP_NOINSTANCE(struct, signed_t< signed x_Type const          >) typedef signed x_Type type; };\
+template <> EMP_NOINSTANCE(struct, signed_t< signed x_Type                >) typedef signed x_Type type; };\
     )\
-template <> EMP_NOINSTANCE_STRUCT(signed_t<        x_Type const volatile >) typedef signed x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT(signed_t<        x_Type volatile       >) typedef signed x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT(signed_t<        x_Type const          >) typedef signed x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT(signed_t<        x_Type                >) typedef signed x_Type type; };\
+template <> EMP_NOINSTANCE(struct, signed_t<        x_Type const volatile >) typedef signed x_Type type; };\
+template <> EMP_NOINSTANCE(struct, signed_t<        x_Type volatile       >) typedef signed x_Type type; };\
+template <> EMP_NOINSTANCE(struct, signed_t<        x_Type const          >) typedef signed x_Type type; };\
+template <> EMP_NOINSTANCE(struct, signed_t<        x_Type                >) typedef signed x_Type type; };\
 )
 EMP_TT_TYPES()
 #undef XTMP_TT_TYPE
@@ -85,20 +85,20 @@ template <typename T> using signed_ = typename signed_t<T>::type;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename T> EMP_NOINSTANCE_STRUCT(unsigned_t) };
-template <> EMP_NOINSTANCE_STRUCT(unsigned_t<bool>) typedef bool type; };
+template <typename T> EMP_NOINSTANCE(struct, unsigned_t) };
+template <> EMP_NOINSTANCE(struct, unsigned_t<bool>) typedef bool type; };
 
 #define XTMP_TT_TYPE(x_Type, x_Name, x_Integral, x_Signdness, x_Distinct, x_Signed)\
 EMP_PP_IF(x_Signdness,\
 \
-template <> EMP_NOINSTANCE_STRUCT( unsigned_t< unsigned x_Type const volatile > ) typedef unsigned x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT( unsigned_t< unsigned x_Type       volatile > ) typedef unsigned x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT( unsigned_t< unsigned x_Type const          > ) typedef unsigned x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT( unsigned_t< unsigned x_Type                > ) typedef unsigned x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT( unsigned_t<          x_Type const volatile > ) typedef unsigned x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT( unsigned_t<          x_Type       volatile > ) typedef unsigned x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT( unsigned_t<          x_Type const          > ) typedef unsigned x_Type type; };\
-template <> EMP_NOINSTANCE_STRUCT( unsigned_t<          x_Type                > ) typedef unsigned x_Type type; };\
+template <> EMP_NOINSTANCE(struct, unsigned_t< unsigned x_Type const volatile > ) typedef unsigned x_Type type; };\
+template <> EMP_NOINSTANCE(struct, unsigned_t< unsigned x_Type       volatile > ) typedef unsigned x_Type type; };\
+template <> EMP_NOINSTANCE(struct, unsigned_t< unsigned x_Type const          > ) typedef unsigned x_Type type; };\
+template <> EMP_NOINSTANCE(struct, unsigned_t< unsigned x_Type                > ) typedef unsigned x_Type type; };\
+template <> EMP_NOINSTANCE(struct, unsigned_t<          x_Type const volatile > ) typedef unsigned x_Type type; };\
+template <> EMP_NOINSTANCE(struct, unsigned_t<          x_Type       volatile > ) typedef unsigned x_Type type; };\
+template <> EMP_NOINSTANCE(struct, unsigned_t<          x_Type const          > ) typedef unsigned x_Type type; };\
+template <> EMP_NOINSTANCE(struct, unsigned_t<          x_Type                > ) typedef unsigned x_Type type; };\
 )
 EMP_TT_TYPES()
 #undef XTMP_TT_TYPE

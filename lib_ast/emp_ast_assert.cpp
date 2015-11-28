@@ -68,10 +68,10 @@ void output_trace(trace_c const& a_rTrace, c_bool a_bVerbose)
 {
     if (a_bVerbose)
     {
-        output_line(EMP_XSZ_FILE, a_rTrace.file().cstr(), a_bVerbose);
-        output_line(EMP_XSZ_LINE, a_rTrace.sz_line().cstr(), a_bVerbose);
-        output_line(EMP_XSZ_FUNCTION, a_rTrace.function().cstr(), a_bVerbose);
-        output_line(EMP_XSZ_SIGNATURE, a_rTrace.signature().cstr(), a_bVerbose);
+        output_line(EMP_XSZ_FILE, a_rTrace.file(), a_bVerbose);
+        output_line(EMP_XSZ_LINE, a_rTrace.sz_line(), a_bVerbose);
+        output_line(EMP_XSZ_FUNCTION, a_rTrace.function(), a_bVerbose);
+        output_line(EMP_XSZ_SIGNATURE, a_rTrace.signature(), a_bVerbose);
     }
 }
 
@@ -80,7 +80,7 @@ void output_trace(trace_c const& a_rTrace, c_bool a_bVerbose)
 void output_assert(assert_c const& a_rAssert, bool const a_bVerbose)
 {
     output_trace(a_rAssert.trace(), a_bVerbose);
-    output_line(EMP_XSZ_CONDITION, a_rAssert.sz_condition().cstr(), a_bVerbose);
+    output_line(EMP_XSZ_CONDITION, a_rAssert.sz_condition(), a_bVerbose);
     output_pchar(EMP_XSZ_NEWLINE);
 }
 
