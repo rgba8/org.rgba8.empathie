@@ -30,7 +30,12 @@ EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo);*/
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 // @@0 duplicate
-template <typename t_From, typename t_To, ENABLE_IF_SIGNED(t_From), ENABLE_IF_SIGNED(t_To)>
+#define XTMP_NEG(x_Type)\
+    ENABLE_IF((emp::tt::is_integral<x_Type>::value == false) || emp::tt::is_signed<x_Type>::value)
+#define XTMP_NOT_NEG(x_Type)\
+    ENABLE_IF((((emp::tt::is_integral<x_Type>::value == false) || emp::tt::is_signed<x_Type>::value) == false))
+
+template <typename t_From, typename t_To, XTMP_NEG(t_From), XTMP_NEG(t_To)>
 EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 {
     static_assert(emp::tt::is_arithmetic<t_From>::value, "");
@@ -49,7 +54,7 @@ EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 // @@0 duplicate
-template <typename t_From, typename t_To, ENABLE_IF_NOT_SIGNED(t_From), ENABLE_IF_NOT_SIGNED(t_To)>
+template <typename t_From, typename t_To, XTMP_NOT_NEG(t_From), XTMP_NOT_NEG(t_To)>
 EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 {
     static_assert(emp::tt::is_arithmetic<t_From>::value, "");
@@ -71,7 +76,7 @@ EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 /*typename emp::tt::enable_if<
     emp::tt::more_equal<size_t, sizeof(t_From), sizeof(t_To)>::value,
 bool>::type*/
-template <typename t_From, typename t_To, ENABLE_IF_NOT_SIGNED(t_From), ENABLE_IF_SIGNED(t_To)>
+template <typename t_From, typename t_To, XTMP_NOT_NEG(t_From), XTMP_NEG(t_To)>
 EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 {
     static_assert(emp::tt::is_arithmetic<t_From>::value, "");
@@ -79,19 +84,25 @@ EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
     static_assert(emp::tt::not_equal<t_From, t_To>::value, "");
 
     // @@0 wtf
-    if (a_tFrom > static_cast<t_From>(emp::tt::max<t_To>::value))
+    if (a_tFrom > emp::tt::max<t_To>::value)
     { EMP_ASSERT(false); return false; }
 
     a_rtTo = static_cast<t_To>(a_tFrom);
     return true;
 }
 
+EMP_RETURN bool try_cast_impl(unsigned long a_tFrom, float& a_rTo);
+EMP_RETURN bool try_cast_impl(unsigned long a_tFrom, float& a_rTo)
+{
+    a_rTo = a_tFrom;
+    return true;
+}
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 // @@0 duplicate
 /*typename emp::tt::enable_if
     <sizeof(t_From) == sizeof(t_To), bool>::type*/
-template <typename t_From, typename t_To, ENABLE_IF_SIGNED(t_From), ENABLE_IF_NOT_SIGNED(t_To)>
+template <typename t_From, typename t_To, XTMP_NEG(t_From), XTMP_NOT_NEG(t_To)>
 EMP_RETURN  bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 {
     static_assert(emp::tt::is_arithmetic<t_From>::value, "");

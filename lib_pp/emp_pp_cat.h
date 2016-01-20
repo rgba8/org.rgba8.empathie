@@ -4,15 +4,19 @@
 #ifndef EMP_PP_CAT_H
 #define EMP_PP_CAT_H
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#define EMP_PP_CAT(x_Left, ...) EMP_PP_CAT_IMP(x_Left, __VA_ARGS__)
-#define EMP_PP_CAT_IMP(x_Left, ...) x_Left ## __VA_ARGS__
+#include "emp_pp_vaargs.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_CAT_3(x_a, x_b, x_c) EMP_PP_CAT_3_IMP(x_a, x_b, x_c)
-#define EMP_PP_CAT_3_IMP(x_a, x_b, x_c) x_a ## x_b ## x_c
+#define EMP_PP_CAT_IMPL0(x_Left, x_Right) EMP_PP_CAT_IMPL1(x_Left, x_Right)
+#define EMP_PP_CAT_IMPL1(x_Left, x_Right) x_Left ## x_Right
+
+#define EMP_PP_CAT(...) EMP_PP_CAT_IMPL0(EMP_PP_CAT_, EMP_VAARGS_COUNT(__VA_ARGS__))(__VA_ARGS__)
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#define EMP_PP_CAT_2(x_a, x_b) EMP_PP_CAT_IMPL0(x_a, x_b)
+#define EMP_PP_CAT_3(x_a, x_b, x_c) EMP_PP_CAT_2(x_a, EMP_PP_CAT_2(x_b, x_c))
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

@@ -31,7 +31,9 @@ template <typename T> EMP_NOINSTANCE(struct, max) };
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define XTMP_TT_TYPE_IMPL(x_Type, x_Name, x_Value)\
-template <> EMP_NOINSTANCE(struct, x_Name<x_Type>) static constexpr x_Type value = x_Value; };
+template <> EMP_NOINSTANCE(struct, x_Name<x_Type>) static constexpr x_Type const value = x_Value; };
+//constexpr x_Type const x_Name<x_Type>::value;
+
 
 #define XTMP_TT_TYPE(x_Type, x_Name, x_Integral, x_Signedness, x_Distinct, x_Signed)\
 XTMP_TT_TYPE_IMPL(x_Type, min, XTMP_TT_MIN(x_Name))\
@@ -48,8 +50,8 @@ EMP_TT_TYPES()
 #undef XTMP_TT_TYPE
 
 EMP_PRAGMA_PUSH_IGNORE(EMP_W_FLOAT_EQUAL)
-template <typename T> EMP_INLINE EMP_RETURN bool equal_(T const f0, T const f1);
-template <typename T> EMP_INLINE EMP_RETURN bool equal_(T const f0, T const f1) { return f0 == f1; }
+template <typename T> constexpr EMP_INLINE EMP_RETURN bool equal_(T const f0, T const f1);
+template <typename T> constexpr EMP_INLINE EMP_RETURN bool equal_(T const f0, T const f1) { return f0 == f1; }
 EMP_PRAGMA_POP_IGNORE(EMP_W_FLOAT_EQUAL)
 
 template <typename T> EMP_INLINE EMP_RETURN bool not_equal_(T const t0, T const t1);
@@ -96,13 +98,13 @@ public:
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-EMP_RETURN T maxof(T const& a_rLeft, T const& a_rRight)
+constexpr EMP_RETURN T maxof(T const& a_rLeft, T const& a_rRight)
 { return a_rLeft > a_rRight ? a_rLeft : a_rRight; }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename T>
-EMP_RETURN T minof(T const& a_rLeft, T const& a_rRight)
+constexpr EMP_RETURN T minof(T const& a_rLeft, T const& a_rRight)
 { return a_rLeft < a_rRight ? a_rLeft : a_rRight; }
 
 //-----------------------------------------------------------------------------

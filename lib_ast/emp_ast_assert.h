@@ -107,15 +107,7 @@ public:
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_NOCOPY(class, asserter_c)
-public:
-    asserter_c(void) {}
-    void condition(assert_c const& a_rAssert);
-};
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-EMP_RETURN asserter_c& asserter(void);
+void assert_(assert_c const& a_rAssert);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -134,9 +126,7 @@ void output_assert(assert_c const& a_rAssert, c_bool a_bVerbose);
 //-----------------------------------------------------------------------------
 #ifdef EMP_XX_ASSERT
 
-#define EMP_ASSERTER emp::ast::asserter()
-#define EMP_ASSERT_HERE(x_Condition) emp::ast::assert_c(x_Condition, EMP_PP_STRING(x_Condition), EMP_TRACE_HERE)
-#define EMP_ASSERT(x_Condition) do { EMP_ASSERTER.condition(EMP_ASSERT_HERE(x_Condition)); } while(0)
+#define EMP_ASSERT(x_Condition) do { emp::ast::assert_(emp::ast::assert_c(x_Condition, EMP_PP_STRING(x_Condition), EMP_TRACE_HERE)); } while(0)
 #define EMP_ASSERT_UNREACHABLE() EMP_ASSERT(false);
 #define EMP_ASSERT_NOT_IMPLEMENTED() EMP_ASSERT(false);
 #define EMP_ASSERT_BOOL_CALL(x_Call) EMP_ASSERT(x_Call)

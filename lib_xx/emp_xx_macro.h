@@ -90,14 +90,30 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+#ifdef EMP_XX_PROFILE
+#define EMP_XX_IF_PROFILE(x_Then) x_Then
+#define EMP_XX_IF_ELSE_PROFILE(x_Then, x_Else) x_Then
+#else
+#define EMP_XX_IF_PROFILE(x_Then)
+#define EMP_XX_IF_ELSE_PROFILE(x_Then, x_Else) x_Else
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#include "emp_pp_vaargs.h"
+
 #include "emp_pp_and.h"
+#include "emp_pp_bool.h"
 #include "emp_pp_cat.h"
 #include "emp_pp_comma_if.h"
+#include "emp_pp_empty.h"
+#include "emp_pp_equal.h"
 #include "emp_pp_forward.h"
 #include "emp_pp_if.h"
 #include "emp_pp_if_else.h"
 #include "emp_pp_not.h"
 #include "emp_pp_solve.h"
+#include "emp_pp_string.h"
 
 #include "emp_xx_attribute.h"
 #include "emp_xx_build.h"
@@ -105,7 +121,6 @@
 #include "emp_xx_class.h"
 #include "emp_xx_pragma.h"
 #include "emp_xx_noop.h"
-#include "emp_xx_vaargs.h"
 
 #include "emp_hh_typedef.h"
 
@@ -138,7 +153,6 @@
 #include "emp_loc_localizer.h"
 
 #include "emp_tim_time.h"
-#include "emp_tim_manager.h"
 
 #include "emp_mat_vector.h"
 #include "emp_mat_matrix.h"

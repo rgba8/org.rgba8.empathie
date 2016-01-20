@@ -27,10 +27,6 @@ EMP_INLINE bool not_const(c_bool a_bCondition EMP_UNUSED)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define XLITERAL(x_Literal, x_Cstr) x_Literal(x_Cstr, emp::tt::integral<size_t, x_Literal::len(x_Cstr)>::value)
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 class aliteral
 {
 public:
@@ -84,7 +80,7 @@ public:
 };
 
 EMP_TYPEDEF(aliteral);
-#define ALITERAL(x_Cstr) XLITERAL(emp::tt::aliteral, x_Cstr)
+#define ALITERAL(x_Cstr) emp::tt::aliteral(x_Cstr, emp::tt::integral<size_t, emp::tt::aliteral::len(x_Cstr)>::value)
 
 namespace {
 
@@ -102,23 +98,27 @@ public:
     char const* m_szLiteral;
     size_t m_stSize;
     size_t m_stLen;
+    size_t m_stByteLen;
 
 public:
     u8literal(void):
         m_szLiteral(nullptr),
         m_stSize(0),
-        m_stLen(0)
+        m_stLen(0),
+        m_stByteLen(0)
     {}
 
     template <size_t t_stSize>
-    explicit constexpr EMP_INLINE u8literal(char const (&a_szLiteral)[t_stSize], c_size a_stLen) :
+    explicit constexpr EMP_INLINE u8literal(char const (&a_szLiteral)[t_stSize], c_size a_stLen, c_size a_stByteLen) :
         m_szLiteral(a_szLiteral), // @@0 ascii test
         m_stSize(t_stSize),
-        m_stLen(a_stLen)
+        m_stLen(a_stLen),
+        m_stByteLen(a_stByteLen)
     {
         static_assert(t_stSize >= 1, "");
         const_assert(a_stLen < t_stSize);
         const_assert(u8literal::len(a_szLiteral) == a_stLen);
+        const_assert(u8literal::byte_len(a_szLiteral) == a_stByteLen);
         //const_assert(a_stLen < t_stSize);
         //const_assert(literal_t::len(a_szLiteral) == a_stLen);
     }
@@ -131,25 +131,48 @@ public:
 
     constexpr EMP_INLINE EMP_RETURN size_t size(void) const { return m_stSize; }
     constexpr EMP_INLINE EMP_RETURN size_t len(void) const { return m_stLen; }
+    constexpr EMP_INLINE EMP_RETURN size_t byte_len(void) const { return m_stByteLen; }
     constexpr EMP_INLINE EMP_RETURN char const* cstr(void) const { return m_szLiteral; }
     
 public:
     template <size_t t_stSize>
-    static constexpr EMP_INLINE EMP_RETURN size_t len(char const (&a_szLiteral)[t_stSize] )
+    static constexpr EMP_INLINE EMP_RETURN size_t byte_len(char const (&a_szLiteral)[t_stSize])
+    {
+        size_t stByteLen = 0;
+        const_assert(stByteLen < t_stSize);
+        while (a_szLiteral[stByteLen] != '\0')
+        {
+            const_assert(stByteLen < t_stSize);
+            ++stByteLen;
+        }
+        return stByteLen;
+    }
+
+
+    template <size_t t_stSize>
+    static constexpr EMP_INLINE EMP_RETURN size_t len(char const (&a_szLiteral)[t_stSize])
     {
         size_t stLen = 0;
-        const_assert(stLen < t_stSize);
-        while (a_szLiteral[stLen] != '\0')
+        size_t stByteLen = 0;
+        const_assert(stByteLen < t_stSize);
+        while (true)
         {
-            const_assert(stLen < t_stSize);
-            ++stLen;
+            const_assert(stByteLen < t_stSize);
+            c_char cChar = a_szLiteral[stByteLen];
+            if (cChar == 0)
+            { break; }
+            if ((cChar & 0xC0) != 0x80)
+            { ++stLen; }
+            ++stByteLen;
         }
         return stLen;
     }
 };
 
 EMP_TYPEDEF(u8literal);
-#define U8LITERAL(x_Cstr) XLITERAL(emp::tt::u8literal, x_Cstr)
+#define U8LITERAL(x_Cstr) emp::tt::u8literal(x_Cstr,\
+    emp::tt::integral<size_t, emp::tt::u8literal::len(x_Cstr)>::value,\
+    emp::tt::integral<size_t, emp::tt::u8literal::byte_len(x_Cstr)>::value)
 
 namespace {
 

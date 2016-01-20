@@ -118,7 +118,7 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_TT_FLOAT_EMP_TT_MIN FLT_MIN
+#define EMP_TT_FLOAT_EMP_TT_MIN -FLT_MAX
 #define EMP_TT_FLOAT_EMP_TT_MAX FLT_MAX
 
 #define EMP_TT_FLOAT_MIN EMP_TT_FLOAT_EMP_TT_MIN
@@ -126,7 +126,7 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_TT_DOUBLE_EMP_TT_MIN DBL_MIN
+#define EMP_TT_DOUBLE_EMP_TT_MIN -DBL_MAX
 #define EMP_TT_DOUBLE_EMP_TT_MAX DBL_MAX
 
 #define EMP_TT_DOUBLE_MIN EMP_TT_DOUBLE_EMP_TT_MIN

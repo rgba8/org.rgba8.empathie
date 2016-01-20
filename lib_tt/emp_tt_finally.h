@@ -14,6 +14,19 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+template <typename T>
+EMP_(struct, scope_t)
+    T* m_pScopee;
+    explicit scope_t(T* a_pScopee) : m_pScopee(a_pScopee) { m_pScopee->start(); }
+    ~scope_t(void) { m_pScopee->stop(); }
+};
+
+template <typename T>
+EMP_RETURN EMP_INLINE scope_t<T> scope(T& a_rScopee)
+{ return scope_t<T>(&a_rScopee); }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 template <typename T, bool t_bDefault>
 struct finally_t
 {

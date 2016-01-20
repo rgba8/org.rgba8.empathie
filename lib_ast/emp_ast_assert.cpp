@@ -5,8 +5,6 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_app_application.h"
-
 #include "emp_hh_stdio.h"
 #include "emp_hh_stdlib.h"
 
@@ -86,7 +84,7 @@ void output_assert(assert_c const& a_rAssert, bool const a_bVerbose)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void asserter_c::condition(emp::ast::assert_c const& a_rAssert)
+void assert_(emp::ast::assert_c const& a_rAssert)
 {
     if (a_rAssert.b_condition() == false)
     {
@@ -95,11 +93,6 @@ void asserter_c::condition(emp::ast::assert_c const& a_rAssert)
         abort();
     }
 }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-EMP_RETURN asserter_c& asserter(void)
-{ return EMP_APPLICATION.asserter(); }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
