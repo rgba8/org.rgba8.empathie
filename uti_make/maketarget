@@ -88,9 +88,15 @@ else
 CCACHE ?=
 endif
 
-UTI_GPP         ?=  $(CCACHE) g++ -pipe
-UTI_GPP_X86_32  ?=  $(CCACHE) g++ -pipe
-UTI_GPP_X86_64  ?=  $(CCACHE) g++ -pipe
+ifeq ($(COMPILER), clang)
+GPP ?= clang++-3.6 -v
+else
+GPP ?= g++
+endif
+
+UTI_GPP         ?=  $(CCACHE) $(GPP) -pipe
+UTI_GPP_X86_32  ?=  $(CCACHE) $(GPP) -pipe
+UTI_GPP_X86_64  ?=  $(CCACHE) $(GPP) -pipe
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
@@ -178,7 +184,11 @@ CXXFLAGS    +=  -mstackrealign
 
 ifeq ($(COMPILER), gcc)
 CXXFLAGS    +=  -fabi-version=0
-CXXFLAGS    +=  -Wno-mudflap
+
+ifeq ($(MUD), true)
+    $(CXXFLAGS    +=  -Wno-mudflap
+endif
+
 CXXFLAGS    +=  -Wsync-nand
 CXXFLAGS    +=  -Wclobbered
 CXXFLAGS    +=  -Wlogical-op
@@ -307,6 +317,8 @@ endif
 endif
 endif
 
+DEFINES += "-DEMP_XX_LOG"
+
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 ifeq ($(ARCH), x86_32)
@@ -326,8 +338,12 @@ endif
 ifeq ($(COMPILER), llvm)
     DEFINES += "-DEMP_XX_COMPILER_LLVM"
 else
+ifeq ($(COMPILER), clang)
+    DEFINES += "-DEMP_XX_COMPILER_LLVM"
+else
 ifeq ($(COMPILER), gcc)
     DEFINES += "-DEMP_XX_COMPILER_GCC"
+endif
 endif
 endif
 
@@ -395,7 +411,7 @@ else
 	$(error unknown architecture : "$(ARCH)")
 endif
 
-ifneq (, $(filter "$(COMPILER)", "llvm" "gcc"))
+ifneq (, $(filter "$(COMPILER)", "llvm" "gcc" "clang"))
 	$(info "$(COMPILER)" compiler...)
 else
 	$(error unknown compiler : "$(COMPILER)")

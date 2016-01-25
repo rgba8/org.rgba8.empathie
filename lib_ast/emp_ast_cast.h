@@ -36,7 +36,7 @@ EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo);*/
     ENABLE_IF((((emp::tt::is_integral<x_Type>::value == false) || emp::tt::is_signed<x_Type>::value) == false))
 
 template <typename t_From, typename t_To, XTMP_NEG(t_From), XTMP_NEG(t_To)>
-EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
+EMP_INLINE EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 {
     static_assert(emp::tt::is_arithmetic<t_From>::value, "");
     static_assert(emp::tt::is_arithmetic<t_To>::value, "");
@@ -55,7 +55,7 @@ EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 //-----------------------------------------------------------------------------
 // @@0 duplicate
 template <typename t_From, typename t_To, XTMP_NOT_NEG(t_From), XTMP_NOT_NEG(t_To)>
-EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
+EMP_INLINE EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 {
     static_assert(emp::tt::is_arithmetic<t_From>::value, "");
     static_assert(emp::tt::is_arithmetic<t_To>::value, "");
@@ -77,7 +77,7 @@ EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
     emp::tt::more_equal<size_t, sizeof(t_From), sizeof(t_To)>::value,
 bool>::type*/
 template <typename t_From, typename t_To, XTMP_NOT_NEG(t_From), XTMP_NEG(t_To)>
-EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
+EMP_INLINE EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 {
     static_assert(emp::tt::is_arithmetic<t_From>::value, "");
     static_assert(emp::tt::is_arithmetic<t_To>::value, "");
@@ -91,8 +91,8 @@ EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
     return true;
 }
 
-EMP_RETURN bool try_cast_impl(unsigned long a_tFrom, float& a_rTo);
-EMP_RETURN bool try_cast_impl(unsigned long a_tFrom, float& a_rTo)
+EMP_INLINE EMP_RETURN bool try_cast_impl(unsigned long a_tFrom, float& a_rTo);
+EMP_INLINE EMP_RETURN bool try_cast_impl(unsigned long a_tFrom, float& a_rTo)
 {
     a_rTo = a_tFrom;
     return true;
@@ -103,7 +103,7 @@ EMP_RETURN bool try_cast_impl(unsigned long a_tFrom, float& a_rTo)
 /*typename emp::tt::enable_if
     <sizeof(t_From) == sizeof(t_To), bool>::type*/
 template <typename t_From, typename t_To, XTMP_NEG(t_From), XTMP_NOT_NEG(t_To)>
-EMP_RETURN  bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
+EMP_INLINE EMP_RETURN  bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 {
     static_assert(emp::tt::is_arithmetic<t_From>::value, "");
     static_assert(emp::tt::is_arithmetic<t_To>::value, "");
@@ -153,14 +153,14 @@ EMP_NOINSTANCE(struct, (try_cast_detail<T, T>))
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename t_From, typename t_To> EMP_RETURN bool try_cast(t_From a_tFrom, t_To& a_rtTo);
-template <typename t_From, typename t_To> EMP_RETURN bool try_cast(t_From a_tFrom, t_To& a_rtTo)
+template <typename t_From, typename t_To> EMP_INLINE EMP_RETURN bool try_cast(t_From a_tFrom, t_To& a_rtTo);
+template <typename t_From, typename t_To> EMP_INLINE EMP_RETURN bool try_cast(t_From a_tFrom, t_To& a_rtTo)
 { return try_cast_detail<t_From, t_To>::apply(a_tFrom, a_rtTo); }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template <typename t_To, typename t_From> EMP_RETURN t_To cast(t_From const a_tFrom);
-template <typename t_To, typename t_From> EMP_RETURN t_To cast(t_From const a_tFrom)
+template <typename t_To, typename t_From> EMP_INLINE EMP_RETURN t_To cast(t_From const a_tFrom);
+template <typename t_To, typename t_From> EMP_INLINE EMP_RETURN t_To cast(t_From const a_tFrom)
 {
     t_To tResult = 0;
     EMP_ASSERT_BOOL_CALL((try_cast<t_From, t_To>(a_tFrom, tResult)));

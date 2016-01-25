@@ -53,7 +53,7 @@ public:
         //const_assert(a_stLen < t_stSize);
         //const_assert(literal_t::len(a_szLiteral) == a_stLen);
     }
- 
+
     constexpr EMP_INLINE EMP_RETURN char operator[](c_size a_stIndex) const
     {
         const_assert(a_stIndex < m_stSize);
@@ -63,7 +63,7 @@ public:
     constexpr EMP_INLINE EMP_RETURN size_t size(void) const { return m_stSize; }
     constexpr EMP_INLINE EMP_RETURN size_t len(void) const { return m_stLen; }
     constexpr EMP_INLINE EMP_RETURN char const* cstr(void) const { return m_szLiteral; }
-    
+
 public:
     template <size_t t_stSize>
     static constexpr EMP_INLINE EMP_RETURN size_t len(char const (&a_szLiteral)[t_stSize] )
@@ -79,7 +79,7 @@ public:
     }
 };
 
-EMP_TYPEDEF(aliteral);
+EMP_TYPEDEF(aliteral)
 #define ALITERAL(x_Cstr) emp::tt::aliteral(x_Cstr, emp::tt::integral<size_t, emp::tt::aliteral::len(x_Cstr)>::value)
 
 namespace {
@@ -122,7 +122,7 @@ public:
         //const_assert(a_stLen < t_stSize);
         //const_assert(literal_t::len(a_szLiteral) == a_stLen);
     }
- 
+
     constexpr EMP_INLINE EMP_RETURN char operator[](c_size a_stIndex) const
     {
         const_assert(a_stIndex < m_stSize);
@@ -133,7 +133,7 @@ public:
     constexpr EMP_INLINE EMP_RETURN size_t len(void) const { return m_stLen; }
     constexpr EMP_INLINE EMP_RETURN size_t byte_len(void) const { return m_stByteLen; }
     constexpr EMP_INLINE EMP_RETURN char const* cstr(void) const { return m_szLiteral; }
-    
+
 public:
     template <size_t t_stSize>
     static constexpr EMP_INLINE EMP_RETURN size_t byte_len(char const (&a_szLiteral)[t_stSize])
@@ -169,7 +169,7 @@ public:
     }
 };
 
-EMP_TYPEDEF(u8literal);
+EMP_TYPEDEF(u8literal)
 #define U8LITERAL(x_Cstr) emp::tt::u8literal(x_Cstr,\
     emp::tt::integral<size_t, emp::tt::u8literal::len(x_Cstr)>::value,\
     emp::tt::integral<size_t, emp::tt::u8literal::byte_len(x_Cstr)>::value)
@@ -242,11 +242,11 @@ public:
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 using aformat_c = format_t<aliteral>;
-EMP_TYPEDEF(aformat_c);
+EMP_TYPEDEF(aformat_c)
 #define AFORMAT(x_Cstr, x_Count) XFORMAT(emp::tt::aformat_c, ALITERAL, x_Cstr, x_Count)
 
 using u8format_c = format_t<u8literal>;
-EMP_TYPEDEF(u8format_c);
+EMP_TYPEDEF(u8format_c)
 #define U8FORMAT(x_Cstr, x_Count) XFORMAT(emp::tt::u8format_c, U8LITERAL, x_Cstr, x_Count)
 
 static_assert(aformat_c::args(ALITERAL("#a#b#c")) == 3, "");
