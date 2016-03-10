@@ -94,7 +94,9 @@ EMP_INLINE EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 EMP_INLINE EMP_RETURN bool try_cast_impl(unsigned long a_tFrom, float& a_rTo);
 EMP_INLINE EMP_RETURN bool try_cast_impl(unsigned long a_tFrom, float& a_rTo)
 {
-    a_rTo = a_tFrom;
+    static_assert(sizeof(unsigned long) == 4, "");
+    // @@0 a_rTo = a_tFrom;
+    a_rTo = static_cast<float>(a_tFrom);
     return true;
 }
 //-----------------------------------------------------------------------------
@@ -110,7 +112,12 @@ EMP_INLINE EMP_RETURN  bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
     static_assert(emp::tt::not_equal<t_From, t_To>::value, "");
 
     if (a_tFrom < 0)
-    { EMP_ASSERT(false); return false; }
+    { return false; }
+
+    EMP_PRAGMA_PUSH_IGNORE(EMP_W_SIGN_COMPARE) // @@0 early out when < 0
+    if (a_tFrom > emp::tt::max<t_To>::value)
+    { return false; }
+    EMP_PRAGMA_POP_IGNORE(EMP_W_SIGN_COMPARE)
 
     a_rtTo = static_cast<t_To>(a_tFrom);
     return true;

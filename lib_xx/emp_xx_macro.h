@@ -134,7 +134,6 @@
 #include "emp_ast_cast.h"
 
 #include "emp_mem_allocator.h"
-#include "emp_mem_delete.h"
 #include "emp_mem_pointer.h"
 
 #include "emp_fct_function.h"

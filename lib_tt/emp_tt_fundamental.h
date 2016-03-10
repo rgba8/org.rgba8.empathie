@@ -14,9 +14,11 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+EMP_PRAGMA_PUSH_IGNORE(EMP_W_UNREFERENCED_INLINE_FUNCTION)
 EMP_TT_DECLARE_VALUE(is_void, false_)
 EMP_TT_DECLARE_VALUE_SPECIAL_CV(is_void, void, true_)
 EMP_TT_DECLARE_VALUE(is_not_void, not_<is_void<T>::value>)
+EMP_PRAGMA_POP_IGNORE(EMP_W_UNREFERENCED_INLINE_FUNCTION)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

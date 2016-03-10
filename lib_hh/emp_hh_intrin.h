@@ -1,20 +1,26 @@
 //-----------------------------------------------------------------------------
-// emp_xx_build.h - @rgba8.org
+// @rgba8.org
 //-----------------------------------------------------------------------------
-#ifndef EMP_XX_BUILD_H
-#define EMP_XX_BUILD_H
+#ifndef EMP_HH_INTRIN_H
+#define EMP_HH_INTRIN_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_XX_COUNTER __COUNTER__
-#define EMP_XX_LINE __LINE__
-#define EMP_XX_FUNCTION __FUNCTION__
 #if defined EMP_XX_COMPILER_MSC
-#define EMP_XX_SIGNATURE __FUNCSIG__
+EMP_PRAGMA_PUSH_IGNORE(EMP_W_4548)
+#include <mmintrin.h>
+#include <emmintrin.h>
+EMP_PRAGMA_POP_IGNORE(EMP_W_4548)
 #else
-#define EMP_XX_SIGNATURE __PRETTY_FUNCTION__
+#include <x86intrin.h>
 #endif
-#define EMP_XX_FILE __FILE__
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//#include <fpu_control.h>
+//void set_fpu (c_uint mode);
+//void set_fpu (c_uint mode)
+//{ asm ("fldcw %0" : : "m" (*&mode)); }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

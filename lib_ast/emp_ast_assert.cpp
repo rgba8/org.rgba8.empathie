@@ -7,6 +7,7 @@
 //-----------------------------------------------------------------------------
 #include "emp_hh_stdio.h"
 #include "emp_hh_stdlib.h"
+#include "emp_hh_windows.h"
 
 #include "emp_xx_string.h"
 
@@ -16,14 +17,25 @@ namespace emp { namespace ast {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void output_char(c_char a_cValue)
-{ fputc(a_cValue, stdout); }
+// @@0 remove 
+//void output_char(c_char a_cValue)
+//{
+//
+//#ifdef EMP_XX_COMPILER_MSC
+//#else
+//    fputc(a_cValue, stdout);
+//#endif
+//}
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 void output_pchar(cpc_char a_pValue)
 {
-    EMP_ASSERT(a_pValue);
+
+    EMP_ASSERT(a_pValue != nullptr);
+#ifdef EMP_XX_COMPILER_MSC
+    OutputDebugStringA(a_pValue);
+#endif
     fputs(a_pValue, stdout);
 }
 
@@ -43,7 +55,7 @@ void output_line(cpc_char a_szName, cpc_char a_szValue, c_bool a_bVerbose)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void output_header(cpc_char a_szName, c_char a_cAlias, c_bool a_bVerbose)
+void output_header(cpc_char a_szName, cpc_char a_szAlias, c_bool a_bVerbose)
 {
     if (a_bVerbose)
     {
@@ -55,7 +67,7 @@ void output_header(cpc_char a_szName, c_char a_cAlias, c_bool a_bVerbose)
     }
     else
     {
-        output_char(a_cAlias);
+        output_pchar(a_szAlias);
         output_pchar(EMP_XSZ_SPACE_COMMA_SPACE);
     }
 }
@@ -77,8 +89,8 @@ void output_trace(trace_c const& a_rTrace, c_bool a_bVerbose)
 //-----------------------------------------------------------------------------
 void output_assert(assert_c const& a_rAssert, bool const a_bVerbose)
 {
-    output_trace(a_rAssert.trace(), a_bVerbose);
-    output_line(EMP_XSZ_CONDITION, a_rAssert.sz_condition(), a_bVerbose);
+    output_trace(a_rAssert.m_Trace, a_bVerbose);
+    output_line(EMP_XSZ_CONDITION, a_rAssert.m_szCondition, a_bVerbose);
     output_pchar(EMP_XSZ_NEWLINE);
 }
 
@@ -86,9 +98,9 @@ void output_assert(assert_c const& a_rAssert, bool const a_bVerbose)
 //-----------------------------------------------------------------------------
 void assert_(emp::ast::assert_c const& a_rAssert)
 {
-    if (a_rAssert.b_condition() == false)
+    if (a_rAssert.m_bCondition == false)
     {
-        output_header(EMP_XSZ_ASSERT, EMP_XC_UPPER_A, true);
+        output_header(EMP_XSZ_ASSERT, EMP_XSZ_UPPER_A, true);
         output_assert(a_rAssert, true);
         abort();
     }

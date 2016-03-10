@@ -6,7 +6,7 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include <assert.h>
+#include "emp_hh_assert.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -14,9 +14,9 @@ namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_INLINE bool not_const(c_bool a_bCondition);
-EMP_INLINE bool not_const(c_bool a_bCondition EMP_UNUSED)
-{ return false; }
+//EMP_INLINE bool not_const(c_bool EMP_SILENT(a_bCondition));
+//EMP_INLINE bool not_const(c_bool EMP_SILENT(a_bCondition))
+//{ return false; }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -35,7 +35,7 @@ public:
     size_t m_stLen;
 
 public:
-    aliteral(void):
+    explicit constexpr aliteral(void):
         m_szLiteral(nullptr),
         m_stSize(0),
         m_stLen(0)
@@ -56,7 +56,10 @@ public:
 
     constexpr EMP_INLINE EMP_RETURN char operator[](c_size a_stIndex) const
     {
+#if defined EMP_XX_CPP_11
+#else
         const_assert(a_stIndex < m_stSize);
+#endif
         return m_szLiteral[a_stIndex];
     }
 
@@ -65,6 +68,27 @@ public:
     constexpr EMP_INLINE EMP_RETURN char const* cstr(void) const { return m_szLiteral; }
 
 public:
+#if defined EMP_XX_CPP_11
+    template <size_t t_stSize>
+    static constexpr EMP_RETURN size_t len_impl(char const(&a_szLiteral)[t_stSize], c_size a_stLen, c_size a_stCount)
+    {
+        const_assert(a_stLen < t_stSize);
+        return a_szLiteral[a_stLen] != '\0' ? 1 + (a_stCount < 1 ? 0 : len_impl<t_stSize>(a_szLiteral, a_stLen + 1, a_stCount - 1)) : 0;
+    }
+    
+    //template <size_t t_stSize>
+    //struct len_impl<t_stSize, 1>
+    //{
+    //    static constexpr EMP_INLINE EMP_RETURN size_t apply(char const (&a_szLiteral)[t_stSize])
+    //    {
+    //        return a_szLiteral[t_st]
+    //    }
+    //};
+    template <size_t t_stSize>
+    static constexpr EMP_INLINE EMP_RETURN size_t len(char const (&a_szLiteral)[t_stSize])
+    { return len_impl<t_stSize>(a_szLiteral, 0, t_stSize); }
+
+#else
     template <size_t t_stSize>
     static constexpr EMP_INLINE EMP_RETURN size_t len(char const (&a_szLiteral)[t_stSize] )
     {
@@ -77,6 +101,7 @@ public:
         }
         return stLen;
     }
+#endif
 };
 
 EMP_TYPEDEF(aliteral)
@@ -125,7 +150,10 @@ public:
 
     constexpr EMP_INLINE EMP_RETURN char operator[](c_size a_stIndex) const
     {
+#if defined EMP_XX_CPP_11
+#else
         const_assert(a_stIndex < m_stSize);
+#endif
         return m_szLiteral[a_stIndex];
     }
 
@@ -136,23 +164,42 @@ public:
 
 public:
     template <size_t t_stSize>
+    static constexpr EMP_RETURN size_t byte_len_impl(char const (&a_szLiteral)[t_stSize], c_size a_stByteLen)
+    {
+        const_assert(a_stByteLen < t_stSize);
+        return a_szLiteral[a_stByteLen] != '\0' ? byte_len_impl(a_szLiteral, a_stByteLen + 1) : a_stByteLen;
+    }
+
+    template <size_t t_stSize>
     static constexpr EMP_INLINE EMP_RETURN size_t byte_len(char const (&a_szLiteral)[t_stSize])
     {
-        size_t stByteLen = 0;
+        return byte_len_impl(a_szLiteral, 0);
+        /*size_t stByteLen = 0;
         const_assert(stByteLen < t_stSize);
         while (a_szLiteral[stByteLen] != '\0')
         {
             const_assert(stByteLen < t_stSize);
             ++stByteLen;
         }
-        return stByteLen;
+        return stByteLen;*/
     }
 
+    template <size_t t_stSize>
+    static constexpr EMP_RETURN size_t len_impl(char const (&a_szLiteral)[t_stSize], c_size a_stByteLen, c_size a_stLen)
+    {
+        const_assert(a_stByteLen < t_stSize);
+        return (a_szLiteral[a_stByteLen] == 0) ? 
+            a_stLen :
+            (a_szLiteral[a_stByteLen] & 0xC0) != 0x80 ?
+                len_impl(a_szLiteral, a_stByteLen + 1, a_stLen + 1) :
+                len_impl(a_szLiteral, a_stByteLen + 1, a_stLen);
+    }
 
     template <size_t t_stSize>
     static constexpr EMP_INLINE EMP_RETURN size_t len(char const (&a_szLiteral)[t_stSize])
     {
-        size_t stLen = 0;
+        return len_impl(a_szLiteral, 0, 0);
+        /*size_t stLen = 0;
         size_t stByteLen = 0;
         const_assert(stByteLen < t_stSize);
         while (true)
@@ -165,7 +212,7 @@ public:
             { ++stLen; }
             ++stByteLen;
         }
-        return stLen;
+        return stLen;*/
     }
 };
 
@@ -207,7 +254,7 @@ public:
     size_t m_stArgs;
 
 public:
-    format_t(void):
+    explicit constexpr format_t(void):
         m_Literal(),
         m_stArgs(0)
     {}
@@ -225,7 +272,14 @@ public:
 
     constexpr EMP_RETURN T const& literal(void) const
     { return m_Literal; }
+
 public:
+#if defined EMP_XX_CPP_11
+
+    static constexpr EMP_INLINE EMP_RETURN size_t args(T const& a_Literal, c_size a_stIndex = 0)
+    { return a_stIndex < a_Literal.len() ? (a_Literal[a_stIndex] == '#' ? 1 : 0) + args(a_Literal, a_stIndex + 1) : 0; }
+ 
+#else
     static constexpr EMP_INLINE EMP_RETURN size_t args(T const& a_Literal)
     {
         size_t stArgs = 0;
@@ -237,6 +291,7 @@ public:
         }
         return stArgs;
     }
+#endif
 };
 
 //-----------------------------------------------------------------------------

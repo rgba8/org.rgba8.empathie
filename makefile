@@ -8,12 +8,12 @@ include $(ROOT)makeuser
 endif
 
 BIN         	?= test
-#COMPILER 	?= llvm 
+#COMPILER 	?= llvm
 COMPILER 	?= gcc
 #ARCH		?= x86_32
 ARCH		?= x86_64
 #TARGET_OS	?= osx
-TARGET_OS	?= lin
+#TARGET_OS	?= lin
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
@@ -29,92 +29,82 @@ ASAN        ?= false
 VALGRIND    ?= false
 CHECK       ?=
 
+##-----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 ifeq ($(TARGET_OS), osx)
 SDK_ROOT	?= /Applications/XCode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/
-else
-ifeq ($(TARGET_OS), lin)
-SDK_ROOT	?= /usr/include/
-else
-ifeq ($(TARGET_OS), win)
-SDK_ROOT    ?= C:/MinGW/Include/
-endif
-endif
-endif
+X11_ROOT	?= $(SDK_ROOT)System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/X11/
+#PCI_ROOT        ?= $(SDK_ROOT)usr/include/pci
 
-ifeq ($(TARGET_OS), osx)
 LIBXML2_H_DIR	?= $(SDK_ROOT)usr/include/libxml2/
 LIBXML2_L_DIR   ?=
 LIBXML2_LIB     ?= -lxml2
-else
-ifeq ($(TARGET_OS), lin)
-LIBXML2_H_DIR	?= $(SDK_ROOT)libxml2/
-LIBXML2_L_DIR   ?=
-LIBXML2_LIB ?= -lxml2
-else
-ifeq ($(TARGET_OS), win)
-LIBXML2_H_DIR ?= C:/MinGW/msys/1.0/Include/libxml2
-LIBXML2_L_DIR ?= C:/MinGW/msys/1.0/lib/
-LIBXML2_LIB   ?= -lxml2
-endif
-endif
-endif
 
-ifeq ($(TARGET_OS), osx)
 OPENGL_ROOT	    ?= $(SDK_ROOT)System/Library/Frameworks/OpenGL.framework/Versions/A/
 OPENGL_H_DIR    ?= $(OPENGL_ROOT)Headers/
 OPENGL_L_DIR    ?=
 OPENGL_LIB      ?= -framework OpenGL
-else
-ifeq ($(TARGET_OS), lin)
-OPENGL_H_DIR	?= $(SDK_ROOT)GL/
-OPENGL_L_DIR    ?=
-OPENGL_LIB      ?= -lGL
-else
-ifeq ($(TARGET_OS), win)
-OPENGL_H_DIR	?= $(SDK_ROOT)GL/
-OPENGL_L_DIR    ?= C:/MinGW/msys/1.0/lib/
-OPENGL_LIB      ?= -lopengl32
-endif
-endif
-endif
 
-ifeq ($(TARGET_OS), osx)
-X11_ROOT	?= $(SDK_ROOT)System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/X11/
-else
-X11_ROOT	?= $(SDK_ROOT)X11/
-endif
-
-ifeq ($(TARGET_OS), osx)
 FREETYPE2_ROOT  ?= $(SDK_ROOT)usr/include/freetype2/
-else
-FREETYPE2_ROOT  ?= $(SDK_ROOT)freetype2/
-endif
 
-ifeq ($(TARGET_OS), osx)
 OPENAL_ROOT     ?=  $(SDK_ROOT)System/Library/Frameworks/OpenAL.framework/Versions/A/
 OPENAL_H_DIR    ?=  $(OPENAL_ROOT)Headers/
 OPENAL_L_DIR    ?=
 OPENAL_LIB      ?=  -framework OpenAL
+
+COCOA_LIB       ?= -framework cocoa -framework QuartzCore
+
 else
+##-----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 ifeq ($(TARGET_OS), lin)
+SDK_ROOT	?= /usr/include/
+X11_ROOT	?= $(SDK_ROOT)X11/
+
+LIBXML2_H_DIR	?= $(SDK_ROOT)libxml2/
+LIBXML2_L_DIR   ?=
+LIBXML2_LIB ?= -lxml2
+
+OPENGL_H_DIR	?= $(SDK_ROOT)GL/
+OPENGL_L_DIR    ?=
+OPENGL_LIB      ?= -lGL
+
+FREETYPE2_ROOT  ?= #$(SDK_ROOT)freetype2/
+
 OPENAL_H_DIR    ?= $(SDK_ROOT)AL/
 OPENAL_L_DIR    ?=
 OPENAL_LIB      ?= -lopenal
+
 else
+##-----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 ifeq ($(TARGET_OS), win)
-OPENAL_H_DIR	?= $(SDK_ROOT)AL/
-OPENAL_L_DIR    ?= C:/MinGW/lib/
-OPENAL_LIB	    ?= -lOpenAL32.dll
+SDK_ROOT    ?= /usr/include/
+
+LIBXML2_H_DIR	?= $(SDK_ROOT)libxml2/
+LIBXML2_H_DIR ?= /c/Users/rgba8/Documents/git/libxml2-2.7.8.win32/include/
+#LIBXML2_H_DIR ?= /c/Users/rgba8/Documents/git/libxml2/include/
+
+#LIBXML2_L_DIR ?= /c/usr/bin/msys-xml2-2.dll
+LIBXML2_L_DIR ?= /c/usr/lib/
+LIBXML2_LIB   ?= -lxml2
+
+OPENGL_H_DIR	?= /c/
+#Program Files (x86)/Windows Kits/8.1/Include/um/
+OPENGL_L_DIR    ?= #C:/MinGW/msys/1.0/lib/
+OPENGL_LIB      ?= -lopengl32
+
+FREETYPE2_ROOT ?= $(SDK_ROOT)
+
+#OPENAL_H_DIR	?= /c/Users/rgba8/Documents/git/openal-soft/include/
+OPENAL_H_DIR ?= /c/Users/rgba8/Documents/git/openal-soft-1.17.2-bin/include/AL/
+OPENAL_L_DIR    ?= #C:/MinGW/lib/
+OPENAL_LIB	    ?= #-lOpenAL32.dll
+
 endif
 endif
 endif
 
-ifeq ($(TARGET_OS), osx)
-COCOA_LIB       ?= -framework cocoa -framework QuartzCore
-endif
-
-#ifeq ($(TARGET_OS), osx)
-#PCI_ROOT        ?= $(SDK_ROOT)usr/include/pci
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 ARGS		?= 	ARCH="$(ARCH)" BUILD="$(BUILD)" FATAL="$(FATAL)" MUD="$(MUD)"\

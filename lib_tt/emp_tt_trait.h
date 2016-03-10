@@ -7,9 +7,9 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 // @@0 : check inclusion CHAR_MIN WCHAR_MIN etc
-#include <limits.h>
-#include <wchar.h>
-#include <float.h>
+#include "emp_hh_float.h"
+#include "emp_hh_limits.h"
+#include "emp_hh_wchar.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -182,59 +182,62 @@ XTMP_TT_TYPE( float         , EMP_TT_FLOAT       , false , false , false , false
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_TYPE(x_Trait, ...)\
-    template <typename T> EMP_NOINSTANCE(struct, x_Trait) typedef __VA_ARGS__ type; };
+    template <typename T> EMP_PP_FORWARD(EMP_NOINSTANCE(struct, x_Trait)) typedef __VA_ARGS__ type; };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_TYPE_PARTIAL(x_Trait, x_Partial, ...)\
-    template <typename T> EMP_NOINSTANCE(struct, x_Trait<x_Partial>) typedef __VA_ARGS__ type; };
+    template <typename T> EMP_PP_FORWARD(EMP_NOINSTANCE(struct, x_Trait<x_Partial>)) typedef __VA_ARGS__ type; };
     
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_VALUE(x_Trait, ...)\
-    template <typename T> EMP_NOINSTANCE_BASE(struct, x_Trait, public, __VA_ARGS__) };
+    template <typename T> EMP_PP_FORWARD(EMP_NOINSTANCE_BASE(struct, x_Trait, public, __VA_ARGS__)) };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_VALUE_PARTIAL_SPECIAL(x_bPartial, x_Trait, x_Partial, ...)\
-template <EMP_PP_IF(x_bPartial, typename T)>\
-    EMP_NOINSTANCE_BASE(struct, x_Trait<x_Partial>, public, __VA_ARGS__) };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_VALUE_PARTIAL(x_Trait, x_Partial, ...)\
-    EMP_TT_DECLARE_VALUE_PARTIAL_SPECIAL(true, x_Trait, x_Partial, __VA_ARGS__)
+    template <typename T>\
+    EMP_PP_FORWARD(EMP_NOINSTANCE_BASE(struct, x_Trait<x_Partial>, public, __VA_ARGS__)) };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_VALUE_SPECIAL(x_Trait, x_Special, ...)\
-    EMP_TT_DECLARE_VALUE_PARTIAL_SPECIAL(false, x_Trait, x_Special, __VA_ARGS__)
+    template <>\
+    EMP_PP_FORWARD(EMP_NOINSTANCE_BASE(struct, x_Trait<x_Special>, public, __VA_ARGS__)) };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_VALUE_PARTIAL_SPECIAL_CV(x_bPartial, x_Trait, x_Type, ...)\
-    EMP_PP_IF_ELSE(  x_bPartial,\
+    EMP_PP_FORWARD(EMP_PP_IF_ELSE(  x_bPartial,\
                 EMP_TT_DECLARE_VALUE_PARTIAL,\
-                EMP_TT_DECLARE_VALUE_SPECIAL)(x_Trait, x_Type, __VA_ARGS__)\
-    EMP_PP_IF_ELSE(  x_bPartial,\
+                EMP_TT_DECLARE_VALUE_SPECIAL)(x_Trait, x_Type, __VA_ARGS__))\
+    EMP_PP_FORWARD(EMP_PP_IF_ELSE(  x_bPartial,\
                 EMP_TT_DECLARE_VALUE_PARTIAL,\
-                EMP_TT_DECLARE_VALUE_SPECIAL)(x_Trait, x_Type const, __VA_ARGS__)\
-    EMP_PP_IF_ELSE(  x_bPartial,\
+                EMP_TT_DECLARE_VALUE_SPECIAL)(x_Trait, x_Type const, __VA_ARGS__))\
+    EMP_PP_FORWARD(EMP_PP_IF_ELSE(  x_bPartial,\
                 EMP_TT_DECLARE_VALUE_PARTIAL,\
-                EMP_TT_DECLARE_VALUE_SPECIAL)(x_Trait, x_Type volatile, __VA_ARGS__)\
-    EMP_PP_IF_ELSE(  x_bPartial,\
+                EMP_TT_DECLARE_VALUE_SPECIAL)(x_Trait, x_Type volatile, __VA_ARGS__))\
+    EMP_PP_FORWARD(EMP_PP_IF_ELSE(  x_bPartial,\
                 EMP_TT_DECLARE_VALUE_PARTIAL,\
-                EMP_TT_DECLARE_VALUE_SPECIAL)(x_Trait, x_Type const volatile, __VA_ARGS__)
+                EMP_TT_DECLARE_VALUE_SPECIAL)(x_Trait, x_Type const volatile, __VA_ARGS__))
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_VALUE_PARTIAL_CV(x_Trait, x_Type, ...)\
-    EMP_TT_DECLARE_VALUE_PARTIAL_SPECIAL_CV(true, x_Trait, x_Type, __VA_ARGS__)
+    EMP_PP_FORWARD(EMP_TT_DECLARE_VALUE_PARTIAL_SPECIAL_CV(true, x_Trait, x_Type, __VA_ARGS__))
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_TT_DECLARE_VALUE_SPECIAL_CV(x_Trait, x_Type, ...)\
-    EMP_TT_DECLARE_VALUE_PARTIAL_SPECIAL_CV(false, x_Trait, x_Type, __VA_ARGS__)
+    EMP_PP_FORWARD(EMP_TT_DECLARE_VALUE_SPECIAL(x_Trait, x_Type                , __VA_ARGS__))\
+    EMP_PP_FORWARD(EMP_TT_DECLARE_VALUE_SPECIAL(x_Trait, x_Type const          , __VA_ARGS__))\
+    EMP_PP_FORWARD(EMP_TT_DECLARE_VALUE_SPECIAL(x_Trait, x_Type volatile       , __VA_ARGS__))\
+    EMP_PP_FORWARD(EMP_TT_DECLARE_VALUE_SPECIAL(x_Trait, x_Type const volatile , __VA_ARGS__))
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

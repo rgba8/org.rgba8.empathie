@@ -71,15 +71,20 @@ static_assert(not_<false>::value == true, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+EMP_PRAGMA_PUSH_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 template <typename T, T t_Left, T t_Right> EMP_NOINSTANCE_BASE(struct, less_equal, public, bool_<t_Left <= t_Right>) };
+EMP_PRAGMA_POP_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 
 static_assert(less_equal<size_t, 0, 1>::value, "");
+
 static_assert(less_equal<size_t, 0, 0>::value, "");
 static_assert(less_equal<size_t, 1, 0>::value == false, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+EMP_PRAGMA_PUSH_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 template <typename T, T t_Left, T t_Right> EMP_NOINSTANCE_BASE(struct, less, public, bool_<t_Left < t_Right>) };
+EMP_PRAGMA_POP_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 
 static_assert(less<size_t, 0, 1>::value, "");
 static_assert(less<size_t, 0, 0>::value == false, "");
@@ -87,7 +92,9 @@ static_assert(less<size_t, 1, 0>::value == false, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+EMP_PRAGMA_PUSH_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 template <typename T, T t_Left, T t_Right> EMP_NOINSTANCE_BASE(struct, more, public, bool_<(t_Left > t_Right)>) };
+EMP_PRAGMA_POP_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 
 static_assert(more<size_t, 0, 1>::value == false, "");
 static_assert(more<size_t, 0, 0>::value == false, "");
@@ -95,7 +102,9 @@ static_assert(more<size_t, 1, 0>::value, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+EMP_PRAGMA_PUSH_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 template <typename T, T t_Left, T t_Right> EMP_NOINSTANCE_BASE(struct, more_equal, public, bool_<t_Left >= t_Right>) };
+EMP_PRAGMA_POP_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 
 static_assert(more_equal<size_t, 0, 1>::value == false, "");
 static_assert(more_equal<size_t, 0, 0>::value, "");
@@ -172,13 +181,14 @@ EMP_NOINSTANCE(struct, (enable_if_t<true, T>))
     typedef T type;
 };
 
-template <bool t_bIf, typename T = void> using enable_if = typename tt::enable_if_t<t_bIf, T>::type;
-template <bool t_bIf, typename T = void> using enable_if_not = typename tt::enable_if_t<t_bIf == false, T>::type;
+struct dummy {};
+template <bool t_bIf, typename T = emp::tt::dummy> using enable_if = typename tt::enable_if_t<t_bIf, T>::type;
+template <bool t_bIf, typename T = emp::tt::dummy> using enable_if_not = typename tt::enable_if_t<t_bIf == false, T>::type;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-#define ENABLE_IF(...) typename emp::tt::enable_if<__VA_ARGS__>* = nullptr
+#define ENABLE_IF(...) emp::tt::enable_if<__VA_ARGS__>* = nullptr
 #define ENABLE_IF_REAL(...) ENABLE_IF(tt::is_real<__VA_ARGS__>::value)
 #define ENABLE_IF_NOT_REAL(...) ENABLE_IF(tt::is_not_real<__VA_ARGS__>::value)
 #define ENABLE_IF_SIGNED(...) ENABLE_IF(tt::is_signed<__VA_ARGS__>::value)

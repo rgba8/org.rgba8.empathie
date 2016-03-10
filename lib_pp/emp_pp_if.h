@@ -11,8 +11,8 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_IF(x_Condition, ...) EMP_PP_IF_IMP(x_Condition, __VA_ARGS__)
-#define EMP_PP_IF_IMP(x_Condition, ...) EMP_PP_CAT(EMP_PP_IF_IMP_, EMP_PP_BOOL(x_Condition))(__VA_ARGS__)
+#define EMP_PP_IF_IMP(x_Condition, ...) EMP_PP_FORWARD(EMP_PP_CAT(EMP_PP_IF_IMP_, EMP_PP_BOOL(x_Condition))(__VA_ARGS__))
+#define EMP_PP_IF(x_Condition, ...) EMP_PP_FORWARD(EMP_PP_IF_IMP(x_Condition, __VA_ARGS__))
 
 #define EMP_PP_IF_IMP_0(...)
 #define EMP_PP_IF_IMP_1(...) __VA_ARGS__

@@ -1,31 +1,34 @@
 //-----------------------------------------------------------------------------
-// emp_pp_bool.h - @rgba8.org
+// @rgba8.org
 //-----------------------------------------------------------------------------
-#ifndef EMP_PP_BOOL_H
-#define EMP_PP_BOOL_H
+#include "emp_xx_call.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_pp_cat.h"
-#include "emp_pp_not.h"
+#include "emp_hh_intrin.h"
+#include "emp_hh_windows.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_CHECK_N(x, n, ...) n
-#define EMP_PP_CHECK(...) EMP_PP_FORWARD(EMP_PP_CHECK_N(__VA_ARGS__, 0,))
-
-#define EMP_PP_PROBE(x) x, 1,
-
-#define EMP_PP_IS0(x_Value) EMP_PP_FORWARD(EMP_PP_CHECK(EMP_PP_CAT(EMP_PP_IS0_, x_Value)))
-#define EMP_PP_IS0_0 EMP_PP_PROBE(~)
-#define EMP_PP_IS0_false EMP_PP_PROBE(~)
-
-#define EMP_PP_BOOL(x_Value) EMP_PP_NOT(EMP_PP_IS0(x_Value))
-
-#define EMP_PP_IS_VOID(x_Value) EMP_PP_CAT(EMP_PP_IS_VOID_, x_Value)
-#define EMP_PP_IS_VOID_void 1
+namespace emp { namespace xx {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+void error_hook(void)
+{
+#ifdef EMP_XX_COMPILER_MSC
+    // @@0 not working __debugbreak;
+    DebugBreak();
+#else
 #endif
+    EMP_LOG_ERROR("debug_break");
+    return;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+} }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 

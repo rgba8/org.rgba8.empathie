@@ -4,14 +4,16 @@
 #ifndef EMP_PP_CAT_H
 #define EMP_PP_CAT_H
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 #include "emp_pp_vaargs.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_CAT_IMPL0(x_Left, x_Right) EMP_PP_CAT_IMPL1(x_Left, x_Right)
 #define EMP_PP_CAT_IMPL1(x_Left, x_Right) x_Left ## x_Right
+#define EMP_PP_CAT_IMPL0(x_Left, x_Right) EMP_PP_CAT_IMPL1(x_Left, x_Right)
 
-#define EMP_PP_CAT(...) EMP_PP_CAT_IMPL0(EMP_PP_CAT_, EMP_VAARGS_COUNT(__VA_ARGS__))(__VA_ARGS__)
+#define EMP_PP_CAT(...) EMP_PP_EXPAND(EMP_PP_CAT_IMPL0(EMP_PP_CAT_, EMP_VAARGS_COUNT(__VA_ARGS__))(__VA_ARGS__))
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

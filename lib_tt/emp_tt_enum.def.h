@@ -83,20 +83,6 @@ EMP_NOINSTANCE(struct, enum_class(enum_name))
 #undef enum_value_ex_3
         >::value;
 
-    static constexpr emp::tt::aliteral const m_sEmpty = ALITERAL("");
-    static constexpr emp::tt::aliteral const names[enum_class(enum_name)::count]
-    {
-#define enum_value_1(x_Name)                     ALITERAL(EMP_PP_STRING(x_Name)),
-#define enum_value_2(x_Name, x_Value)            enum_value_1(x_Name)
-#define enum_value_ex_2(x_Name, x_user)          enum_value_1(x_Name)
-#define enum_value_ex_3(x_Name, x_Value, x_User) enum_value_1(x_Name)
-        enum_values
-#undef enum_value_1
-#undef enum_value_2
-#undef enum_value_ex_2
-#undef enum_value_ex_3
-    };
-
 public:
     static constexpr enum_name const e_values[enum_class(enum_name)::count]
     {
@@ -127,11 +113,11 @@ public:
     // is_valid
     //
     template <enum_name t_eValue>
-    static constexpr EMP_RETURN bool is_valid(void)
+    static constexpr EMP_RETURN bool is_valid_enum(void)
     { return is_valid_t<t_eValue>::value; }
 
     template <size_t t_stValue>
-    static constexpr EMP_RETURN bool is_valid(void)
+    static constexpr EMP_RETURN bool is_valid_index(void)
     { return t_stValue < to_t<max>::value; }
 
     static constexpr EMP_RETURN bool is_valid(enum_name a_eValue)
@@ -157,15 +143,14 @@ public:
     template <size_t t_stValue>
     static constexpr EMP_RETURN enum_name from(void)
     {
-        static_assert(is_valid<t_stValue>(), "");
-        constexpr enum_name const eValue = static_cast<enum_name>(t_stValue);
-        static_assert(is_valid<eValue>(), "");
-        return eValue;
+        static_assert(is_valid_index<t_stValue>(), "");
+        static_assert(is_valid_enum<static_cast<enum_name>(t_stValue)>(), "");
+        return static_cast<enum_name>(t_stValue);
     }
 
     template <size_t t_stValue>
     EMP_NOINSTANCE(struct, from_t)
-        static_assert(is_valid<t_stValue>(), "");
+        static_assert(is_valid_index<t_stValue>(), "");
         static constexpr enum_name const value = static_cast<enum_name>(t_stValue);
     };
 
@@ -181,7 +166,7 @@ public:
     template <enum_name t_eValue, typename T = size_t>
     static constexpr EMP_RETURN T to(void)
     {
-        static_assert(is_valid<t_eValue>(), "");
+        static_assert(is_valid_enum<t_eValue>(), "");
         static_assert(static_cast<size_t>(t_eValue) <= emp::tt::max<T>::value, "");
         static_assert(t_eValue <= e_values[count - 1], "");
         return static_cast<T>(t_eValue);
@@ -197,38 +182,44 @@ public:
 
     // name
     //
-    static EMP_RETURN emp::tt::c_aliteral& name(enum_name const a_eValue)
-    {
-        c_bool bIsValid = is_valid(a_eValue);
-        EMP_ASSERT(bIsValid);
-        if (is_valid(a_eValue))
-        { return names[to(a_eValue)]; }
-        return m_sEmpty;
-    }
+    static EMP_RETURN emp::tt::c_aliteral name(c_size a_stIndex)
+    { return name(from(a_stIndex)); }
 
-    static EMP_RETURN emp::tt::c_aliteral& name(c_size a_stIndex)
+    static EMP_RETURN emp::tt::c_aliteral name(enum_name const a_eValue)
     {
-        c_bool bIsValid = is_valid_index(a_stIndex);
-        EMP_ASSERT(bIsValid);
-        if (bIsValid)
-        { return names[a_stIndex]; }
-        return m_sEmpty;
+        switch (a_eValue) // @@0 c++14 array...
+        {
+#define enum_value_1(x_Name)                     case enum_name::x_Name: { return ALITERAL(EMP_PP_STRING(x_Name)); break; }
+#define enum_value_2(x_Name, x_Value)            enum_value_1(x_Name)
+#define enum_value_ex_2(x_Name, x_user)          enum_value_1(x_Name)
+#define enum_value_ex_3(x_Name, x_Value, x_User) enum_value_1(x_Name)
+            enum_values
+#undef enum_value_1
+#undef enum_value_2
+#undef enum_value_ex_2
+#undef enum_value_ex_3
+            default:
+            {
+                EMP_ASSERT(false);
+                return ALITERAL("");
+            }
+        };
     }
-
+    
     // assert
     static_assert(count <= emp::tt::max<size_t>::value, "");
     static_assert(emp::tt::max<enum_base>::value <= emp::tt::max<size_t>::value, "");
     static_assert(to_t<max, size_t>::value <= emp::tt::max<size_t>::value, "");
 };
 template <typename D>
-EMP_RETURN enum_class(enum_name)<D>& enum_alias(enum_name const& a_rFrom);
+EMP_RETURN enum_class(enum_name)<D>const& enum_alias(enum_name const& a_rFrom);
 
 //template <typename D>
 //EMP_RETURN enum_class<D>& enum_alias_t(enum_name const& a_rFrom);
 
-template <typename D> constexpr emp::tt::aliteral enum_class(enum_name)<D>::names[enum_class(enum_name)<D>::count];
+//template <typename D> constexpr emp::tt::aliteral enum_class(enum_name)<D>::names[enum_class(enum_name)<D>::count];
 
-template <typename D> constexpr emp::tt::aliteral enum_class(enum_name)<D>::m_sEmpty;
+//template <typename D> constexpr emp::tt::aliteral enum_class(enum_name)<D>::m_sEmpty;
 
 #endif
 

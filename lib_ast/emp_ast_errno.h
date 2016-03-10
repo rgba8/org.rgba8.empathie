@@ -10,9 +10,9 @@ namespace emp { namespace ast {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-extern int get_errno(void);
+extern EMP_RETURN int get_errno(void);
 extern void set_errno(c_int a_siValue);
-extern cpc_char errno_to_cstr(void);
+extern EMP_RETURN pc_char errno_to_cstr(void);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

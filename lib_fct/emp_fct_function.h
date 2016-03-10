@@ -41,11 +41,10 @@ template <typename> class member_handler;
 template <typename R, typename O, typename...P>
 EMP_BASE(class, member_handler<R(O::*)(P...)>, public, function_i<R(*)(P...)>)
 private:
-    O* m_pObject;
-
     typedef R(O::*F)(P...);
     typedef R(O::*MF)(P...);
 
+    O* m_pObject;
     MF m_pFunction;
 
 public:

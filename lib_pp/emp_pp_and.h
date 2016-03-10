@@ -14,7 +14,7 @@
 #define EMP_PP_AND_IMP0(x_Left, x_Right) EMP_PP_AND_IMP1(x_Left, x_Right)
 #define EMP_PP_AND_IMP1(x_Left, x_Right) EMP_PP_CAT(EMP_PP_AND_, EMP_PP_BOOL(x_Left), EMP_PP_BOOL(x_Right))
 
-#define EMP_PP_AND(...) EMP_PP_CAT(EMP_PP_AND_, EMP_VAARGS_COUNT(__VA_ARGS__))(__VA_ARGS__)
+#define EMP_PP_AND(...) EMP_PP_FORWARD(EMP_PP_CAT(EMP_PP_AND_, EMP_VAARGS_COUNT(__VA_ARGS__))(__VA_ARGS__))
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

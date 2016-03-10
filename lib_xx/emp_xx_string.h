@@ -109,6 +109,7 @@
 #define EMP_XSZ_lower_z "z"
 #define EMP_XSZ_UPPER_A "A"
 #define EMP_XSZ_UPPER_Z "Z"
+#define EMP_XSZ_UPPER_E "E"
 
 #define EMP_XSZ_0 "0"
 #define EMP_XSZ_1 "1"

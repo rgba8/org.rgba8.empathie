@@ -6,8 +6,8 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define EMP_PP_SOLVE(x_Args) EMP_PP_SOLVE_IMPL x_Args
 #define EMP_PP_SOLVE_IMPL(...) __VA_ARGS__
+#define EMP_PP_SOLVE(x_Args) EMP_PP_SOLVE_IMPL x_Args
 
 
 /*#define CAT(x, y) CAT_I(x, y)
@@ -41,9 +41,9 @@ STRIP_PARENS((a,b,c)) */
 
 #define PASTE(x, ...) x ## __VA_ARGS__
 
-#define EVALUATING_PASTE(x, ...) PASTE(x, __VA_ARGS__)
+#define EVALUATING_PASTE(x, ...) EMP_PP_FORWARD(PASTE(x, __VA_ARGS__))
 
-#define EMP_PP_TRY_SOLVE(x) EVALUATING_PASTE(NOTHING_, EXTRACT x)
+#define EMP_PP_TRY_SOLVE(x) EMP_PP_FORWARD(EVALUATING_PASTE(NOTHING_, EXTRACT x))
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

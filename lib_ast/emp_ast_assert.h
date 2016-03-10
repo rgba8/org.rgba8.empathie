@@ -26,13 +26,12 @@
 #define EMP_TRACE_COMMA EMP_PP_COMMA()
 #define EMP_TRACE_ARG a_rTrace
 #define EMP_TRACE_PARAM emp::ast::trace_c const& a_rTrace
-#define EMP_TRACE_UNUSED EMP_UNUSED
 #define EMP_TRACE_HERE EMP_TRACE()
 namespace emp { namespace ast { class trace_c; } }
 
 #define EMP_TRACE_ARG_COMMA EMP_TRACE_ARG EMP_TRACE_COMMA
 #define EMP_TRACE_PARAM_COMMA EMP_TRACE_PARAM EMP_TRACE_COMMA
-#define EMP_TRACE_PARAM_UNUSED EMP_TRACE_PARAM EMP_TRACE_UNUSED
+#define EMP_TRACE_PARAM_UNUSED emp::ast::trace_c const& EMP_SILENT(a_rTrace)
 #define EMP_TRACE_PARAM_UNUSED_COMMA EMP_TRACE_PARAM_UNUSED EMP_TRACE_COMMA
 #define EMP_TRACE_HERE_COMMA EMP_TRACE_HERE EMP_TRACE_COMMA
 
@@ -74,7 +73,7 @@ public:
     }*/
 
 public:
-    EMP_RETURN cpc_char file(void) const { return m_szFile; }
+    EMP_RETURN pc_char file(void) const { return m_szFile; }
     EMP_RETURN uint ui_line(void) const { return m_uiLine; }
     EMP_RETURN cpc_char& sz_line(void) const { return m_szLine; }
     EMP_RETURN cpc_char& function(void) const { return m_szFunction; }
@@ -83,27 +82,29 @@ public:
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_(class, assert_c)
-private:
+EMP_PRAGMA_PUSH_IGNORE(EMP_W_PADDING_ADDED)
+struct assert_c
+{
+public:
     bool m_bCondition;
     cpc_char m_szCondition;
     trace_c  m_Trace;
 
-public:
-    assert_c(
-        c_bool a_bCondition,
-        cpc_char& a_szCondition,
-        trace_c const& a_rTrace):
-        m_bCondition(a_bCondition),
-        m_szCondition(a_szCondition),
-        m_Trace(a_rTrace)
-    { }
+    assert_c(void) = delete;
+    assert_c(assert_c const&) = delete;
+    assert_c& operator=(assert_c const&) = delete;
+    assert_c& operator=(assert_c&&) = delete;
 
-public:
-    EMP_RETURN bool b_condition(void) const { return m_bCondition; }
-    EMP_RETURN cpc_char sz_condition(void) const { return m_szCondition; }
-    EMP_RETURN trace_c const& trace(void) const { return m_Trace; }
+    //assert_c(
+    //    c_bool a_bCondition,
+    //    cpc_char& a_szCondition,
+    //    trace_c const& a_rTrace):
+    //    m_bCondition(a_bCondition),
+    //    m_szCondition(a_szCondition),
+    //    m_Trace(a_rTrace)
+    //{ }
 };
+EMP_PRAGMA_POP_IGNORE(EMP_W_PADDING_ADDED)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -114,7 +115,7 @@ void assert_(assert_c const& a_rAssert);
 void output_char(c_char a_cValue);
 void output_pchar(cpc_char a_pValue);
 void output_line(cpc_char a_szName, cpc_char a_szValue, c_bool a_bVerbose);
-void output_header(cpc_char a_szName, c_char a_cAlias, c_bool a_bVerbose);
+void output_header(cpc_char a_szName, cpc_char a_szAlias, c_bool a_bVerbose);
 void output_trace(trace_c const& a_rTrace, c_bool a_bVerbose);
 void output_assert(assert_c const& a_rAssert, c_bool a_bVerbose);
 
@@ -126,7 +127,7 @@ void output_assert(assert_c const& a_rAssert, c_bool a_bVerbose);
 //-----------------------------------------------------------------------------
 #ifdef EMP_XX_ASSERT
 
-#define EMP_ASSERT(x_Condition) do { emp::ast::assert_(emp::ast::assert_c(x_Condition, EMP_PP_STRING(x_Condition), EMP_TRACE_HERE)); } while(0)
+#define EMP_ASSERT(x_Condition) do { emp::ast::assert_({ x_Condition, EMP_PP_STRING(x_Condition), EMP_TRACE_HERE}); } while(0)
 #define EMP_ASSERT_UNREACHABLE() EMP_ASSERT(false);
 #define EMP_ASSERT_NOT_IMPLEMENTED() EMP_ASSERT(false);
 #define EMP_ASSERT_BOOL_CALL(x_Call) EMP_ASSERT(x_Call)
@@ -135,7 +136,7 @@ void output_assert(assert_c const& a_rAssert, c_bool a_bVerbose);
 
 #define EMP_ASSERT(x_Condition) EMP_XX_NOOP()
 #define EMP_ASSERT_UNREACHABLE() EMP_XX_NOOP()
-#define EMP_ASSERT_NOT_IMPLEMENTED() static_assert(false, "not implemented")
+#define EMP_ASSERT_NOT_IMPLEMENTED() EMP_ASSERT(false);// static_assert(false, "not implemented")
 #define EMP_ASSERT_BOOL_CALL(x_Call) emp::tt::silent(x_Call)
 
 #endif

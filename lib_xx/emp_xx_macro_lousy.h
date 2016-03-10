@@ -12,7 +12,6 @@
 
 #define EMP_XX_LOCALIZE
 
-#define EMP_XX_GUI_DEBUG
 #define EMP_XX_OSE_DEBUG
 
 //-----------------------------------------------------------------------------
