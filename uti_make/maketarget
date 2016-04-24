@@ -89,7 +89,7 @@ CCACHE ?=
 endif
 
 ifeq ($(COMPILER), clang)
-GPP ?= clang++-3.6 -v
+GPP ?= clang++-3.6
 else
 GPP ?= g++
 endif
