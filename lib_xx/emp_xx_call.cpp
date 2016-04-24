@@ -18,7 +18,7 @@ void error_hook(void)
 {
 #ifdef EMP_XX_COMPILER_MSC
     // @@0 not working __debugbreak;
-    DebugBreak();
+    //DebugBreak();
 #else
 #endif
     EMP_LOG_ERROR("debug_break");

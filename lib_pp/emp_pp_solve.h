@@ -43,7 +43,7 @@ STRIP_PARENS((a,b,c)) */
 
 #define EVALUATING_PASTE(x, ...) EMP_PP_FORWARD(PASTE(x, __VA_ARGS__))
 
-#define EMP_PP_TRY_SOLVE(x) EMP_PP_FORWARD(EVALUATING_PASTE(NOTHING_, EXTRACT x))
+#define EMP_PP_TRY_SOLVE(...) EMP_PP_FORWARD(EVALUATING_PASTE(NOTHING_, EXTRACT __VA_ARGS__))
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

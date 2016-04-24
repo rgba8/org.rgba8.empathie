@@ -86,7 +86,7 @@ LIBXML2_H_DIR ?= /c/Users/rgba8/Documents/git/libxml2-2.7.8.win32/include/
 #LIBXML2_H_DIR ?= /c/Users/rgba8/Documents/git/libxml2/include/
 
 #LIBXML2_L_DIR ?= /c/usr/bin/msys-xml2-2.dll
-LIBXML2_L_DIR ?= /c/usr/lib/
+LIBXML2_L_DIR ?= /usr/lib/
 LIBXML2_LIB   ?= -lxml2
 
 OPENGL_H_DIR	?= /c/

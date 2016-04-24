@@ -204,8 +204,6 @@ CXXFLAGS    +=  -msse2
 CXXFLAGS    +=  -msse3
 CXXFLAGS    +=  -mssse3
 CXXFLAGS    +=  -msse4.1
-#CXXFLAGS_RELEASE    +=  --param inline-unit-growth=200
-#CXXFLAGS_RELEASE    +=  --param large-function-growth=400
 #CXXFLAGS_RELEASE    +=  -fno-branch-count-reg
 
 #CXXFLAGS    +=  -Wstrict-overflow=5
@@ -234,7 +232,9 @@ CXXFLAGS_RELEASE    +=  -fomit-frame-pointer
 CXXFLAGS_RELEASE    +=  -foptimize-sibling-calls
 CXXFLAGS_RELEASE    +=  -funroll-loops
 CXXFLAGS_RELEASE    +=  -pipe
-
+CXXFLAGS_RELEASE    +=  --param inline-unit-growth=200
+CXXFLAGS_RELEASE    +=  --param max-inline-insns-single=1000
+CXXFLAGS_RELEASE    +=  --param large-function-growth=400
 CXXFLAGS_RELEASE    +=  -march=core2
 CXXFLAGS_RELEASE    +=  -mtune=core2
 
