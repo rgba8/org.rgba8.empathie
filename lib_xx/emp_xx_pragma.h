@@ -37,6 +37,7 @@
 #define EMP_W_INLINE 4001 // @@0 implement
 #define EMP_W_ERROR_INLINE 4001 // @@0 implement
 #define EMP_W_DISABLED_OPTIMIZATION 4001 // @@0 implement
+#define EMP_W_SETJMP_CPP 4611
 
 
 #elif defined(EMP_XX_COMPILER_LLVM)
@@ -90,6 +91,7 @@
 #define EMP_W_4324  "-Wformat-security" // @@0 implement
 #define EMP_W_UNSAFE_REINTERPRET_CAST "-Wformat-security" // @@0 implement
 #define EMP_W_UNREFERENCED_PARAMETER "-Wformat-security" // @@0 implement
+#define EMP_W_SETJMP_CPP "-Wformat-security" // @@0 implement
 #define EMP_W_INLINE "-Winline"
 #define EMP_W_ERROR_INLINE "-Werror"
 #define EMP_W_THIS_IN_MIL "-Wformat-security" // @@9 implement
