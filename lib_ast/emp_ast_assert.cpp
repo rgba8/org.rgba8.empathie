@@ -7,7 +7,10 @@
 //-----------------------------------------------------------------------------
 #include "emp_hh_stdio.h"
 #include "emp_hh_stdlib.h"
+
+#if defined EMP_XX_OS_WIN
 #include "emp_hh_windows.h"
+#endif
 
 #include "emp_xx_string.h"
 

@@ -94,8 +94,9 @@ EMP_INLINE EMP_RETURN bool try_cast_impl(t_From a_tFrom, t_To& a_rtTo)
 EMP_INLINE EMP_RETURN bool try_cast_impl(unsigned long a_tFrom, float& a_rTo);
 EMP_INLINE EMP_RETURN bool try_cast_impl(unsigned long a_tFrom, float& a_rTo)
 {
-    static_assert(sizeof(unsigned long) == 4, "");
-    // @@0 a_rTo = a_tFrom;
+    if (a_tFrom >= (1 << 24))
+    { return false; }
+
     a_rTo = static_cast<float>(a_tFrom);
     return true;
 }

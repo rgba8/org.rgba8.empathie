@@ -40,6 +40,10 @@ LIBXML2_H_DIR	?= $(SDK_ROOT)usr/include/libxml2/
 LIBXML2_L_DIR   ?=
 LIBXML2_LIB     ?= -lxml2
 
+LIBPNG_H_DIR    ?= /opt/local/include/
+LIBPNG_L_DIR    ?= /opt/local/lib/
+LIBPNG_LIB      ?= -lpng16
+
 OPENGL_ROOT	    ?= $(SDK_ROOT)System/Library/Frameworks/OpenGL.framework/Versions/A/
 OPENGL_H_DIR    ?= $(OPENGL_ROOT)Headers/
 OPENGL_L_DIR    ?=
