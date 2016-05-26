@@ -94,7 +94,7 @@
 #define EMP_W_UNREFERENCED_PARAMETER "-Wformat-security" // @@0 implement
 #define EMP_W_SETJMP_CPP "-Wformat-security" // @@0 implement
 #define EMP_W_INLINE "-Winline"
-#define EMP_W_ERROR_INLINE "-Werror"
+#define EMP_W_ERROR_INLINE "-Wformat-security"
 #define EMP_W_THIS_IN_MIL "-Wformat-security" // @@9 implement
 #define EMP_W_DISABLED_OPTIMIZATION "-Wdisabled-optimization"
 

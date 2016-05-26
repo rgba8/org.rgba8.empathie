@@ -69,6 +69,10 @@ LIBXML2_H_DIR	?= $(SDK_ROOT)libxml2/
 LIBXML2_L_DIR   ?=
 LIBXML2_LIB ?= -lxml2
 
+LIBPNG_H_DIR    ?= /usr/local/include/
+LIBPNG_L_DIR    ?= /usr/local/lib/
+LIBPNG_LIB      ?= -lpng16
+
 OPENGL_H_DIR	?= $(SDK_ROOT)GL/
 OPENGL_L_DIR    ?=
 OPENGL_LIB      ?= -lGL
