@@ -12,8 +12,6 @@ namespace emp { namespace ast {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#ifdef EMP_XX_COMPILER_MSC
-#else
 EMP_RETURN int get_errno(void)
 { return errno; }
 
@@ -29,15 +27,27 @@ EMP_RETURN pc_char errno_to_cstr(void)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_RETURN pc_char errno_to_cstr(c_int a_siErrno)
+EMP_RETURN pc_char errno_to_cstr(c_int
+    #if defined EMP_XX_COMPILER_MSC
+    #else
+        a_siErrno
+    #endif
+    )
 {
+#if defined EMP_XX_COMPILER_MSC
+    /*errno = 0;
+    constexpr c_size c_stCount = 256;
+    char cBuffer[c_stCount];
+    strerror_s(cBuffer, c_stCount - 1, a_siErrno);*/
+    return "not implemented";
+#else
     errno = 0;
     cpc_char szResult = strerror(a_siErrno);
     EMP_ASSERT(szResult);
     EMP_ASSERT(errno == 0 || errno == ERANGE);
     return szResult;
-}
 #endif
+}
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
