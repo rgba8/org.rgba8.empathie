@@ -1,8 +1,8 @@
 //-----------------------------------------------------------------------------
 // emp_ast_errno.h - @rgba8.org
 //-----------------------------------------------------------------------------
-#ifndef EMP_ERR_ERRNO_H
-#define EMP_ERR_ERRNO_H
+#ifndef EMP_AST_ERRNO_H
+#define EMP_AST_ERRNO_H
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -10,9 +10,13 @@ namespace emp { namespace ast {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-extern EMP_RETURN int get_errno(void);
-extern void set_errno(c_int a_siValue);
-extern EMP_RETURN pc_char errno_to_cstr(void);
+#ifdef EMP_XX_COMPILER_MSC
+#else
+EMP_RETURN int get_errno(void);
+void set_errno(c_int a_siValue);
+EMP_RETURN pc_char errno_to_cstr(void);
+EMP_RETURN pc_char errno_to_cstr(c_int a_siValue);
+#endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

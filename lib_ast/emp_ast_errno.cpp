@@ -12,6 +12,8 @@ namespace emp { namespace ast {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+#ifdef EMP_XX_COMPILER_MSC
+#else
 EMP_RETURN int get_errno(void)
 { return errno; }
 
@@ -23,17 +25,19 @@ void set_errno(c_int a_siValue)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 EMP_RETURN pc_char errno_to_cstr(void)
+{ return errno_to_cstr(get_errno()); }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+EMP_RETURN pc_char errno_to_cstr(c_int a_siErrno)
 {
-/* @@0 win
-c_int siErrno = get_errno();
     errno = 0;
-    cpc_char szResult = strerror(siErrno);
+    cpc_char szResult = strerror(a_siErrno);
     EMP_ASSERT(szResult);
     EMP_ASSERT(errno == 0 || errno == ERANGE);
     return szResult;
-    */
-    return nullptr;
 }
+#endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
