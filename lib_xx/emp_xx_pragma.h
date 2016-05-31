@@ -106,9 +106,12 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #if defined EMP_XX_COMPILER_MSC
+#define EMP_PRAGMA_SET_IGNORE(x_Value)\
+    __pragma(warning(disable:x_Value))
+
 #define EMP_PRAGMA_PUSH_IGNORE(x_Value)\
     __pragma(warning(push))\
-    __pragma(warning(disable:x_Value))
+    EMP_PRAGMA_SET_IGNORE(x_Value)
 
 #define EMP_PRAGMA_POP_IGNORE(x_Value)\
     __pragma(warning(pop))
