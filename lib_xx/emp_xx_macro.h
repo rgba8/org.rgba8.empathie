@@ -171,7 +171,7 @@
 using namespace emp::cnt;
 using namespace emp::str;
 
-EMP_PRAGMA_PUSH_IGNORE(EMP_W_INLINE)
+EMP_PRAGMA_SET_IGNORE(EMP_W_INLINE)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
