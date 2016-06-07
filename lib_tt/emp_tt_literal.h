@@ -23,7 +23,11 @@ namespace emp { namespace tt {
 //EMP_INLINE constexpr bool const_assert(c_bool a_bCondition)
 //{ return a_bCondition ? true : not_const(a_bCondition); }
 
-#define const_assert assert
+#if defined EMP_XX_ASSERT
+#define const_assert(...) assert(__VA_ARGS__)
+#else
+#define const_assert(...)
+#endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -75,7 +79,7 @@ public:
         const_assert(a_stLen < t_stSize);
         return a_szLiteral[a_stLen] != '\0' ? 1 + (a_stCount < 1 ? 0 : len_impl<t_stSize>(a_szLiteral, a_stLen + 1, a_stCount - 1)) : 0;
     }
-    
+
     //template <size_t t_stSize>
     //struct len_impl<t_stSize, 1>
     //{

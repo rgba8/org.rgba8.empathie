@@ -89,13 +89,17 @@ else
 ifeq ($(TARGET_OS), win)
 SDK_ROOT    ?= /usr/include/
 
-LIBXML2_H_DIR	?= $(SDK_ROOT)libxml2/
-LIBXML2_H_DIR ?= /c/Users/rgba8/Documents/git/libxml2-2.7.8.win32/include/
+#LIBXML2_H_DIR	?= $(SDK_ROOT)libxml2/
 #LIBXML2_H_DIR ?= /c/Users/rgba8/Documents/git/libxml2/include/
+LIBXML2_H_DIR ?= /c/Users/rgba8/Documents/git/libxml2-2.7.8.win32/include/
 
 #LIBXML2_L_DIR ?= /c/usr/bin/msys-xml2-2.dll
 LIBXML2_L_DIR ?= /usr/lib/
 LIBXML2_LIB   ?= -lxml2
+
+LIBPNG_H_DIR    ?= /c/Users/rgba8/Documents/git/libpng/
+LIBPNG_L_DIR    ?= /c/Users/rgba8/Documents/git/libpng/projects/vsstudio/Release/
+LIBPNG_LIB      ?= -lpng16
 
 OPENGL_H_DIR	?= /c/
 #Program Files (x86)/Windows Kits/8.1/Include/um/

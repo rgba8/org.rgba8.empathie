@@ -18,7 +18,7 @@
 //-----------------------------------------------------------------------------
 #ifdef EMP_XX_ERROR_HOOK
 #define EMP_XX_HOOK() emp::xx::error_hook();
-namespace emp 
+namespace emp
 {
     namespace xx
     {
@@ -31,6 +31,7 @@ namespace emp
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+#if defined EMP_XX_DEBUG
 #define EMP_RET_X_IF_X_1(x_Test, x_Void, x_Return, x_Call)\
 EMP_XX_MULTI_STATEMENT_BEGIN()\
 if ((x_Call) x_Test)\
@@ -53,7 +54,20 @@ if ((x_Call) x_Test)\
     return EMP_PP_IF_NOT(x_Void, x_Return);\
 }\
 EMP_XX_MULTI_STATEMENT_END()
+#else
+#define EMP_RET_X_IF_X_1(x_Test, x_Void, x_Return, x_Call)\
+EMP_XX_MULTI_STATEMENT_BEGIN()\
+if ((x_Call) x_Test) { return EMP_PP_IF_NOT(x_Void, x_Return); }\
+EMP_XX_MULTI_STATEMENT_END()
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#define EMP_RET_X_IF_X_0(x_Test, x_Void, x_Return, x_Call, ...)\
+EMP_XX_MULTI_STATEMENT_BEGIN()\
+if ((x_Call) x_Test) { return EMP_PP_IF_NOT(x_Void, x_Return); }\
+EMP_XX_MULTI_STATEMENT_END()
+
+#endif
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_RET_X_IF_X(x_Test, x_Return, ...)\
@@ -75,6 +89,9 @@ EMP_XX_MULTI_STATEMENT_END()
 
 #define EMP_RET_NULL_IF(      ...)  EMP_PP_FORWARD(EMP_RET_X_IF(nullptr , __VA_ARGS__ ))
 #define EMP_RET_NULL_IF_NOT(  ...)  EMP_PP_FORWARD(EMP_RET_X_IF_NOT(nullptr , __VA_ARGS__ ))
+
+#define EMP_RET_NEG1_IF(      ...)  EMP_PP_FORWARD(EMP_RET_X_IF(-1 , __VA_ARGS__ ))
+#define EMP_RET_NEG1_IF_NOT(  ...)  EMP_PP_FORWARD(EMP_RET_X_IF_NOT(-1 , __VA_ARGS__ ))
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
