@@ -83,6 +83,7 @@ endif
 ##-----------------------------------------------------------------------------
 MAKECHECK	?= $(ROOT)uti_check/check.py
 
+CXXFLAGS    ?=  -std=c++14
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 ifeq ($(TARGET_OS), lin)
@@ -91,8 +92,9 @@ else
 CCACHE ?=
 endif
 
-ifeq ($(COMPILER), clang)
-GPP ?= clang++-3.6
+ifeq ($(COMPILER), llvm)
+GPP ?= clang++ -v
+CXXFLAGS    += -stdlib=libstdc++
 else
 GPP ?= g++
 endif
@@ -103,9 +105,6 @@ UTI_GPP_X86_64  ?=  $(CCACHE) $(GPP) -pipe
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
-CPPFLAGS    ?= #-std=c++11
-
-CXXFLAGS    ?=  -std=c++14
 CXXFLAGS    +=  -Wall
 CXXFLAGS    +=  -Werror
 CXXFLAGS    +=  -Wabi
@@ -189,11 +188,12 @@ ifeq ($(COMPILER), gcc)
 CXXFLAGS    +=  -fabi-version=0
 
 ifeq ($(MUD), true)
-    $(CXXFLAGS    +=  -Wno-mudflap
+CXXFLAGS    +=  -Wno-mudflap
 endif
 
 ifeq ($(COMPILER), llvm)
 CXXFLAGS    +=  -fmacro-backtrace-limit=0
+CXXFLAGS    +=  -stdlib=libc++
 endif
 
 CXXFLAGS    +=  -Wsync-nand
@@ -345,12 +345,8 @@ endif
 ifeq ($(COMPILER), llvm)
     DEFINES += "-DEMP_XX_COMPILER_LLVM"
 else
-ifeq ($(COMPILER), clang)
-    DEFINES += "-DEMP_XX_COMPILER_LLVM"
-else
 ifeq ($(COMPILER), gcc)
     DEFINES += "-DEMP_XX_COMPILER_GCC"
-endif
 endif
 endif
 
@@ -418,7 +414,7 @@ else
 	$(error unknown architecture : "$(ARCH)")
 endif
 
-ifneq (, $(filter "$(COMPILER)", "llvm" "gcc" "clang"))
+ifneq (, $(filter "$(COMPILER)", "llvm" "gcc"))
 	$(info "$(COMPILER)" compiler...)
 else
 	$(error unknown compiler : "$(COMPILER)")
