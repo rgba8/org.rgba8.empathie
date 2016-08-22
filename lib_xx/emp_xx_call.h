@@ -29,9 +29,14 @@ namespace emp
 #define EMP_XX_HOOK()
 #endif
 
+//#define EMP_XX_RELEASE_LOG
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#if defined EMP_XX_DEBUG
+#if defined EMP_XX_LOG
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 #define EMP_RET_X_IF_X_1(x_Test, x_Void, x_Return, x_Call)\
 EMP_XX_MULTI_STATEMENT_BEGIN()\
 if ((x_Call) x_Test)\
@@ -42,8 +47,6 @@ if ((x_Call) x_Test)\
 }\
 EMP_XX_MULTI_STATEMENT_END()
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 #define EMP_RET_X_IF_X_0(x_Test, x_Void, x_Return, x_Call, ...)\
 EMP_XX_MULTI_STATEMENT_BEGIN()\
 if ((x_Call) x_Test)\
@@ -54,20 +57,25 @@ if ((x_Call) x_Test)\
     return EMP_PP_IF_NOT(x_Void, x_Return);\
 }\
 EMP_XX_MULTI_STATEMENT_END()
-#else
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+/*#else
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 #define EMP_RET_X_IF_X_1(x_Test, x_Void, x_Return, x_Call)\
 EMP_XX_MULTI_STATEMENT_BEGIN()\
 if ((x_Call) x_Test) { return EMP_PP_IF_NOT(x_Void, x_Return); }\
 EMP_XX_MULTI_STATEMENT_END()
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 #define EMP_RET_X_IF_X_0(x_Test, x_Void, x_Return, x_Call, ...)\
 EMP_XX_MULTI_STATEMENT_BEGIN()\
 if ((x_Call) x_Test) { return EMP_PP_IF_NOT(x_Void, x_Return); }\
 EMP_XX_MULTI_STATEMENT_END()
-
+*/
 #endif
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_RET_X_IF_X(x_Test, x_Return, ...)\

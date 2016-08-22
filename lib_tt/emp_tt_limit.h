@@ -162,8 +162,11 @@ EMP_NOINSTANCE(struct, (max_t<T, first, last>)) static constexpr const T value =
 #define EMP_TT_MIN_CTOR(x_Variable) x_Variable(emp::tt::min<decltype(x_Variable)>::value)
 #define EMP_TT_MAX_CTOR(x_Variable) x_Variable(emp::tt::max<decltype(x_Variable)>::value)
 
-#define EMP_TT_MIN_VAR(x_Variable) x_Variable = emp::tt::min<emp::tt::try_remove_reference<decltype(x_Variable)>>::value
-#define EMP_TT_MAX_VAR(x_Variable) x_Variable = emp::tt::max<emp::tt::try_remove_reference<decltype(x_Variable)>>::value
+#define EMP_TT_MIN(x_Variable) emp::tt::min<emp::tt::try_remove_reference<decltype(x_Variable)>>::value
+#define EMP_TT_MAX(x_Variable) emp::tt::max<emp::tt::try_remove_reference<decltype(x_Variable)>>::value
+
+#define EMP_TT_MIN_VAR(x_Variable) x_Variable = EMP_TT_MIN(x_Variable)
+#define EMP_TT_MAX_VAR(x_Variable) x_Variable = EMP_TT_MAX(x_Variable)
 
 
 /* @@0 wtf template <typename T>
@@ -198,6 +201,15 @@ constexpr EMP_RETURN T minof(T const& a_rLeft, T const& a_rRight)
     const_assert(is_valid(a_rLeft));
     const_assert(is_valid(a_rRight));
     return a_rLeft < a_rRight ? a_rLeft : a_rRight;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+template <typename T>
+constexpr EMP_RETURN T saturate(T const& a_rLeft)
+{
+    const_assert(is_valid(a_rLeft));
+    return maxof<T>(0, minof<T>(1, a_rLeft));
 }
 
 //-----------------------------------------------------------------------------

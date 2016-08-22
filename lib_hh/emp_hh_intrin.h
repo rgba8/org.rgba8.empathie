@@ -11,6 +11,7 @@ EMP_PRAGMA_PUSH_IGNORE(EMP_W_4548)
 #include <mmintrin.h>
 #include <emmintrin.h>
 EMP_PRAGMA_POP_IGNORE(EMP_W_4548)
+#elif defined EMP_XX_OS_IOS
 #else
 #include <x86intrin.h>
 #endif

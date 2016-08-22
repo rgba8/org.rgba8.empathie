@@ -28,7 +28,7 @@ void error_hook(void)
 #else
 #endif
 
-    EMP_LOG_ERROR("debug_break");
+    //EMP_LOG_ERROR("debug_break");
     return;
 }
 #endif
