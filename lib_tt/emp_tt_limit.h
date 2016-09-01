@@ -6,13 +6,15 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_tt_literal.h"
+//#include "emp_tt_literal.h"
+#include "emp_tt_dereference.h"
 #include "emp_tt_trait.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #include "emp_hh_math.h"
 #include "emp_hh_limits.h"
+#include "emp_hh_assert.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -145,7 +147,7 @@ template <typename T> EMP_INLINE void get_min(T& a_rtValue) { a_rtValue = emp::t
 template <typename T> EMP_INLINE void get_max(T& a_rtValue) { a_rtValue = emp::tt::max<T>::value; }
 template <typename T> EMP_INLINE EMP_RETURN T get_max(void) { return emp::tt::max<T>::value; }
 template <typename T> EMP_INLINE EMP_RETURN bool is_min(T const a_rtValue) { return equal_(a_rtValue, emp::tt::min<T>::value); }
-template <typename T> EMP_INLINE EMP_RETURN bool is_max(T const a_rtValue) { return equal_(a_rtValue, emp::tt::max<T>::value); }
+template <typename T> constexpr EMP_INLINE EMP_RETURN bool is_max(T const a_rtValue) { return equal_(a_rtValue, emp::tt::max<T>::value); }
 template <typename T> EMP_INLINE EMP_RETURN bool is_not_min(T const a_rtValue) { return is_min(a_rtValue) == false; }
 template <typename T> EMP_INLINE EMP_RETURN bool is_not_max(T const a_rtValue) { return is_max(a_rtValue) == false; }
 template <typename T> EMP_INLINE EMP_RETURN bool has_max(T const a_rtValue) { return is_max(a_rtValue); }

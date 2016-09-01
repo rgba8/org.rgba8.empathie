@@ -7,27 +7,11 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #include "emp_hh_assert.h"
+#include "emp_tt_limit.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 namespace emp { namespace tt {
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//EMP_INLINE bool not_const(c_bool EMP_SILENT(a_bCondition));
-//EMP_INLINE bool not_const(c_bool EMP_SILENT(a_bCondition))
-//{ return false; }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//EMP_INLINE constexpr bool const_assert(c_bool a_bCondition)
-//{ return a_bCondition ? true : not_const(a_bCondition); }
-
-#if defined EMP_XX_ASSERT
-#define const_assert(...) assert(__VA_ARGS__)
-#else
-#define const_assert(...)
-#endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -280,20 +264,71 @@ public:
 public:
 #if defined EMP_XX_CPP_11
 
-    static constexpr EMP_INLINE EMP_RETURN size_t args(T const& a_Literal, c_size a_stIndex = 0)
-    { return a_stIndex < a_Literal.len() ? (a_Literal[a_stIndex] == '#' ? 1 : 0) + args(a_Literal, a_stIndex + 1) : 0; }
- 
+    static constexpr EMP_INLINE EMP_RETURN size_t arg_stub(T const& a_Literal, c_size a_stIndex, c_size a_stCount, c_ui64 a_uiArg, c_size a_stOffset)
+    { return a_stIndex < a_Literal.len() ? (a_stOffset % 2 == 1 ? arg_index(a_Literal, a_stIndex + a_stOffset, a_stCount, a_uiArg) : args(a_Literal, a_stIndex +(a_stOffset > 0 ? a_stOffset : 1))) : 0; }
+
+    static constexpr EMP_INLINE EMP_RETURN size_t args(T const& a_Literal, c_size a_stIndex, c_size a_stCount = 0)
+    { return a_stIndex < a_Literal.len() ? arg_stub(a_Literal, a_stIndex, a_stCount, 0, is_arg(a_Literal, a_stIndex)) : 0; }
+
+    static constexpr EMP_INLINE EMP_RETURN bool is_arg(T const& a_Literal, c_size a_stIndex)
+    { return a_stIndex < a_Literal.len() ? (a_Literal[a_stIndex] == '#' ? 1 + is_arg(a_Literal, a_stIndex + 1) : 0) : 0; }
+
+    static constexpr EMP_INLINE EMP_RETURN size_t arg_index(T const& a_Literal, c_size a_stIndex, c_size a_stCount, c_ui64 a_uiArg)
+    { return a_stIndex < a_Literal.len() ?
+            ((a_Literal[a_stIndex] >= '0' && a_Literal[a_stIndex] <= '9') ?
+                arg_index(a_Literal, a_stIndex, a_stCount, a_uiArg * 10 + a_Literal[a_stIndex] - '0') :
+                args(a_Literal, a_stIndex, a_stCount + 1) + (a_stCount == a_uiArg ? 1 : 0)) : 0;
+    }
 #else
     static constexpr EMP_INLINE EMP_RETURN size_t args(T const& a_Literal)
     {
-        size_t stArgs = 0;
+        size_t stRank = 0;
+        size_t stSharp = 0;
         c_size stLen = a_Literal.len();
-        for (size_t stIndex = 0; stIndex < stLen; ++stIndex)
+        size_t stIndex = 0;
+        while (stIndex < stLen)
         {
-            if (a_Literal[stIndex] == '#')
-            { ++stArgs; }
+            auto const& cChar = a_Literal[stIndex];
+            if (cChar == '#')
+            {
+                ++stSharp;
+                ++stIndex;
+            }
+            else
+            {
+                c_bool isArg = (stSharp % 2) == 1;
+                stSharp = 0;
+                if (isArg)
+                {
+                    size_t EMP_TT_MAX_VAR(stValue);
+                    while (stIndex < stLen)
+                    {
+                        auto const& cNum = a_Literal[stIndex];
+                        if (cNum >= '0' && cNum <= '9')
+                        {
+                            if (emp::tt::is_max(stValue))
+                            { stValue = 0; }
+                            stValue = stValue * 10 + static_cast<size_t>(cNum - '0');
+                            ++stIndex;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if (emp::tt::is_max(stValue) ||
+                        stValue != stRank)
+                    { return 0; }
+                    else
+                    { ++stRank; }
+                }
+                else
+                {
+                    ++stIndex;
+                }
+            }
         }
-        return stArgs;
+        return stRank;
     }
 #endif
 };
@@ -308,8 +343,6 @@ using u8format_c = format_t<u8literal>;
 EMP_TYPEDEF(u8format_c)
 #define U8FORMAT(x_Cstr, x_Count) XFORMAT(emp::tt::u8format_c, U8LITERAL, x_Cstr, x_Count)
 
-static_assert(aformat_c::args(ALITERAL("#a#b#c")) == 3, "");
-static_assert(AFORMAT("ab##", 2).args() == 2, "");
 // @@0 static_assert
 
 //-----------------------------------------------------------------------------
