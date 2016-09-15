@@ -36,6 +36,76 @@ EMP_RETURN T* function_clone(T* a_pFrom)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+template <typename> class static_handler;
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+template <typename R, typename... P>
+EMP_BASE(class, static_handler<R(*)(P...)>, public, function_i<R(*)(P...)>)
+public:
+    typedef R(*F)(P...);
+
+private:
+    F m_Function;
+
+public:
+    static_handler(static_handler const& a_rFrom) :
+    m_Function(a_rFrom.m_Function) {}
+
+    static_handler(F const& a_rFunction) :
+    m_Function(a_rFunction) {}
+
+    static_handler& operator=(static_handler const& a_rFrom)
+    {
+        m_Function = a_rFrom.m_Function;
+        return *this;
+    }
+
+    EMP_RETURN static_handler* clone(void)
+    { return EMP_ALLOCATE(static_handler, *this); }
+
+    EMP_RETURN bool is_valid(void) const
+    { return m_Function != nullptr; }
+
+    R operator()(P const&... a_rtParams) const { return m_Function(a_rtParams...); }
+    R operator()(P const&... a_rtParams)       { return m_Function(a_rtParams...); }
+};
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+/*template <typename R, typename... P>
+EMP_BASE(class, static_handler<function_t<R(*)(P...)>>, public, function_i<R(*)(P...)>)
+public:
+    typedef function_t<R(*)(P...)> F;
+
+private:
+    F m_Function;
+
+public:
+    static_handler(static_handler const& a_rFrom) :
+    m_Function(a_rFrom.m_Function) {}
+
+    static_handler(F const& a_rFunction) :
+    m_Function(a_rFunction) {}
+
+    static_handler& operator=(static_handler const& a_rFrom)
+    {
+        m_Function = a_rFrom.m_Function;
+        return *this;
+    }
+
+    EMP_RETURN static_handler* clone(void)
+    { return EMP_ALLOCATE(i, *this); }
+
+    EMP_RETURN bool is_valid(void) const
+    { return m_Function.is_valid(); }
+
+    R operator()(P const&... a_rtParams) const { return m_Function(a_rtParams...); }
+    R operator()(P const&... a_rtParams)       { return m_Function(a_rtParams...); }
+};*/
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 template <typename> class member_handler;
 
 template <typename R, typename O, typename...P>
@@ -95,7 +165,9 @@ public:
         m_pImpl(a_pImpl)
     {}
 
-    function_t(F const& a_rFrom);
+    function_t(F const& a_rFrom):
+        m_pImpl(EMP_ALLOCATE(static_handler<F>, a_rFrom))
+    {}
 
     template <typename O>
     function_t(O* const a_pObject, R(O::* const& a_pFunction)(P...)) :
@@ -119,76 +191,6 @@ public:
 public:
     R operator()(P const&... a_rtParams) const { return (*m_pImpl)(a_rtParams...); }
     R operator()(P const&... a_rtParams)       { return (*m_pImpl)(a_rtParams...); }
-};
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-template <typename> class static_handler;
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-template <typename R, typename... P>
-EMP_BASE(class, static_handler<R(*)(P...)>, public, function_i<R(*)(P...)>)
-public:
-    typedef R(*F)(P...);
-
-private:
-    F m_Function;
-
-public:
-    static_handler(static_handler const& a_rFrom) :
-    m_Function(a_rFrom.m_Function) {}
-
-    static_handler(F const& a_rFunction) :
-    m_Function(a_rFunction) {}
-
-    static_handler& operator=(static_handler const& a_rFrom)
-    {
-        m_Function = a_rFrom.m_Function;
-        return *this;
-    }
-
-    EMP_RETURN static_handler* clone(void)
-    { return EMP_ALLOCATE(static_handler, *this); }
-
-    EMP_RETURN bool is_valid(void) const
-    { return m_Function != nullptr; }
-
-    R operator()(P const&... a_rtParams) const { return m_Function(a_rtParams...); }
-    R operator()(P const&... a_rtParams)       { return m_Function(a_rtParams...); }
-};
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-template <typename R, typename... P>
-EMP_BASE(class, static_handler<function_t<R(*)(P...)>>, public, function_i<R(*)(P...)>)
-public:
-    typedef function_t<R(*)(P...)> F;
-
-private:
-    F m_Function;
-
-public:
-    static_handler(static_handler const& a_rFrom) :
-    m_Function(a_rFrom.m_Function) {}
-
-    static_handler(F const& a_rFunction) :
-    m_Function(a_rFunction) {}
-
-    static_handler& operator=(static_handler const& a_rFrom)
-    {
-        m_Function = a_rFrom.m_Function;
-        return *this;
-    }
-
-    EMP_RETURN static_handler* clone(void)
-    { return EMP_ALLOCATE(static_handler, *this); }
-
-    EMP_RETURN bool is_valid(void) const
-    { return m_Function.is_valid(); }
-
-    R operator()(P const&... a_rtParams) const { return m_Function(a_rtParams...); }
-    R operator()(P const&... a_rtParams)       { return m_Function(a_rtParams...); }
 };
 
 //-----------------------------------------------------------------------------
