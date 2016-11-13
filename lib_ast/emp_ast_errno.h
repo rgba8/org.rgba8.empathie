@@ -18,8 +18,8 @@ namespace emp { namespace ast {
 //-----------------------------------------------------------------------------
 EMP_RETURN int get_errno(void);
 void set_errno(c_int a_siValue);
-EMP_RETURN pc_char errno_to_cstr(void);
-EMP_RETURN pc_char errno_to_cstr(c_int a_siValue);
+EMP_RETURN c_char* errno_to_cstr(void);
+EMP_RETURN c_char* errno_to_cstr(c_int a_siValue);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

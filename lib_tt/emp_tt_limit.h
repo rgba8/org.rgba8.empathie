@@ -164,8 +164,8 @@ EMP_NOINSTANCE(struct, (max_t<T, first, last>)) static constexpr const T value =
 #define EMP_TT_MIN_CTOR(x_Variable) x_Variable(emp::tt::min<decltype(x_Variable)>::value)
 #define EMP_TT_MAX_CTOR(x_Variable) x_Variable(emp::tt::max<decltype(x_Variable)>::value)
 
-#define EMP_TT_MIN(x_Variable) emp::tt::min<emp::tt::try_remove_reference<decltype(x_Variable)>>::value
-#define EMP_TT_MAX(x_Variable) emp::tt::max<emp::tt::try_remove_reference<decltype(x_Variable)>>::value
+#define EMP_TT_MIN(x_Variable) emp::tt::min<emp::tt::try_remove_reference<emp::tt::try_remove_const<decltype(x_Variable)>>>::value
+#define EMP_TT_MAX(x_Variable) emp::tt::max<emp::tt::try_remove_reference<emp::tt::try_remove_const<decltype(x_Variable)>>>::value
 
 #define EMP_TT_MIN_VAR(x_Variable) x_Variable = EMP_TT_MIN(x_Variable)
 #define EMP_TT_MAX_VAR(x_Variable) x_Variable = EMP_TT_MAX(x_Variable)

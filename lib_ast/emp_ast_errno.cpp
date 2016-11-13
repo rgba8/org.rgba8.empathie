@@ -22,12 +22,12 @@ void set_errno(c_int a_siValue)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_RETURN pc_char errno_to_cstr(void)
+EMP_RETURN c_char* errno_to_cstr(void)
 { return errno_to_cstr(get_errno()); }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_RETURN pc_char errno_to_cstr(c_int
+EMP_RETURN c_char* errno_to_cstr(c_int
     #if defined EMP_XX_COMPILER_MSC
     #else
         a_siErrno

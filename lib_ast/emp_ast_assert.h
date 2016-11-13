@@ -44,11 +44,11 @@ namespace emp { namespace ast {
 struct trace_s
 {
 public:
-    pc_char m_szFile;
+    c_char* m_szFile;
     uint m_uiLine;
-    pc_char m_szLine;
-    pc_char m_szFunction;
-    pc_char m_szSignature;
+    c_char* m_szLine;
+    c_char* m_szFunction;
+    c_char* m_szSignature;
 };
 
 //-----------------------------------------------------------------------------

@@ -90,7 +90,7 @@ void output_trace(trace_s const& a_rTrace, c_bool a_bVerbose)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void output_assert(assert_c const& a_rAssert, bool const a_bVerbose)
+void output_assert(assert_c const& a_rAssert, c_bool a_bVerbose)
 {
     output_trace(a_rAssert.m_Trace, a_bVerbose);
     output_line(EMP_XSZ_CONDITION, a_rAssert.m_szCondition, a_bVerbose);

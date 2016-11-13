@@ -25,10 +25,8 @@ namespace emp { namespace rfx  { template <typename> class type_t; } }
 //-----------------------------------------------------------------------------
 #define EMP_TYPEDEF_IMP(x_Type, x_Alias)\
     typedef x_Type const EMP_PP_CAT(c_, x_Alias);\
-    typedef x_Type* EMP_PP_CAT(p_, x_Alias);\
-    typedef x_Type const* EMP_PP_CAT(pc_, x_Alias);\
+    typedef x_Type* const EMP_PP_CAT(pc_, x_Alias);\
     typedef x_Type const* const EMP_PP_CAT(cpc_, x_Alias);\
-    typedef x_Type* const EMP_PP_CAT(cp_, x_Alias);
 
 #define EMP_TYPEDEF_EX(x_Type, x_Alias)\
     typedef x_Type x_Alias;\
@@ -178,6 +176,22 @@ public:\
     EMP_PP_FORWARD(EMP_NOCOPY_BASE(x_Type, x_Name, __VA_ARGS__))\
     EMP_XX_NOINSTANCE(x_Name)\
     EMP_XX_TYPE_ACCESS(x_Type)
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+#define EMP_FIELD_1(x_Type, x_Name)\
+    x_Type x_Name;\
+    auto& x_Name##_(x_Type const& a_Value) { x_Name = a_Value; return *this; }
+
+#define EMP_FIELD_0(x_Type, x_Name, ...)\
+    x_Type x_Name = __VA_ARGS__;\
+    auto& x_Name##_(x_Type const& a_Value) { x_Name = a_Value; return *this; }
+
+#define EMP_FIELD(x_Type, ...)\
+    EMP_PP_CAT(EMP_FIELD_, EMP_PP_EQUAL(1, EMP_VAARGS_COUNT(__VA_ARGS__)))(x_Type, __VA_ARGS__)
+
+#define EMP_FIELD_MAX(x_Type, x_Name) EMP_FIELD(x_Type, x_Name, EMP_TT_MAX(x_Name))
+
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
