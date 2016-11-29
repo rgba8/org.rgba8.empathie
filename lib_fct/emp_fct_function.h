@@ -240,8 +240,8 @@ public:
         m_p0(p0), m_Function(a_rFunction)
     {}
 
-    R operator()(P... a_rtParams) const { return m_Function(m_p0, a_rtParams...); }
-    R operator()(P... a_rtParams)       { return m_Function(m_p0, a_rtParams...); }
+    R operator()(P const... a_rtParams) const { return m_Function(m_p0, a_rtParams...); }
+    R operator()(P const... a_rtParams)       { return m_Function(m_p0, a_rtParams...); }
 
     EMP_RETURN bind_handler* clone(void) { return EMP_ALLOCATE(bind_handler, *this); }
     EMP_RETURN bool is_valid(void) const { return m_Function.is_valid(); }
