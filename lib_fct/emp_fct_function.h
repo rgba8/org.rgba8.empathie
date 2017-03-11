@@ -256,6 +256,11 @@ EMP_NOINSTANCE(struct, member_signature_t<R(C::*)(P...)>)
     typedef R(*type)(P...);
 };
 
+/*template <typename R, typename C, typename ...P>
+EMP_NOINSTANCE(struct, member_signature_t<R(C::*)(P...) const>)
+    typedef R(*type)(P...);
+};*/
+
 template <typename...P>
 using member_signature = typename member_signature_t<P...>::type;
 
