@@ -37,6 +37,7 @@
 #define EMP_W_INLINE 4001 // @@0 implement
 #define EMP_W_ERROR_INLINE 4001 // @@0 implement
 #define EMP_W_DISABLED_OPTIMIZATION 4001 // @@0 implement
+#define EMP_W_SETJMP_CPP 4611
 
 
 #elif defined(EMP_XX_COMPILER_LLVM)
@@ -47,7 +48,7 @@
 #define EMP_W_FORMAT_NONLITERAL "-Wformat-nonliteral"
 #define EMP_W_FORMAT_SECURITY "-Wformat-security"
 #define EMP_W_UNUSED_PRIVATE_FIELD "-Wunused-private-field"
-#define EMP_W_EXIT_TIME_DESTRUCTORS "-Wformat-security" // @@0 implement
+#define EMP_W_EXIT_TIME_DESTRUCTORS "-Wexit-time-destructors" // @@0 llvm osx not on llvm win ?
 #define EMP_W_EFFCPP "-Weffc++"
 #define EMP_W_STATIC_DATA_DEFAULT_CTOR "-Wformat-security" // @@0 implement
 #define EMP_W_PADDING_ADDED "-Wformat-security" // @@0 implement
@@ -62,9 +63,10 @@
 #define EMP_W_4324  "-Wformat-security" // @@0 implement
 #define EMP_W_UNSAFE_REINTERPRET_CAST "-Wformat-security" // @@0 implement
 #define EMP_W_UNREFERENCED_PARAMETER "-Wformat-security" // @@0 implement
+#define EMP_W_SETJMP_CPP "-Wformat-security" // @@0 implement
 #define EMP_W_INLINE "-Winline"
-#define EMP_W_ERROR_INLINE "-Werror"
-#define EMP_W_THIS_IN_MIL "-Wformat-security" // @@9 implement
+#define EMP_W_ERROR_INLINE "-Wformat-security" // @@0 implement
+#define EMP_W_THIS_IN_MIL "-Wformat-security" // @@0 implement
 #define EMP_W_DISABLED_OPTIMIZATION "-Wdisabled-optimization"
 
 #elif defined(EMP_XX_COMPILER_GCC)
@@ -90,8 +92,9 @@
 #define EMP_W_4324  "-Wformat-security" // @@0 implement
 #define EMP_W_UNSAFE_REINTERPRET_CAST "-Wformat-security" // @@0 implement
 #define EMP_W_UNREFERENCED_PARAMETER "-Wformat-security" // @@0 implement
+#define EMP_W_SETJMP_CPP "-Wformat-security" // @@0 implement
 #define EMP_W_INLINE "-Winline"
-#define EMP_W_ERROR_INLINE "-Werror"
+#define EMP_W_ERROR_INLINE "-Wformat-security"
 #define EMP_W_THIS_IN_MIL "-Wformat-security" // @@9 implement
 #define EMP_W_DISABLED_OPTIMIZATION "-Wdisabled-optimization"
 
@@ -103,9 +106,12 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #if defined EMP_XX_COMPILER_MSC
+#define EMP_PRAGMA_SET_IGNORE(x_Value)\
+    __pragma(warning(disable:x_Value))
+
 #define EMP_PRAGMA_PUSH_IGNORE(x_Value)\
     __pragma(warning(push))\
-    __pragma(warning(disable:x_Value))
+    EMP_PRAGMA_SET_IGNORE(x_Value)
 
 #define EMP_PRAGMA_POP_IGNORE(x_Value)\
     __pragma(warning(pop))

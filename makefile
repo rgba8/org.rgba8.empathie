@@ -7,8 +7,7 @@ else
 include $(ROOT)makeuser
 endif
 
-BIN         	?= test
-#COMPILER 	?= llvm
+BIN        	?= test
 COMPILER 	?= gcc
 #ARCH		?= x86_32
 ARCH		?= x86_64
@@ -31,6 +30,11 @@ CHECK       ?=
 
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
+INCLUDES    ?=
+LIBRARIES   ?=# -static -static-libgcc -static-libstdc++
+
+##-----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 ifeq ($(TARGET_OS), osx)
 SDK_ROOT	?= /Applications/XCode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/
 X11_ROOT	?= $(SDK_ROOT)System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/X11/
@@ -39,6 +43,10 @@ X11_ROOT	?= $(SDK_ROOT)System/Library/Frameworks/Tk.framework/Versions/8.5/Heade
 LIBXML2_H_DIR	?= $(SDK_ROOT)usr/include/libxml2/
 LIBXML2_L_DIR   ?=
 LIBXML2_LIB     ?= -lxml2
+
+LIBPNG_H_DIR    ?= /opt/local/include/
+LIBPNG_L_DIR    ?= /opt/local/lib/
+LIBPNG_LIB      ?= -lpng16
 
 OPENGL_ROOT	    ?= $(SDK_ROOT)System/Library/Frameworks/OpenGL.framework/Versions/A/
 OPENGL_H_DIR    ?= $(OPENGL_ROOT)Headers/
@@ -65,6 +73,10 @@ LIBXML2_H_DIR	?= $(SDK_ROOT)libxml2/
 LIBXML2_L_DIR   ?=
 LIBXML2_LIB ?= -lxml2
 
+LIBPNG_H_DIR    ?= /usr/local/include/
+LIBPNG_L_DIR    ?= /usr/local/lib/
+LIBPNG_LIB      ?= -lpng16
+
 OPENGL_H_DIR	?= $(SDK_ROOT)GL/
 OPENGL_L_DIR    ?=
 OPENGL_LIB      ?= -lGL
@@ -79,27 +91,37 @@ else
 ##-----------------------------------------------------------------------------
 ##-----------------------------------------------------------------------------
 ifeq ($(TARGET_OS), win)
-SDK_ROOT    ?= /usr/include/
+SDK_ROOT    ?= /C/Users/rgba8/Documents/git/
 
-LIBXML2_H_DIR	?= $(SDK_ROOT)libxml2/
-LIBXML2_H_DIR ?= /c/Users/rgba8/Documents/git/libxml2-2.7.8.win32/include/
-#LIBXML2_H_DIR ?= /c/Users/rgba8/Documents/git/libxml2/include/
-
-#LIBXML2_L_DIR ?= /c/usr/bin/msys-xml2-2.dll
-LIBXML2_L_DIR ?= /usr/lib/
+#LIBXML2_ROOT  ?= $(SDK_ROOT)libxml2-2.7.8.win32/
+LIBXML2_ROOT ?= /usr/
+LIBXML2_H_DIR ?= $(LIBXML2_ROOT)include/
+LIBXML2_L_DIR ?= $(LIBXML2_ROOT)lib/
 LIBXML2_LIB   ?= -lxml2
+
+LIBPNG_ROOT     ?= $(SDK_ROOT)libpng/
+LIBPNG_H_DIR    ?= $(LIBPNG_ROOT)
+LIBPNG_L_DIR    ?= $(LIBPNG_ROOT)projects/vsstudio/Release/
+LIBPNG_LIB      ?= -lpng16.dll
 
 OPENGL_H_DIR	?= /c/
 #Program Files (x86)/Windows Kits/8.1/Include/um/
 OPENGL_L_DIR    ?= #C:/MinGW/msys/1.0/lib/
 OPENGL_LIB      ?= -lopengl32
 
-FREETYPE2_ROOT ?= $(SDK_ROOT)
+FREETYPE2_ROOT ?=
 
-#OPENAL_H_DIR	?= /c/Users/rgba8/Documents/git/openal-soft/include/
-OPENAL_H_DIR ?= /c/Users/rgba8/Documents/git/openal-soft-1.17.2-bin/include/AL/
-OPENAL_L_DIR    ?= #C:/MinGW/lib/
-OPENAL_LIB	    ?= #-lOpenAL32.dll
+#OPENAL_ROOT     ?= /C/Users/rgba8/Documents/git/openal-soft-1.17.2-bin/
+OPENAL_ROOT ?= /mingw64/
+OPENAL_H_DIR	?= $(OPENAL_ROOT)include/
+OPENAL_L_DIR    ?= $(OPENAL_ROOT)bin/
+OPENAL_LIB	    ?= -lopenal #-Wl, -Bstatic
+
+ifeq ($(COMPILER), llvm)
+INCLUDES    += -I/mingw64/include/c++/5.4.0/
+INCLUDES    += -I/mingw64/include/c++/5.4.0/x86_64-w64-mingw32/
+LIBRARIES   += -lpthread
+endif
 
 endif
 endif

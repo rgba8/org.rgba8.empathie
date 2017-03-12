@@ -7,7 +7,10 @@
 //-----------------------------------------------------------------------------
 #include "emp_hh_stdio.h"
 #include "emp_hh_stdlib.h"
+
+#if defined EMP_XX_OS_WIN
 #include "emp_hh_windows.h"
+#endif
 
 #include "emp_xx_string.h"
 
@@ -74,20 +77,20 @@ void output_header(cpc_char a_szName, cpc_char a_szAlias, c_bool a_bVerbose)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void output_trace(trace_c const& a_rTrace, c_bool a_bVerbose)
+void output_trace(trace_s const& a_rTrace, c_bool a_bVerbose)
 {
     if (a_bVerbose)
     {
-        output_line(EMP_XSZ_FILE, a_rTrace.file(), a_bVerbose);
-        output_line(EMP_XSZ_LINE, a_rTrace.sz_line(), a_bVerbose);
-        output_line(EMP_XSZ_FUNCTION, a_rTrace.function(), a_bVerbose);
-        output_line(EMP_XSZ_SIGNATURE, a_rTrace.signature(), a_bVerbose);
+        output_line(EMP_XSZ_FILE, a_rTrace.m_szFile, a_bVerbose);
+        output_line(EMP_XSZ_LINE, a_rTrace.m_szLine, a_bVerbose);
+        output_line(EMP_XSZ_FUNCTION, a_rTrace.m_szFunction, a_bVerbose);
+        output_line(EMP_XSZ_SIGNATURE, a_rTrace.m_szSignature, a_bVerbose);
     }
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void output_assert(assert_c const& a_rAssert, bool const a_bVerbose)
+void output_assert(assert_c const& a_rAssert, c_bool a_bVerbose)
 {
     output_trace(a_rAssert.m_Trace, a_bVerbose);
     output_line(EMP_XSZ_CONDITION, a_rAssert.m_szCondition, a_bVerbose);

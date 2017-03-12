@@ -28,6 +28,14 @@
 #define EMP_XX_IF_NOT_IOS(x_Then) x_Then
 #endif
 
+#if defined EMP_XX_OS_OSX || defined EMP_XX_OS_WIN || defined EMP_XX_OS_LIN
+#define EMP_XX_DEV_DESKTOP
+#elif defined EMP_XX_OS_IOS
+#define EMP_XX_DEV_MOBILE
+#else
+#error unknown device type
+#endif
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #ifdef EMP_XX_TT_ARRAY_COUNT
@@ -162,6 +170,8 @@
 //-----------------------------------------------------------------------------
 using namespace emp::cnt;
 using namespace emp::str;
+
+EMP_PRAGMA_SET_IGNORE(EMP_W_INLINE)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

@@ -22,17 +22,31 @@ void set_errno(c_int a_siValue)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_RETURN pc_char errno_to_cstr(void)
+EMP_RETURN c_char* errno_to_cstr(void)
+{ return errno_to_cstr(get_errno()); }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+EMP_RETURN c_char* errno_to_cstr(c_int
+    #if defined EMP_XX_COMPILER_MSC
+    #else
+        a_siErrno
+    #endif
+    )
 {
-/* @@0 win
-c_int siErrno = get_errno();
+#if defined EMP_XX_COMPILER_MSC
+    /*errno = 0;
+    constexpr c_size c_stCount = 256;
+    char cBuffer[c_stCount];
+    strerror_s(cBuffer, c_stCount - 1, a_siErrno);*/
+    return "not implemented";
+#else
     errno = 0;
-    cpc_char szResult = strerror(siErrno);
+    cpc_char szResult = strerror(a_siErrno);
     EMP_ASSERT(szResult);
     EMP_ASSERT(errno == 0 || errno == ERANGE);
     return szResult;
-    */
-    return nullptr;
+#endif
 }
 
 //-----------------------------------------------------------------------------

@@ -13,6 +13,23 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+//EMP_INLINE bool not_const(c_bool EMP_SILENT(a_bCondition));
+//EMP_INLINE bool not_const(c_bool EMP_SILENT(a_bCondition))
+//{ return false; }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//EMP_INLINE constexpr bool const_assert(c_bool a_bCondition)
+//{ return a_bCondition ? true : not_const(a_bCondition); }
+
+#if defined EMP_XX_ASSERT
+#define const_assert(...) assert(__VA_ARGS__)
+#else
+#define const_assert(...)
+#endif
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 #if (defined(CHAR_MIN) && (CHAR_MIN != 0))
 #define EMP_TT_CHAR_EMP_TT_MIN CHAR_MIN
 #else

@@ -47,6 +47,7 @@ public:
 
     void release(void) { m_bFinalize = false; }
 
+    void action(void) { if (m_bFinalize) { m_Finalizer(); } release(); }
 private:
     finally_t(finally_t const&) = delete;
     finally_t& operator=(finally_t const&) = delete;

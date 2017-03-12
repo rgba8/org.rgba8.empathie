@@ -128,7 +128,7 @@ public:
 
     template <enum_name t_eValue>
     EMP_NOINSTANCE(struct, is_valid_t)
-        static constexpr const bool value = t_eValue <= max;
+        static constexpr c_bool value = t_eValue <= max;
     };
 
     template <typename T>

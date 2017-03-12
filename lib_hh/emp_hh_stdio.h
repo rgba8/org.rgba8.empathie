@@ -21,6 +21,12 @@ EMP_PRAGMA_PUSH_IGNORE(EMP_W_NOEXPECT)
 
 #include <fcntl.h>
 #endif
+
+#if defined EMP_XX_OS_WIN
+#else
+#include <unistd.h>
+#endif
+
 EMP_PRAGMA_POP_IGNORE(EMP_W_NOEXPECT)
 EMP_PRAGMA_POP_IGNORE(EMP_W_UNREFERENCED_INLINE_FUNCTION)
 

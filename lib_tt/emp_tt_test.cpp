@@ -1,29 +1,26 @@
 //-----------------------------------------------------------------------------
-// @rgba8.org
+// emp_tt_test.cpp - @rgba8.org
 //-----------------------------------------------------------------------------
-#ifndef EMP_HH_INTRIN_H
-#define EMP_HH_INTRIN_H
+#include "emp_tt_literal.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#if defined EMP_XX_COMPILER_MSC
-EMP_PRAGMA_PUSH_IGNORE(EMP_W_4548)
-#include <mmintrin.h>
-#include <emmintrin.h>
-EMP_PRAGMA_POP_IGNORE(EMP_W_4548)
-#elif defined EMP_XX_OS_IOS
-#else
-#include <x86intrin.h>
-#endif
+namespace emp { namespace tt {
+
+
+static_assert(aformat_c::args(ALITERAL("#a#b#c")) == 0, "");
+static_assert(AFORMAT("ab##", 0).args() == 0, "");
+static_assert(aformat_c::args(ALITERAL("##")) == 0, "");
+static_assert(aformat_c::args(ALITERAL("#0")) == 1, "");
+static_assert(aformat_c::args(ALITERAL("#1")) == 0, "");
+static_assert(aformat_c::args(ALITERAL("##0")) == 0, "");
+static_assert(aformat_c::args(ALITERAL("#0#1")) == 2, "");
+static_assert(aformat_c::args(ALITERAL("#0 #2")) == 0, "");
+static_assert(aformat_c::args(ALITERAL("#0 #1")) == 2, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-//#include <fpu_control.h>
-//void set_fpu (c_uint mode);
-//void set_fpu (c_uint mode)
-//{ asm ("fldcw %0" : : "m" (*&mode)); }
+} }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#endif
-
