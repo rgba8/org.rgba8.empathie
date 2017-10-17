@@ -129,12 +129,20 @@ EMP_INLINE EMP_RETURN bool is_valid(c_double d);
 EMP_INLINE EMP_RETURN bool is_valid(c_double d)
 { return is_nan(d) == false && is_inf(d) == false; }
 
+#if defined EMP_ASSERT_NOT_NAN
+#define EMP_ASSERT_NUMBER(x_Value) EMP_ASSERT(emp::tt::is_valid(x_Value))
+#define EMP_CONST_ASSERT_NUMBER(x_Value) assert(emp::tt::is_valid(x_Value))
+#else
+#define EMP_ASSERT_NUMBER(x_Value)
+#define EMP_CONST_ASSERT_NUMBER(x_Value) 
+#endif
+
 EMP_PRAGMA_PUSH_IGNORE(EMP_W_FLOAT_EQUAL)
 template <typename T> constexpr EMP_INLINE EMP_RETURN bool equal_(T const f0, T const f1);
 template <typename T> constexpr EMP_INLINE EMP_RETURN bool equal_(T const f0, T const f1)
 {
-    const_assert(is_valid(f0));
-    const_assert(is_valid(f1));
+    EMP_CONST_ASSERT_NUMBER(f0);
+    EMP_CONST_ASSERT_NUMBER(f1);
     return f0 == f1;
 }
 EMP_PRAGMA_POP_IGNORE(EMP_W_FLOAT_EQUAL)
@@ -190,8 +198,8 @@ public:
 template <typename T>
 constexpr EMP_RETURN T maxof(T const& a_rLeft, T const& a_rRight)
 {
-    const_assert(is_valid(a_rLeft));
-    const_assert(is_valid(a_rRight));
+    EMP_CONST_ASSERT_NUMBER(a_rLeft);
+    EMP_CONST_ASSERT_NUMBER(a_rRight);
     return a_rLeft > a_rRight ? a_rLeft : a_rRight;
 }
 
@@ -200,8 +208,8 @@ constexpr EMP_RETURN T maxof(T const& a_rLeft, T const& a_rRight)
 template <typename T>
 constexpr EMP_RETURN T minof(T const& a_rLeft, T const& a_rRight)
 {
-    const_assert(is_valid(a_rLeft));
-    const_assert(is_valid(a_rRight));
+    EMP_CONST_ASSERT_NUMBER(a_rLeft);
+    EMP_CONST_ASSERT_NUMBER(a_rRight);
     return a_rLeft < a_rRight ? a_rLeft : a_rRight;
 }
 
@@ -210,7 +218,7 @@ constexpr EMP_RETURN T minof(T const& a_rLeft, T const& a_rRight)
 template <typename T>
 constexpr EMP_RETURN T saturate(T const& a_rLeft)
 {
-    const_assert(is_valid(a_rLeft));
+    EMP_CONST_ASSERT_NUMBER(a_rLeft);
     return maxof<T>(0, minof<T>(1, a_rLeft));
 }
 
