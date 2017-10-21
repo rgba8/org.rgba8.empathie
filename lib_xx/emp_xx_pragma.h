@@ -51,9 +51,25 @@
 #define EMP_W_LAYOUT_CHANGE_VD2 4435 // @@0 debug
 #define EMP_W_CONVERSION_OF_GREATER_SIZE 4312 // @@0 debug
 
+#define EMP_W_STL\
+    EMP_W_SIGNED_UNSIGNED_MISMATCH\
+    EMP_W_PADDING_ADDED\
+    EMP_W_COPY_CTOR_IMPLICITLY_DEFINED_DELETED\
+    EMP_W_ASSIGNMENT_OPERATOR_IMPLICITLY_DEFINED_DELETED\
+    EMP_W_MOVE_CTOR_IMPLICITLY_DEFINED_DELETED\
+    EMP_W_MOVE_ASSIGNMENT_OPERATOR_IMPLICITLY_DEFINED_DELETED\
+    EMP_W_FORMAT_STRING_NOT_LITERAL\
+    EMP_W_NOT_DEFINED_AS_PREPROCESSOR_MACRO\
+    EMP_W_FUNCTION_NOT_INLINED\
+    EMP_W_UNREFERENCED_INLINE_FUNCTION
 
+#define EMP_PRAGMA_PUSH_IGNORE_STL EMP_PRAGMA_PUSH_IGNORE(EMP_W_STL)
+#define EMP_PRAGMA_POP_IGNORE_STL EMP_PRAGMA_POP_IGNORE(EMP_W_STL)
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 #elif defined(EMP_XX_COMPILER_LLVM)
+
 #define EMP_MSC_W_C4548 "-Wformat-security"
 #define EMP_W_COMPARISON_ALWAYS_TRUE "-Wformat-security" // @@0 implement
 #define EMP_W_OLD_STYLE_CAST "-Wold-style-cast"
@@ -81,8 +97,25 @@
 #define EMP_W_ERROR_INLINE "-Wformat-security" // @@0 implement
 #define EMP_W_THIS_IN_MIL "-Wformat-security" // @@0 implement
 #define EMP_W_DISABLED_OPTIMIZATION "-Wdisabled-optimization"
+#define EMP_W_SIGNED_UNSIGNED_MISMATCH "-Wformat-security" // @@0 implement
+#define EMP_W_COPY_CTOR_IMPLICITLY_DEFINED_DELETED "-Wformat-security" // @@0 implement
+#define EMP_W_ASSIGNMENT_OPERATOR_IMPLICITLY_DEFINED_DELETED "-Wformat-security" // @@0 implement
+#define EMP_W_MOVE_CTOR_IMPLICITLY_DEFINED_DELETED "-Wformat-security" // @@0 implement
+#define EMP_W_MOVE_ASSIGNMENT_OPERATOR_IMPLICITLY_DEFINED_DELETED "-Wformat-security" // @@0 implement
+#define EMP_W_FORMAT_STRING_NOT_LITERAL "-Wformat-security" // @@0 implement
+#define EMP_W_NOT_DEFINED_AS_PREPROCESSOR_MACRO "-Wformat-security" // @@0 implement
+#define EMP_W_FUNCTION_NOT_INLINED "-Wformat-security" // @@0 implement
+#define EMP_W_LAYOUT_CHANGE_VD2 "-Wformat-security" // @@0 implement
+#define EMP_W_INHERITS_VIA_DOMINANCE "-Wformat-security" // @@0 implement
 
+
+#define EMP_PRAGMA_PUSH_IGNORE_STL
+#define EMP_PRAGMA_POP_IGNORE_STL
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 #elif defined(EMP_XX_COMPILER_GCC)
+
 #define EMP_MSC_W_C4548 "-Wformat-security"
 #define EMP_W_COMPARISON_ALWAYS_TRUE "-Wformat-security" // @@0 implement
 #define EMP_W_OLD_STYLE_CAST "-Wold-style-cast"
@@ -110,9 +143,6 @@
 #define EMP_W_ERROR_INLINE "-Wformat-security"
 #define EMP_W_THIS_IN_MIL "-Wformat-security" // @@9 implement
 #define EMP_W_DISABLED_OPTIMIZATION "-Wdisabled-optimization"
-
-
-
 
 #endif
 
@@ -163,22 +193,6 @@ EMP_PRAGMA_POP_IGNORE(x_Warning)
 #define EMP_PRAGMA_IGNORE_W_PADDING_ADDED(...) EMP_PRAGMA_IGNORE_W(EMP_W_PADDING_ADDED, __VA_ARGS__)
 #define EMP_PRAGMA_IGNORE_W_UNSAFE_REINTERPRET_CAST(...) EMP_PRAGMA_IGNORE_W(EMP_W_UNSAFE_REINTERPRET_CAST, __VA_ARGS__)
 #define EMP_PRAGMA_IGNORE_W_THIS_IN_MIL(...) EMP_PRAGMA_IGNORE_W(EMP_W_THIS_IN_MIL, __VA_ARGS__)
-
-#define EMP_W_STL\
-    EMP_W_SIGNED_UNSIGNED_MISMATCH\
-    EMP_W_PADDING_ADDED\
-    EMP_W_COPY_CTOR_IMPLICITLY_DEFINED_DELETED\
-    EMP_W_ASSIGNMENT_OPERATOR_IMPLICITLY_DEFINED_DELETED\
-    EMP_W_MOVE_CTOR_IMPLICITLY_DEFINED_DELETED\
-    EMP_W_MOVE_ASSIGNMENT_OPERATOR_IMPLICITLY_DEFINED_DELETED\
-    EMP_W_FORMAT_STRING_NOT_LITERAL\
-    EMP_W_NOT_DEFINED_AS_PREPROCESSOR_MACRO\
-    EMP_W_FUNCTION_NOT_INLINED\
-    EMP_W_UNREFERENCED_INLINE_FUNCTION
-
-#define EMP_PRAGMA_PUSH_IGNORE_STL EMP_PRAGMA_PUSH_IGNORE(EMP_W_STL)
-
-#define EMP_PRAGMA_POP_IGNORE_STL EMP_PRAGMA_POP_IGNORE(EMP_W_STL)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

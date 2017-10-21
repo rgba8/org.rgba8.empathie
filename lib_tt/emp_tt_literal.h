@@ -229,11 +229,14 @@ using format_validator = typename format_validator_t<T, t_stArgs, t_stExpected>:
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-//#define XFORMAT(x_Format, x_Literal, x_Cstr, x_Count) emp::tt::format_validator\
-//    <x_Format, x_Count, x_Format::args(x_Literal(x_Cstr))>(x_Literal(x_Cstr), x_Count)
-
+#ifdef EMP_XX_COMPILER_MSC
 #define XFORMAT(x_Format, x_Literal, x_Cstr, x_Count) emp::tt::format_validator\
     <x_Format, x_Count, x_Count>(x_Literal(x_Cstr), x_Count)
+#warning unchecked format.
+#else
+#define XFORMAT(x_Format, x_Literal, x_Cstr, x_Count) emp::tt::format_validator\
+    <x_Format, x_Count, x_Format::args(x_Literal(x_Cstr))>(x_Literal(x_Cstr), x_Count)
+#endif
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -254,7 +257,9 @@ public:
         m_Literal(a_Literal),
         m_stArgs(a_stArgs)
     {
-//        const_assert(args(a_Literal) == m_stArgs);
+#ifndef EMP_XX_COMPILER_MSC
+        const_assert(args(a_Literal) == m_stArgs);
+#endif
     }
 
 public:
@@ -283,15 +288,16 @@ public:
                 args(a_Literal, a_stIndex, a_stCount + 1) + (a_stCount == a_uiArg ? 1 : 0)) : 0;
     }
 #else
-    /*static constexpr EMP_INLINE EMP_RETURN size_t args(T const& a_Literal)
+#ifndef EMP_XX_COMPILER_MSC
+    static constexpr EMP_INLINE EMP_RETURN size_t args(T const& a_Literal)
     {
         size_t stRank = 0;
         size_t stSharp = 0;
-        constexpr c_size stLen = a_Literal.len();
+        c_size stLen = a_Literal.len();
         size_t stIndex = 0;
         while (stIndex < stLen)
         {
-            auto constexpr const& cChar = a_Literal[stIndex];
+            auto const& cChar = a_Literal[stIndex];
             if (cChar == '#')
             {
                 ++stSharp;
@@ -306,7 +312,7 @@ public:
                     size_t EMP_TT_MAX_VAR(stValue);
                     while (stIndex < stLen)
                     {
-                        constexpr auto const& cNum = a_Literal[stIndex];
+                        auto const& cNum = a_Literal[stIndex];
                         if (cNum >= '0' && cNum <= '9')
                         {
                             if (emp::tt::is_max(stValue))
@@ -332,7 +338,8 @@ public:
             }
         }
         return stRank;
-    }*/
+    }
+#endif
 #endif
 };
 
