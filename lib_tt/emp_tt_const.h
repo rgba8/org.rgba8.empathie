@@ -42,9 +42,6 @@ EMP_TT_DECLARE_TYPE_PARTIAL(remove_const_t, T volatile const, T)
 template <typename T> using remove_const = typename remove_const_t<T>::type;
 template <typename T> using try_remove_const = try_<T, is_const, remove_const>;
 
-
-
-
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 } }

@@ -26,12 +26,6 @@ using param = if_else<is_param<T>::value, try_add_const<T>, try_add_reference<tr
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-static_assert(is_param<int>::value, "");
-static_assert(equal<try_add_const<int>, int const>::value, "");
-static_assert(equal<param<int>, int const>::value, "");
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 template <typename T>
 EMP_NOINSTANCE(struct, const_param_t)
 public:
@@ -49,12 +43,6 @@ public:
 };
 
 template <typename T> using const_param = param<typename emp::tt::const_param_t<T>::type>;
-
-static_assert(equal<const_param<int>, int const>::value, "int");
-static_assert(equal<const_param<int*>, int const* const>::value, "int*");
-static_assert(equal<const_param<int**>, int const* const* const>::value, "int**");
-static_assert(equal<const_param<int**&>, int const* const* const&>::value, "int**&");
-static_assert(equal<const_param<char const* const>, char const* const>::value, "char const* const");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

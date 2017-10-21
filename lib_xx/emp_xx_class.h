@@ -54,8 +54,6 @@ namespace emp { namespace rfx  { template <typename> class type_t; } }
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 #define EMP_XX_NOCOPY(...)\
-public:\
-    void emp_nopublic(void) {};\
 private:\
     EMP_PP_TRY_SOLVE(__VA_ARGS__)(EMP_PP_TRY_SOLVE(__VA_ARGS__) const& a_rFrom);\
     EMP_PP_TRY_SOLVE(__VA_ARGS__) const& operator=(EMP_PP_TRY_SOLVE(__VA_ARGS__) const& a_rFrom);
@@ -64,8 +62,6 @@ private:\
 //-----------------------------------------------------------------------------
 #define EMP_XX_NOINSTANCE(...)\
 private:\
-    class emp_nofriend {};\
-    friend class emp_nofriend;\
     EMP_PP_TRY_SOLVE(__VA_ARGS__)(void);\
     virtual ~EMP_PP_TRY_SOLVE(__VA_ARGS__)(void) = 0;
 
@@ -188,7 +184,7 @@ public:\
     auto& x_Name##_(x_Type const& a_Value) { x_Name = a_Value; return *this; }
 
 #define EMP_FIELD(x_Type, ...)\
-    EMP_PP_CAT(EMP_FIELD_, EMP_PP_EQUAL(1, EMP_VAARGS_COUNT(__VA_ARGS__)))(x_Type, __VA_ARGS__)
+    EMP_PP_CAT(EMP_FIELD_, EMP_PP_EQUAL(1, EMP_PP_FORWARD(EMP_VAARGS_COUNT(__VA_ARGS__)))(x_Type, __VA_ARGS__))
 
 #define EMP_FIELD_MAX(x_Type, x_Name) EMP_FIELD(x_Type, x_Name, EMP_TT_MAX(x_Name))
 

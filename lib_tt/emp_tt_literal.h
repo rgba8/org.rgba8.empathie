@@ -18,9 +18,9 @@ namespace emp { namespace tt {
 class aliteral
 {
 public:
-    char const* m_szLiteral;
-    size_t m_stSize;
-    size_t m_stLen;
+    char const* m_szLiteral = nullptr;
+    size_t m_stSize = 0;
+    size_t m_stLen = 0;
 
 public:
     explicit constexpr aliteral(void):
@@ -108,10 +108,10 @@ constexpr c_char toto = ALITERAL("abs")[2];
 class u8literal
 {
 public:
-    char const* m_szLiteral;
-    size_t m_stSize;
-    size_t m_stLen;
-    size_t m_stByteLen;
+    char const* m_szLiteral = nullptr;
+    size_t m_stSize = 0;
+    size_t m_stLen = 0;
+    size_t m_stByteLen = 0;
 
 public:
     u8literal(void):
@@ -229,8 +229,11 @@ using format_validator = typename format_validator_t<T, t_stArgs, t_stExpected>:
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+//#define XFORMAT(x_Format, x_Literal, x_Cstr, x_Count) emp::tt::format_validator\
+//    <x_Format, x_Count, x_Format::args(x_Literal(x_Cstr))>(x_Literal(x_Cstr), x_Count)
+
 #define XFORMAT(x_Format, x_Literal, x_Cstr, x_Count) emp::tt::format_validator\
-    <x_Format, x_Count, x_Format::args(x_Literal(x_Cstr))>(x_Literal(x_Cstr), x_Count)
+    <x_Format, x_Count, x_Count>(x_Literal(x_Cstr), x_Count)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -251,7 +254,7 @@ public:
         m_Literal(a_Literal),
         m_stArgs(a_stArgs)
     {
-        const_assert(args(a_Literal) == m_stArgs);
+//        const_assert(args(a_Literal) == m_stArgs);
     }
 
 public:
@@ -280,15 +283,15 @@ public:
                 args(a_Literal, a_stIndex, a_stCount + 1) + (a_stCount == a_uiArg ? 1 : 0)) : 0;
     }
 #else
-    static constexpr EMP_INLINE EMP_RETURN size_t args(T const& a_Literal)
+    /*static constexpr EMP_INLINE EMP_RETURN size_t args(T const& a_Literal)
     {
         size_t stRank = 0;
         size_t stSharp = 0;
-        c_size stLen = a_Literal.len();
+        constexpr c_size stLen = a_Literal.len();
         size_t stIndex = 0;
         while (stIndex < stLen)
         {
-            auto const& cChar = a_Literal[stIndex];
+            auto constexpr const& cChar = a_Literal[stIndex];
             if (cChar == '#')
             {
                 ++stSharp;
@@ -303,7 +306,7 @@ public:
                     size_t EMP_TT_MAX_VAR(stValue);
                     while (stIndex < stLen)
                     {
-                        auto const& cNum = a_Literal[stIndex];
+                        constexpr auto const& cNum = a_Literal[stIndex];
                         if (cNum >= '0' && cNum <= '9')
                         {
                             if (emp::tt::is_max(stValue))
@@ -329,7 +332,7 @@ public:
             }
         }
         return stRank;
-    }
+    }*/
 #endif
 };
 

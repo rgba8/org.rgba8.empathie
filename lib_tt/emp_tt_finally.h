@@ -27,7 +27,6 @@ EMP_RETURN EMP_INLINE scope_t<T> scope(T& a_rScopee)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_PRAGMA_PUSH_IGNORE(EMP_W_PADDING_ADDED)
 template <typename T, bool t_bDefault>
 struct finally_t
 {
@@ -53,7 +52,6 @@ private:
     finally_t& operator=(finally_t const&) = delete;
     finally_t& operator=(finally_t&&) = delete;
 };
-EMP_PRAGMA_POP_IGNORE(EMP_W_PADDING_ADDED)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

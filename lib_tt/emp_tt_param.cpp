@@ -3,41 +3,26 @@
 //-----------------------------------------------------------------------------
 // @rgba8.org
 //-----------------------------------------------------------------------------
-#include "emp_xx_call.h"
+#include "emp_tt_param.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#include "emp_hh_intrin.h"
-
-#if defined EMP_XX_OS_WIN
-#include "emp_hh_windows.h"
-#endif
+namespace emp { namespace tt {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-namespace emp { namespace xx {
+static_assert(is_param<int>::value, "");
+static_assert(equal<try_add_const<int>, int const>::value, "");
+static_assert(equal<param<int>, int const>::value, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#if defined EMP_XX_ERROR_HOOK
-void error_hook(void)
-{
-
-#ifdef EMP_XX_COMPILER_MSC
-    // @@0 not working __debugbreak;
-    //DebugBreak();
-#else
-#endif
-
-    //EMP_LOG_ERROR("debug_break");
-    return;
-}
-#endif
+static_assert(equal<const_param<int>, int const>::value, "int");
+static_assert(equal<const_param<int*>, int const* const>::value, "int*");
+static_assert(equal<const_param<int**>, int const* const* const>::value, "int**");
+static_assert(equal<const_param<int**&>, int const* const* const&>::value, "int**&");
+static_assert(equal<const_param<char const* const>, char const* const>::value, "char const* const");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 } }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-

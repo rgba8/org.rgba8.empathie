@@ -59,28 +59,6 @@ EMP_TT_HAS_FUNCTION(post_load)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-struct test_1
-{
-    virtual ~test_1(void) {}
-    bool pre_load(void) { return true; };
-};
-
-EMP_NOCOPY_BASE(struct, test_2, public, test_1) };
-
-struct test_3
-{
-};
-
-// @@0 use emp_static_assert
-#define EMP_STATIC_ASSERT(...) static_assert(__VA_ARGS__, "static assertion failure : " EMP_PP_STRING(__VA_ARGS__))
-
-EMP_STATIC_ASSERT(emp::tt::equal<test_2::tbases, std::tuple<test_1>>::value);
-EMP_STATIC_ASSERT(has_function_pre_load<test_3, bool(void)>::value == false);
-EMP_STATIC_ASSERT(has_function_pre_load<test_2, bool(void)>::value);
-EMP_STATIC_ASSERT(has_function_pre_load<test_1, bool(void)>::value);
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 template <typename B, typename D>
 using is_base = std::is_base_of<B, D>;
 
@@ -100,9 +78,6 @@ EMP_TT_HAS_TYPEDEF( tbases );
 EMP_TT_HAS_TYPEDEF( tbase1 );
 EMP_TT_HAS_TYPEDEF( tbase2 );
 EMP_TT_HAS_TYPEDEF( tbase3 );
-
-static_assert(has_typedef_tbases<test_3>::value == false, "");
-static_assert(has_typedef_tbases<test_2>::value, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

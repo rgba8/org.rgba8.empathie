@@ -6,8 +6,7 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_PRAGMA_PUSH_IGNORE(EMP_W_UNREFERENCED_INLINE_FUNCTION)
-EMP_PRAGMA_PUSH_IGNORE(EMP_W_NOEXPECT)
+EMP_PRAGMA_PUSH_IGNORE_STL
 #ifdef __STRICT_ANSI__
 // @@0 ugly
 #undef __STRICT_ANSI__
@@ -26,9 +25,7 @@ EMP_PRAGMA_PUSH_IGNORE(EMP_W_NOEXPECT)
 #else
 #include <unistd.h>
 #endif
-
-EMP_PRAGMA_POP_IGNORE(EMP_W_NOEXPECT)
-EMP_PRAGMA_POP_IGNORE(EMP_W_UNREFERENCED_INLINE_FUNCTION)
+EMP_PRAGMA_POP_IGNORE_STL
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

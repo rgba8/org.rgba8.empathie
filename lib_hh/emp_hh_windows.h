@@ -6,11 +6,9 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_PRAGMA_PUSH_IGNORE(EMP_W_PADDING_ADDED)
-EMP_PRAGMA_PUSH_IGNORE(EMP_W_4668)
+EMP_PRAGMA_PUSH_IGNORE_STL
 #include <windows.h>
-EMP_PRAGMA_POP_IGNORE(EMP_W_4668)
-EMP_PRAGMA_POP_IGNORE(EMP_W_PADDING_ADDED)
+EMP_PRAGMA_POP_IGNORE_STL
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

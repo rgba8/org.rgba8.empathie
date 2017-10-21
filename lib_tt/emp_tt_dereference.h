@@ -71,14 +71,6 @@ EMP_RETURN typename dereference<T>::treturn dereference<T>::apply(typename deref
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-static_assert(equal<dereference<char>::treturn, char&>::value, "");
-static_assert(equal<dereference<char const>::treturn, char const &>::value, "");
-static_assert(equal<dereference<char const&>::treturn, char const &>::value, "");
-static_assert(equal<dereference<char const* const>::treturn, char const&>::value, "");
-static_assert(equal<dereference<char const* const&>::treturn, char const&>::value, "");
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 } }
 
 //-----------------------------------------------------------------------------

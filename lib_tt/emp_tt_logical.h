@@ -39,35 +39,15 @@ template <bool b, bool... bn> EMP_NOINSTANCE_BASE(struct, and_, public, (and_<b,
 template <bool b0, bool b1> EMP_NOINSTANCE_BASE(struct, (and_<b0, b1>), public, bool_<b0 && b1>) };
 template <bool b0> EMP_NOINSTANCE_BASE(struct, and_<b0>, public, bool_<b0>) };
 
-static_assert(and_<true>::value, "");
-static_assert(and_<true, true>::value, "");
-static_assert(and_<true, false>::value == false, "");
-static_assert(and_<false, true>::value == false, "");
-static_assert(and_<true, true, true>::value, "");
-static_assert(and_<true, true, false>::value == false, "");
-
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <bool b, bool... bn> EMP_NOINSTANCE_BASE(struct, or_, public, (or_<b, or_<bn...>::value>)) };
 template <bool b0, bool b1> EMP_NOINSTANCE_BASE(struct, (or_<b0, b1>), public, bool_<b0 || b1>) };
 template <bool b0> EMP_NOINSTANCE_BASE(struct, or_<b0>, public, bool_<b0>) };
 
-static_assert(or_<true>::value, "");
-static_assert(or_<true, true>::value, "");
-static_assert(or_<true, false>::value, "");
-static_assert(or_<false, true>::value, "");
-static_assert(or_<true, true, true>::value, "");
-static_assert(or_<true, true, false>::value, "");
-static_assert(or_<false>::value == false, "");
-static_assert(or_<false, false>::value == false, "");
-static_assert(or_<false, false, false>::value == false, "");
-
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <bool t_bValue> EMP_NOINSTANCE_BASE(struct, not_, public, bool_<t_bValue == false>) };
-
-static_assert(not_<true>::value == false, "");
-static_assert(not_<false>::value == true, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -75,20 +55,11 @@ EMP_PRAGMA_PUSH_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 template <typename T, T t_Left, T t_Right> EMP_NOINSTANCE_BASE(struct, less_equal, public, bool_<t_Left <= t_Right>) };
 EMP_PRAGMA_POP_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 
-static_assert(less_equal<size_t, 0, 1>::value, "");
-
-static_assert(less_equal<size_t, 0, 0>::value, "");
-static_assert(less_equal<size_t, 1, 0>::value == false, "");
-
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 EMP_PRAGMA_PUSH_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 template <typename T, T t_Left, T t_Right> EMP_NOINSTANCE_BASE(struct, less, public, bool_<t_Left < t_Right>) };
 EMP_PRAGMA_POP_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
-
-static_assert(less<size_t, 0, 1>::value, "");
-static_assert(less<size_t, 0, 0>::value == false, "");
-static_assert(less<size_t, 1, 0>::value == false, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -96,29 +67,17 @@ EMP_PRAGMA_PUSH_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 template <typename T, T t_Left, T t_Right> EMP_NOINSTANCE_BASE(struct, more, public, bool_<(t_Left > t_Right)>) };
 EMP_PRAGMA_POP_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 
-static_assert(more<size_t, 0, 1>::value == false, "");
-static_assert(more<size_t, 0, 0>::value == false, "");
-static_assert(more<size_t, 1, 0>::value, "");
-
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 EMP_PRAGMA_PUSH_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 template <typename T, T t_Left, T t_Right> EMP_NOINSTANCE_BASE(struct, more_equal, public, bool_<t_Left >= t_Right>) };
 EMP_PRAGMA_POP_IGNORE(EMP_W_COMPARISON_ALWAYS_TRUE)
 
-static_assert(more_equal<size_t, 0, 1>::value == false, "");
-static_assert(more_equal<size_t, 0, 0>::value, "");
-static_assert(more_equal<size_t, 1, 0>::value, "");
-
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 template <typename L, typename R> EMP_NOINSTANCE_BASE(struct, equal, public, false_) };
 template <typename T> EMP_NOINSTANCE_BASE(struct, (equal<T, T>), public, true_) };
-
 template <typename L, typename R> using not_equal = not_<equal<L, R>::value>;
-
-static_assert(equal<int, int>::value, "");
-static_assert(not_equal<int, char>::value, "");
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

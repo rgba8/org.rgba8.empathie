@@ -166,7 +166,7 @@ public:
     {}
 
     function_t(F const& a_rFrom):
-        m_pImpl(EMP_ALLOCATE(static_handler<F>, a_rFrom))
+        m_pImpl(EMP_ALLOCATE(static_handler<F>, a_rFrom)) //-V747
     {}
 
     template <typename O>
@@ -270,7 +270,7 @@ using member_signature = typename member_signature_t<P...>::type;
 //-----------------------------------------------------------------------------
 template <typename F, typename B0>
 EMP_RETURN auto bind(F const& a_rFunction, B0 const& a_Bound)
-{ return function_t<remove_first<F>>(EMP_ALLOCATE(bind_handler<F>, a_rFunction, a_Bound)); }
+{ return function_t<remove_first<F>>(EMP_ALLOCATE(bind_handler<F>, a_rFunction, a_Bound)); } //-V747
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

@@ -4,11 +4,15 @@
 #ifndef EMP_HH_TUPLE_H
 #define EMP_HH_TUPLE_H
 
+// @@0 build emp_hh_**
+// @@0 static_assert
+// @@0 logger_c remove properties
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_PRAGMA_PUSH_IGNORE(EMP_MSC_W_C4548)
+EMP_PRAGMA_PUSH_IGNORE_STL
 #include <tuple>
-EMP_PRAGMA_POP_IGNORE(EMP_MSC_W_C4548)
+EMP_PRAGMA_POP_IGNORE_STL
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

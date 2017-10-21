@@ -41,24 +41,22 @@ namespace emp { namespace ast {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-struct trace_s
-{
+EMP_STRUCT(trace_s)
 public:
-    c_char* m_szFile;
-    uint m_uiLine;
-    c_char* m_szLine;
-    c_char* m_szFunction;
-    c_char* m_szSignature;
+    c_char* m_szFile = nullptr;
+    uint m_uiLine = 0;
+    c_char* m_szLine = nullptr;
+    c_char* m_szFunction = nullptr;
+    c_char* m_szSignature = nullptr;
 };
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-EMP_PRAGMA_PUSH_IGNORE(EMP_W_PADDING_ADDED)
 struct assert_c
 {
 public:
-    bool m_bCondition;
-    cpc_char m_szCondition;
+    bool m_bCondition = false;
+    cpc_char m_szCondition = nullptr;
     trace_s  m_Trace;
 
     assert_c(void) = delete;
@@ -66,7 +64,6 @@ public:
     assert_c& operator=(assert_c const&) = delete;
     assert_c& operator=(assert_c&&) = delete;
 };
-EMP_PRAGMA_POP_IGNORE(EMP_W_PADDING_ADDED)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -74,7 +71,6 @@ void assert_(assert_c const& a_rAssert);
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void output_char(c_char a_cValue);
 void output_pchar(cpc_char a_pValue);
 void output_line(cpc_char a_szName, cpc_char a_szValue, c_bool a_bVerbose);
 void output_header(cpc_char a_szName, cpc_char a_szAlias, c_bool a_bVerbose);
@@ -104,7 +100,6 @@ void output_assert(assert_c const& a_rAssert, c_bool a_bVerbose);
 #endif
 
 #define EMP_ASSERT_NOT(x_Condition) EMP_ASSERT((x_Condition))
-
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
